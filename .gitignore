@@ -1,0 +1,29 @@
+# ── 祕密：env 實檔一律不進版控，只保留 .example ──
+# （setup 初始化後，依技術棧補上專案的 env 路徑）
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# 戰情資料夾：PM 討論過程 / demo 素材，屬臨時工作狀態，一律不進版控
+# （正式產出走 tickets/ 與 docs/SPEC.md）
+cache/
+
+# 常見產物（依技術棧增補）
+node_modules/
+dist/
+coverage/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.log
+
+# 備份檔（可能含正式資料）
+*.sql
+*.sql.gz
+
+# OS / 編輯器
+.DS_Store
+.idea/
+.vscode/
