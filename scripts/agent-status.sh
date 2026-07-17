@@ -38,7 +38,8 @@ if ls tickets/"$TICKET_PREFIX"-*.md >/dev/null 2>&1; then
       待開發|開發中)
         id=$(grep -m1 "^id:" "$f" | sed 's/id: *//')
         ti=$(grep -m1 "^title:" "$f" | sed 's/title: *//')
-        echo "  → $id [$st] $ti" ;;
+        ow=$(grep -m1 "^owner:" "$f" | sed 's/owner: *//;s/ *#.*//;s/ *$//')
+        echo "  → $id [$st]${ow:+[$ow]} $ti" ;;
     esac
   done
 else

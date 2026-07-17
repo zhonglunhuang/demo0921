@@ -19,3 +19,10 @@
    「memory 教訓數 N、最近一條標題」。
 5. **大量讀取警示** [猜]：防主對話下場掃檔 → PreToolUse hook 對單次 Read >300 行
    提示「考慮派 Explore」；可能誤傷正常操作，先觀察再決定是否常駐。
+
+## 兩道確認閘的機制化
+
+- 現況：規則層（pm/dev SKILL + AGENTS.md 嚴禁清單）。
+- 可機制化：PreToolUse hook 攔 `git push origin stage|prod`，要求存在本回合確認標記
+  （例如 cache/.push-approved，由使用者同意後才建立、push 後即刪）。hook 無法互動提問，
+  只能以標記檔為證。先觀察規則層遵循度，重犯再上 hook。

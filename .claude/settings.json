@@ -6,8 +6,11 @@
       "Bash(scripts/agent-status.sh)",
       "Bash(./scripts/ticket-lint.sh)",
       "Bash(scripts/ticket-lint.sh)",
+      "Bash(./scripts/new-ticket.sh:*)",
+      "Bash(scripts/new-ticket.sh:*)",
       "Bash(make check)",
-      "Bash(make ticket-lint)"
+      "Bash(make ticket-lint)",
+      "Bash(make new-ticket:*)"
     ],
     "deny": []
   },

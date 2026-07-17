@@ -55,6 +55,7 @@ skills 由 harness 自動從 `.claude/skills/` 列出（不在此重複）；can
 ```
 make check          # 框架一致性檢查（至少含 ticket-lint；專案檢查由 setup 補上）
 make ticket-lint    # 只跑票務 lint
+make new-ticket t="短題" r="角色"   # 開新票（先 fetch 遠端再取號防撞號）
 ./scripts/agent-status.sh   # 入口簡報用的一次性狀態快照
 ```
 

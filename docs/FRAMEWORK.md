@@ -1,6 +1,6 @@
 # FRAMEWORK.md — Agent 協作框架（總覽 + 決策紀錄）
 
-> **框架版本：v4.0.0**（版號規則見 §2.8；此為單一事實來源，`scripts/agent-status.sh` 簡報會讀這裡）
+> **框架版本：v4.1.0**（版號規則見 §2.9；此為單一事實來源，`scripts/agent-status.sh` 簡報會讀這裡）
 >
 > 本檔記錄**協作框架本身**：角色入口怎麼設計、為什麼這樣設計、歷次變更。
 > 框架的變更由 `framework` 入口討論與落地（豁免功能票）；每次變更**必須**同時
@@ -66,33 +66,38 @@
 3. **PM 必問四件事**：誰使用、目的、驗收標準、邊界——沒確認不開票。
    **PM 入口也能實際開發**（給不懂 code 的人用，agent 主導、白話回報），但**開發前一樣先開票**，
    無票不開發不豁免；pm 與 dev 差在使用者是誰與呈現方式，不在能力。
-4. **票三態**：待開發 → 開發中 → 完成（作廢標記不刪檔）。
-5. **框架變更豁免票**：走 framework 入口討論確認後直接改，但**必須**在本檔決策紀錄留痕。
-6. **canonical/adapter 一致**：改工作流先改 `.agents/skills/`，再確認 `.claude/skills/` adapter 與
+4. **票三態**：待開發 → 開發中 → 完成（作廢標記不刪檔）。開票一律用 `scripts/new-ticket.sh`
+   （先 fetch 遠端再取號防撞號）；多 session 平行以**領票制**協作（標「開發中」同時填 `owner`，
+   他人票不碰，見 `tickets/README.md`）。
+5. **兩道確認閘**：開票後→問「現在開發嗎？」同意才動工；檢查綠燈後→問「上實機嗎？」
+   同意才 merge/push/部署。授權單次有效，不跨票、不跨回合延續。
+6. **框架變更豁免票**：走 framework 入口討論確認後直接改，但**必須**在本檔決策紀錄留痕。
+7. **canonical/adapter 一致**：改工作流先改 `.agents/skills/`，再確認 `.claude/skills/` adapter 與
    CLAUDE.md / README / team-leader 入口清單同步。
-7. **長任務走背景 subagent**：大範圍調查、demo 素材、已開票的長實作（限隔離 worktree）
+8. **長任務走背景 subagent**：大範圍調查、demo 素材、已開票的長實作（限隔離 worktree）
    派背景 subagent 執行，主對話不中斷。任務描述必須自包含（subagent 中途不能提問）；
    進行中每回合開頭回報一行狀態，完成/失敗自動彙報；「無票不開發」同樣約束 subagent，
    實作結果由主對話驗證（run-checks）與驗收後才合回，票況與 SPEC 由主對話推進。
    派工門檻、模型調度、驗證判準見 `docs/harness/dispatch.md`。
-8. **框架版號（semver）**：每次框架變更**必須** bump 檔頭「框架版本」並於 §3 補一列（含版號欄）。
+9. **框架版號（semver）**：每次框架變更**必須** bump 檔頭「框架版本」並於 §3 補一列（含版號欄）。
    - **MAJOR**：不相容變更——移除/改寫入口、推翻既有規則、改變資料夾契約。
    - **MINOR**：新增能力——新入口、新機制/腳本、新規則（不破壞既有）。
    - **PATCH**：修 bug、文字、微調（不改行為契約）。
    一次涵蓋多項變更時，取最高等級 bump 一次；各項在 §3 分列、共用該版號。
    （**專案初始化（setup 填佔位符）不 bump**：屬專案設定，非框架變更，但在 §3 留一列。）
-9. **分支與出貨流程**（pm/dev 共用，細節見 AGENTS.md「分支與出貨流程」、權威分支定義見 CONTRIBUTING.md
-   「分支即環境」）：開發都從 **`stage`** 開 `feature/<票號>-<短題>`；判斷可實機測試時**先問使用者**，
-   同意後 merge 回 `stage`，在實機環境驗收。分支模型：`stage` 整合分支、`prod` production。
-   進 stage/prod 與部署都是對外動作，先確認。
-10. **模板初始化（setup）**：`.template-uninitialized` 存在時，SessionStart hook 導向 setup 精靈；
+10. **分支與出貨流程**（pm/dev 共用，細節見 AGENTS.md「分支與出貨流程」、權威分支定義見 CONTRIBUTING.md
+    「分支即環境」）：開發都從 **`stage`** 開 `feature/<票號>-<短題>`；判斷可實機測試時**先問使用者**，
+    同意後 merge 回 `stage`，在實機環境驗收。分支模型：`stage` 整合分支、`prod` production。
+    進 stage/prod 與部署都是對外動作，先確認。
+11. **模板初始化（setup）**：`.template-uninitialized` 存在時，SessionStart hook 導向 setup 精靈；
     setup 只填佔位符與 `framework-config.sh`，不改框架規則；收尾刪除標記、在 §3 留痕（不 bump）。
 
 ## 3. 決策紀錄（changelog）
 
-> 新版在上。每列：版號 / 日期 / 改了什麼 / 為什麼。版號規則見 §2.8。
+> 新版在上。每列：版號 / 日期 / 改了什麼 / 為什麼。版號規則見 §2.9。
 
 | 版號 | 日期 | 決策（改了什麼） | 原因（為什麼） |
 |------|------|------|------|
+| v4.1.0 | 2026-07-17 | **回港源專案（baojay）v3.2.0–v4.2.1 的通用框架改進**（去產品化後移植）：(1) **領票制**（源 v3.2.0）——票 frontmatter 加 `owner`、他人開發中票不碰、ticket-lint 對「開發中缺 owner」warn 不擋、agent-status 簡報顯示 owner、tickets/README 補「多 session 平行協作」；(2) **兩道確認閘**（源 v3.3.0）——開票後必問「現在開發嗎？」、綠燈後必問「上實機嗎？」，授權單次有效不跨票；入 pm/dev SKILL、AGENTS.md 嚴禁清單、§2 規則 5、sensors-backlog 機制化備忘；(3) **開票先 fetch 再取號**（源 v4.2.0+v4.2.1）——新增 `scripts/new-ticket.sh`（改讀 framework-config 的 `TICKET_PREFIX`，含 v4.2.1 的 `${VAR}` 大括號修正）＋ `make new-ticket`；(4) tickets/README 補「有 CI 就把 `make check` 掛進 CI」通用建議（源 v4.1.0 的 CI 強制在模板無 CI 可掛，降級為建議、由 setup/framework 入口落地）。**不帶入**源專案 v4.0.0「App-only/Web-admin 平台範圍」（產品決策）與所有 stack 綁定內容。連動同步：README「30 秒版」補領票制與兩道確認閘、`.claude/settings.json` 允許清單加 `make new-ticket`、§2.8→§2.9 引用更新。MINOR：新增機制與規則，不破壞既有 | 使用者要求把源專案演進出的新版框架同步回模板；逐條對照兩邊 FRAMEWORK.md 決策紀錄，只移植通用框架能力、產品內容一律不帶 |
 | v4.0.0 | 2026-07-07 | **模板化（template 化）**：(1) 剝離源專案（baojay）的全部業務程式碼、票、stack 綁定文件與 git 歷史，框架改為 stack 無關；(2) 目錄壓平成單一 repo（原「工作區＋專案子目錄」兩層併一層，hooks 路徑改 `$CLAUDE_PROJECT_DIR/scripts/`）；(3) 專案差異外部化到 `scripts/framework-config.sh`（專案名/票號前綴/產品目錄/健康檢查 URL），四支框架腳本改讀設定不寫死；(4) 新增 **setup 入口**（初始化精靈）＋ `.template-uninitialized` 標記：未初始化時 SessionStart hook 改注入首次使用引導，setup 問 5 組問題代填 AGENTS.md 佔位符與設定，收尾刪標記；(5) AGENTS.md 改為含 `{{…}}` 佔位符的骨架，stack 綁定 skills（add-*/deploy-safely/troubleshoot）移除、run-checks 改為由 setup 填寫的佔位版。MAJOR：移除入口、改變資料夾契約 | 使用者要把源專案的協作框架做成可發布的 template：業務程式碼是客戶 IP 不能散布；stack 綁定會限縮適用面；新使用者需要被引導而不是自己讀文件——用既有原語（skill + SessionStart hook + 標記檔）實作首次使用引導，不發明新機制 |
 | — | 2026-07-02 ~ 07-04 | **前史（v1.0.0–v3.1.0，源專案 baojay）**：三角色入口以 skill 實作、每 session 開場簡報（SessionStart hook 強制）、無票不開發（PreToolUse hook 機制化）＋ ticket-lint、PM 升級為非工程師開發代理（能力=dev、差在呈現）、分支即環境出貨流程、框架版號制度、背景 subagent、harness 制度檔（dispatch/templates/sensors/maintenance）、git 同步閘門。完整決策表見 `docs/harness/archive/FRAMEWORK-history.md` | 每條規則的「為什麼」都來自源專案的真實踩坑（假設角色致重構、push 成功但 CD 失敗、平行開發互相覆蓋等）；歷史保留供翻舊帳，本表只留摘要 |

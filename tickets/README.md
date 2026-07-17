@@ -10,13 +10,18 @@
 前綴在 `scripts/framework-config.sh` 的 `TICKET_PREFIX` 設定（setup 初始化時填，本文件範例用 `TK`）。
 流水號取現有最大號 +1，不重用、不補洞。
 
+**開票一律用 `scripts/new-ticket.sh`（或 `make new-ticket t="短題" r="角色"`）**：它**開票當下先 fetch
+遠端整合分支**，再從「本地＋遠端」的最大號 +1 取號、照下方模板建檔——多 session 平行時從源頭
+降低撞號（撞號最後防線仍是 ticket-lint 的唯一性檢查）。離線時退回本地最大號並提醒，push 前務必再 pull --rebase。
+
 ## 狀態流（三態）
 
 `待開發` →（/dev 動工時）→ `開發中` →（驗收通過）→ `完成`
 
 - 狀態寫在票的 frontmatter `status`，由誰推進：PM 開票=待開發；/dev 動工=開發中；驗證通過=完成。
 - 作廢的票不刪檔，狀態改 `作廢` 並在備註寫原因（留脈絡）。
-- 格式與一致性由 `scripts/ticket-lint.sh` 機器檢查（`make ticket-lint`，含在 `make check`）。
+- 格式與一致性由 `scripts/ticket-lint.sh` 機器檢查（`make ticket-lint`，含在 `make check`；
+  專案有 CI 時建議把 `make check` 掛進 CI，票號重複／格式漂移在 push/PR 直接紅燈）。
 
 ## 票格式（模板）
 
@@ -26,6 +31,7 @@ id: TK-0001
 title: 掃碼入庫
 status: 待開發        # 待開發 | 開發中 | 完成 | 作廢
 roles: [行政]         # 誰使用：填產品的角色（清單見 docs/SPEC.md 產品概述），可多個
+owner:                # 領票人/session 代號（標「開發中」時填，例：jon-mac、cloud-a）
 spec: docs/SPEC.md#31-xxx  # 對應 SPEC 章節（實作後必須同步）
 created: 2026-01-01
 updated: 2026-01-01
@@ -56,6 +62,16 @@ updated: 2026-01-01
 
 - 實作決策、風險、對應 commit / PR。
 ```
+
+## 多 session 平行協作（領票制）
+
+同一個 repo 可能有多個 session / 多台機器同時開發，協作以「票」為鎖：
+
+1. **動工＝領票**：把票標 `開發中` 的同時填 `owner`（自己的代號，例：jon-mac、cloud-a）。
+2. **他人的票不碰**：看到 `開發中` 且 owner 不是自己 → 不改該票範圍的程式；要接手先問使用者、改 owner。
+3. **平行開發用各自的 feature 分支**；同機多 session 建議各開 git worktree
+   （`git worktree add ../<專案>-<票號> feature/<票號>`）避免工作區互踩。
+4. push 前先同步遠端由 git-sync-gate hook 強制（既有）。
 
 ## 鐵則
 
