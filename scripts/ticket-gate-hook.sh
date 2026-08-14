@@ -38,7 +38,7 @@ done
 [ -f "$ROOT/cache/hotfix-override" ] && exit 0
 
 # 有任何「待開發 / 開發中」的票 → 放行
-if grep -lE '^status: *(待開發|開發中)' "$ROOT"/tickets/"$TICKET_PREFIX"-*.md >/dev/null 2>&1; then
+if grep -lE '^status: *(待開發|開發中)' "$ROOT"/tickets/*-*.md >/dev/null 2>&1; then
   exit 0
 fi
 

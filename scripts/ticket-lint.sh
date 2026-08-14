@@ -12,7 +12,14 @@ err() { echo "[ticket-lint] $1" >&2; fail=1; }
 warn() { echo "[ticket-lint][warn] $1" >&2; }  # 提醒不擋（協作軟規則）
 
 shopt -s nullglob
-files=("$TICKETS_DIR/$TICKET_PREFIX"-*.md)
+# 新舊兩種票號並存（源專案 v4.11.0）：舊制 ${TICKET_PREFIX}-XXXX 不改號，
+# 新票一律作者前綴（git config ticket.prefix，例 AMY-01）。
+# 用「排除 README」而不是列舉前綴——新成員加入時不必回來改這裡。
+files=()
+for f in "$TICKETS_DIR"/*.md; do
+  [ "$(basename "$f")" = "README.md" ] && continue
+  files+=("$f")
+done
 if [ ${#files[@]} -eq 0 ]; then
   echo "[ticket-lint] OK（尚無票）"
   exit 0
@@ -26,7 +33,9 @@ for f in "${files[@]}"; do
   title=$(sed -n 's/^title: *//p' "$f" | head -1)
   spec=$(sed -n 's/^spec: *//p' "$f" | sed 's/ *#.*$//' | head -1)
 
-  [[ "$id" =~ ^${TICKET_PREFIX}-[0-9]{4}$ ]] || err "${base}：id 格式錯誤（'$id'），應為 ${TICKET_PREFIX}-XXXX"
+  # 舊制 ${TICKET_PREFIX}-XXXX（凍結）或作者前綴（PREFIX-NN，源專案 v4.11.0）
+  [[ "$id" =~ ^(${TICKET_PREFIX}-[0-9]{4}|[A-Z][A-Z0-9]{1,7}-[0-9]{2,4})$ ]] \
+    || err "${base}：id 格式錯誤（'$id'），應為 ${TICKET_PREFIX}-XXXX（舊制）或 前綴-NN（例 AMY-01）"
   [[ "$base" == "$id"-* ]] || err "${base}：檔名須以 id（$id-）開頭"
   case "$status" in
     待開發|開發中|完成|作廢) ;;
@@ -48,7 +57,9 @@ for f in "${files[@]}"; do
 done
 
 dups=$(sed -n 's/^id: *//p' "${files[@]}" | sort | uniq -d)
-[ -n "$dups" ] && err "id 重複：${dups}（流水號不重用）"
+# 全形括號緊接 $dups 會被 bash 當成變數名的一部分（set -u 下直接炸掉，
+# 反而讓「回報撞號」自己先死——源專案 v4.2.1 在 new-ticket.sh 修過同一個坑）。
+[ -n "${dups}" ] && err "id 重複：${dups}（號碼不重用；兩個 session 同前綴撞號時，第二個 session 用 TICKET_PREFIX 指定別名）"
 
 if [ "$fail" -eq 0 ]; then
   echo "[ticket-lint] OK（${#files[@]} 張票通過）"

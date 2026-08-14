@@ -12,6 +12,7 @@ check: ticket-lint ## 跑所有檢查（= CI；setup 後應包含專案的 lint/
 
 ticket-lint: ## 票務格式與一致性檢查
 	./scripts/ticket-lint.sh
+	@bash scripts/ticket-tools-test.sh  # 守規則的工具自己也要有測試（源專案 v4.12.1）
 
 new-ticket: ## 開新票（先 fetch 遠端再取號防撞號）：make new-ticket t="短題" r="行政"
 	@./scripts/new-ticket.sh "$(t)" "$(r)"

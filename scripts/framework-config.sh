@@ -6,7 +6,10 @@
 # 專案名稱（顯示於簡報）
 PROJECT_NAME="（未初始化——請走 setup 入口）"
 
-# 票號前綴：tickets/ 的票一律命名 <前綴>-XXXX-<短題>.md（例：TK-0001-掃碼入庫.md）
+# 票號舊制前綴（凍結）：既有 <前綴>-XXXX 票沿用此值過 lint，不再發新號。
+# 新票一律「作者前綴」（源專案 v4.11.0）：每個 clone 設一次
+#   git config ticket.prefix AMY
+# 多人平行開票各有獨立號碼空間，結構上不撞號；詳見 tickets/README.md。
 TICKET_PREFIX="TK"
 
 # 產品程式碼目錄（相對 repo 根目錄）：「無票不開發」閘門的守備範圍。

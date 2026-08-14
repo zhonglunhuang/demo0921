@@ -25,14 +25,14 @@ if [ "$dirty_n" -gt 0 ]; then
 fi
 
 echo "== tickets =="
-if ls tickets/"$TICKET_PREFIX"-*.md >/dev/null 2>&1; then
+if ls tickets/*-*.md >/dev/null 2>&1; then
   # 統計四態
   for s in 待開發 開發中 完成 作廢; do
-    n=$(grep -l "^status: $s" tickets/"$TICKET_PREFIX"-*.md 2>/dev/null | wc -l | tr -d ' ')
+    n=$(grep -l "^status: $s" tickets/*-*.md 2>/dev/null | wc -l | tr -d ' ')
     echo "  $s: $n"
   done
   # 工作佇列才詳列（待開發 / 開發中）；完成 / 作廢只給數字，避免歷史淹沒簡報
-  for f in tickets/"$TICKET_PREFIX"-*.md; do
+  for f in tickets/*-*.md; do
     st=$(grep -m1 "^status:" "$f" | sed 's/status: *//')
     case "$st" in
       待開發|開發中)

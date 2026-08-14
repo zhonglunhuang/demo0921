@@ -52,6 +52,8 @@ API 契約、資料模型、狀態機、遷移風險、權限邊界。規範來�
 ### 4. 驗證、實機測試與收尾
 
 - 跑 `run-checks`（專案的最小驗證清單）綠燈、同步 `docs/SPEC.md`。
+- **改到使用者看得到／按得到的東西 → 綠燈後必過 `user-walkthrough`**（真人操作走查）：
+  以「真人操作」視角走完整條使用路徑，run-checks 全綠也擋不住的問題靠它。走查清單見該 skill。
 - **可實機測試時必停先問**是否上實機——**未獲本次同意不得 merge / push / 部署**；
   每張票單獨確認（兩道確認閘之二）。同意後：開 PR / merge `feature/*`
   → 整合分支 → 依專案部署方式上測試環境 → 真裝置驗證。
@@ -63,6 +65,10 @@ API 契約、資料模型、狀態機、遷移風險、權限邊界。規範來�
 | skill | 何時用 |
 |-------|--------|
 | `run-checks` | 改完的最小驗證（動工後必跑；指令清單由 setup / framework 入口維護） |
+| `user-walkthrough` | 真人操作走查（改到 UI／流程時，綠燈後、回報前必過） |
+| `ui-design` | 動任何畫面前套用的通用 UI/UX 檢查清單 |
+| `ux-writing` | 寫使用者看得到的文字時套用（繁中、一致性、盤古之白） |
+| `grilling` | 需求進來先逼問一輪（pm 入口開票前必跑） |
 | （stack 專屬 workflow skills） | 由 framework 入口依專案技術棧建立，例：add-backend-feature、deploy-safely |
 
 ## 長時間任務（背景 subagent）

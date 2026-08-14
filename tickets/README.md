@@ -4,15 +4,28 @@
 > 新功能 / 行為修改，都必須先有一張票（由 `/pm` 與案主確認後開立）。
 > 討論過程與 demo 素材放 `cache/`（不進版控）；系統「目前實際行為」以 `docs/SPEC.md` 為準。
 
-## 命名
+## 命名（作者前綴）
 
-`<前綴>-<四位流水號>-<kebab-或中文短題>.md`，例：`TK-0001-掃碼入庫.md`。
-前綴在 `scripts/framework-config.sh` 的 `TICKET_PREFIX` 設定（setup 初始化時填，本文件範例用 `TK`）。
-流水號取現有最大號 +1，不重用、不補洞。
+`<作者前綴>-<流水號>-<kebab-或中文短題>.md`，例：`AMY-01-掃碼入庫.md`。
 
-**開票一律用 `scripts/new-ticket.sh`（或 `make new-ticket t="短題" r="角色"`）**：它**開票當下先 fetch
-遠端整合分支**，再從「本地＋遠端」的最大號 +1 取號、照下方模板建檔——多 session 平行時從源頭
-降低撞號（撞號最後防線仍是 ticket-lint 的唯一性檢查）。離線時退回本地最大號並提醒，push 前務必再 pull --rebase。
+- **前綴 = 每個 clone 設定一次**：`git config ticket.prefix AMY`（2~8 個大寫字母，字母開頭；
+  存在 `.git/config`，不進版控）。前綴代表「這台 clone 的作者」，**不是**「誰想到需求」。
+- 流水號**只在自己的前綴裡遞增**——每個人有獨立的號碼空間，結構上不會撞。
+- **同一人平行開第二個 session 也在開票時**，第二個 session 用
+  `TICKET_PREFIX=AMY2 make new-ticket …` 指定別名，否則同前綴照樣撞。
+- 建議把**領域**放進短題開頭（例 `AMY-01-庫存-…`）：票號負責唯一性，檔名負責可讀性。
+- 專案若有舊制 `TICKET_PREFIX-XXXX` 票（`scripts/framework-config.sh` 設定的那個，預設 `TK`）
+  **不改號、不再發新號**（凍結），lint 兩制並收。
+
+> 為什麼用作者前綴而不是全域流水號（源專案 v4.11.0）：撞號是「取號」與「推送」之間的
+> 競爭條件——兩個人在對方 push 之前取號，fetch 再勤也看不到彼此（源專案四度因此撞號）。
+> 作者前綴讓取號**不需要與任何人協調**。
+
+**開票一律用 `scripts/new-ticket.sh`（或 `make new-ticket t="短題" r="角色"`）**：
+它會讀取前綴、**fetch 全部遠端分支**（只掃整合分支會看不到別人 feature 分支上剛開的票，
+源專案 v4.8.0 的教訓）後在自己的 namespace 取最大號 +1、照下方模板建檔。
+撞號最後防線仍是 ticket-lint 的唯一性檢查（工具本身也有自動化測試 `scripts/ticket-tools-test.sh`）。
+離線時退回本地最大號並提醒，push 前務必再 pull --rebase。
 
 ## 狀態流（三態）
 
