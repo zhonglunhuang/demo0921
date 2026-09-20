@@ -16,8 +16,21 @@ make check          # 目前至少包含 ticket-lint；專案檢查指令設定�
 
 ## 專案檢查指令
 
-{{TODO：由 setup 填寫——依技術棧列出 lint / typecheck / test / build 指令，
-分「改了哪一側就跑哪一段」。設定前，至少人工確認改動可正常執行。}}
+本專案是純靜態 HTML/CSS/JS，沒有建置與套件管理，檢查只有兩段：
+
+```
+make static-check   # 靜態站基本檢查（已包含在 make check 裡）
+```
+
+`static-check` 會檢查：
+
+- `src/index.html` 存在。
+- 所有 HTML 引用的站內檔案（連結、css、js、圖片）確實存在——路徑打錯會被抓出來。
+- 沒有以 `/` 開頭的站內絕對路徑（GitHub Pages 子路徑下會失效）。
+- 沒有殘留的 `TODO` / `Lorem ipsum` / `{{佔位}}` 內容被交出去給客戶看。
+
+改了畫面時，**指令綠燈不等於做好**：一定要在瀏覽器實際開過該頁，並走 `user-walkthrough`
+以真人視角把使用路徑點完。
 
 ## 多介面同步
 
