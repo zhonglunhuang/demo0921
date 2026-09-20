@@ -22,8 +22,8 @@
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/ticket-gate-hook.sh",
-            "statusMessage": "檢查無票不開發閘門",
-            "timeout": 15
+            "timeout": 15,
+            "statusMessage": "檢查無票不開發閘門"
           }
         ]
       },
@@ -33,8 +33,8 @@
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/git-sync-gate-hook.sh",
-            "statusMessage": "推分支前檢查遠端同步",
-            "timeout": 20
+            "timeout": 20,
+            "statusMessage": "推分支前檢查遠端同步"
           }
         ]
       }
@@ -50,5 +50,8 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true
   }
 }
