@@ -1059,7 +1059,13 @@
     ['付款：WO-1031 發票已上傳', 'D02', 'S04', '2026-09-19', '待處理', 'payment', true],
     ['付款：WO-1041 發票已上傳', 'E12', 'S04', '2026-09-23', '待處理', 'payment', false],
     ['水電異常追蹤：B04 疑似漏水', 'B04', 'S05', '2026-09-22', '進行中', 'utility', false],
-    ['水電異常追蹤：C08 空房用電', 'C08', 'S05', '2026-09-25', '待處理', 'utility', false]
+    ['水電異常追蹤：C08 空房用電', 'C08', 'S05', '2026-09-25', '待處理', 'utility', false],
+    ['屋主回覆追蹤：A03 續約條件', 'A03', 'S02', '2026-09-26', '待處理', 'lease', false],
+    ['點交準備：B15 10/14', 'B15', 'S02', '2026-10-13', '待處理', 'moveout', false],
+    ['入住準備：D15 簽約後備品', 'D15', 'S02', '2026-09-28', '待處理', 'prep', false],
+    ['設備保固到期檢視：B 棟熱水器', 'B02', 'S02', '2026-09-29', '待處理', 'equipment', false],
+    ['知識庫更新：C 棟垃圾車時間異動', 'C01', 'S02', '2026-09-27', '待處理', 'billing', false],
+    ['租金行情複查：中壢套房', 'A12', 'S02', '2026-09-30', '待處理', 'vacancy', false]
   ];
   DB.todos = TODO_SEED.map(function (r, i) {
     return {
@@ -1073,12 +1079,18 @@
     month: CURRENT_MONTH, monthLabel: monthLabel(CURRENT_MONTH),
     totals: { moveIn: 6, moveOut: 4, repair: 14, dunning: 9, showing: 11, renewal: 7 },
     byStaff: [
-      { staffId: 'S02', name: '陳○○', role: '租務管理員', open: 20, overdue: 3, moveIn: 3, moveOut: 2, repair: 6, dunning: 5, showing: 4 },
-      { staffId: 'S03', name: '劉○○', role: '租務管理員', open: 12, overdue: 0, moveIn: 3, moveOut: 2, repair: 4, dunning: 2, showing: 7 },
-      { staffId: 'S04', name: '黃○○', role: '會計', open: 6, overdue: 1, moveIn: 0, moveOut: 0, repair: 0, dunning: 2, showing: 0 },
-      { staffId: 'S05', name: '吳○○', role: '修繕人員', open: 8, overdue: 0, moveIn: 0, moveOut: 0, repair: 4, dunning: 0, showing: 0 }
+      { staffId: 'S02', name: '陳○○', role: '租務管理員', moveIn: 3, moveOut: 2, repair: 6, dunning: 5, showing: 4 },
+      { staffId: 'S03', name: '劉○○', role: '租務管理員', moveIn: 3, moveOut: 2, repair: 4, dunning: 2, showing: 7 },
+      { staffId: 'S04', name: '黃○○', role: '會計', moveIn: 0, moveOut: 0, repair: 0, dunning: 2, showing: 0 },
+      { staffId: 'S05', name: '吳○○', role: '修繕人員', moveIn: 0, moveOut: 0, repair: 4, dunning: 0, showing: 0 }
     ]
   };
+  /* 手上件數與逾期件數一律由 DB.todos 推導，避免待辦清單與績效表兩處數字打架 */
+  DB.performance.byStaff.forEach(function (r) {
+    var mine = DB.todos.filter(function (t) { return t.assigneeId === r.staffId && t.status !== '完成'; });
+    r.open = mine.length;
+    r.overdue = mine.filter(function (t) { return t.overdue; }).length;
+  });
 
   /* ============================================================
    * 17. 匯出與 API（f20）

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 168" role="img" aria-label="退租點交照片：牆面破損">
+  <defs>
+    <linearGradient id="f04h-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ececef"/>
+      <stop offset="1" stop-color="#d9d9de"/>
+    </linearGradient>
+    <linearGradient id="f04h-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9bfae"/>
+      <stop offset="1" stop-color="#b6ab98"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="168" rx="10" fill="url(#f04h-wall)"/>
+  <path d="M0 126h240v42H0z" fill="url(#f04h-floor)"/>
+  <path d="M0 124h240v3H0z" fill="#a89d8a"/>
+
+  <rect x="26" y="34" width="52" height="70" rx="3" fill="#ffffff" opacity=".7"/>
+  <rect x="26" y="34" width="52" height="70" rx="3" fill="none" stroke="#b9b9c0"/>
+  <path d="M52 34v70M26 69h52" stroke="#b9b9c0"/>
+
+  <path d="M128 48c9-6 18 2 15 11 6 1 9 8 5 13-4 6-14 5-17-1-6 3-13-1-13-8 0-6 5-11 10-11 0-2 0-3 0-4z" fill="#c6b8a4" opacity=".85"/>
+  <path d="M137 74c5 5 3 13-4 16-6 3-13-1-14-7" fill="none" stroke="#a89578" stroke-width="1.4"/>
+  <path d="M150 60c6 3 8 11 4 16" fill="none" stroke="#a89578" stroke-width="1.2"/>
+
+  <rect x="112" y="38" width="62" height="58" rx="3" fill="none" stroke="#ff3b30" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="112" y="32" font-family="-apple-system, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="10" font-weight="600" fill="#ff3b30">牆面污損</text>
+
+  <rect x="0" y="140" width="240" height="28" fill="#1d1d1f" opacity=".62"/>
+  <text x="12" y="158" font-family="-apple-system, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="10" fill="#f5f5f7">D11 退租點交 · 2026/08/07</text>
+  <text x="228" y="158" text-anchor="end" font-family="-apple-system, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="10" fill="#a1a1a6">主臥東側牆</text>
+</svg>

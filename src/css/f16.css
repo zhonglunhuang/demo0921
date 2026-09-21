@@ -1,0 +1,431 @@
+/* f16.css — 老闆營運儀表板（f16）專屬樣式
+ * 契約：docs/DESIGN.md §1（css/fNN.css 只有該功能引用）、§2.1（不得出現裸 hex，一律用 tokens）。
+ * 兩個頁面共用：src/app/f16-owner-dashboard.html（操作頁）、src/tour/f16-owner-dashboard.html（導覽頁）。
+ * 前綴一律 .f16-，不覆寫基礎層元件。
+ */
+
+/* ==========================================================================
+   1. 操作頁：工具列、區塊節奏
+   ========================================================================== */
+.f16-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  padding: 12px 16px;
+  margin-bottom: 28px;
+  background: var(--bg-alt);
+  border-radius: var(--radius-m);
+}
+.f16-toolbar__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+.f16-toolbar__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-2);
+  flex: none;
+}
+.f16-toolbar .segmented {
+  background: var(--bg);
+  flex-wrap: wrap;
+}
+.f16-toolbar__meta {
+  font-size: 13px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+.f16-section { margin-top: 36px; }
+.f16-section:first-of-type { margin-top: 0; }
+.f16-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.f16-section__head p { margin: 0; }
+
+/* ==========================================================================
+   2. 本月結果（深色主卡）與出租組成
+   ========================================================================== */
+.f16-hero__label {
+  font-size: 14px;
+  color: var(--ink-2-on-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.f16-hero__label .icon { width: 16px; height: 16px; }
+.f16-hero__value {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  margin: 6px 0 4px;
+  word-break: keep-all;
+}
+.f16-hero__value .f16-hero__unit {
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--ink-2-on-dark);
+  margin-right: 6px;
+  vertical-align: 10px;
+  letter-spacing: 0;
+}
+/* 深色卡上的漲跌字：淺底用的 ink 色在黑底會看不清，換成亮一階的語意色 */
+.f16-hero .kpi-delta--up { color: var(--ok); }
+.f16-hero .kpi-delta--down { color: var(--danger); }
+.f16-hero .kpi-delta--flat { color: var(--ink-2-on-dark); }
+.f16-hero .kpi-delta .muted-2 { color: var(--ink-2-on-dark); }
+.f16-hero__breakdown {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.f16-hero__breakdown .stat-label { color: var(--ink-2-on-dark); }
+.f16-hero__breakdown .stat-value { color: var(--ink-on-dark); }
+.f16-sentence {
+  margin-top: 18px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2-on-dark);
+}
+.f16-sentence strong { color: var(--ink-on-dark); font-weight: 600; }
+
+.f16-mix { display: flex; flex-direction: column; gap: 16px; }
+.f16-mix .chart--donut { gap: 20px; }
+
+/* ==========================================================================
+   3. 今天要盯的事
+   ========================================================================== */
+.f16-watch-card .card-head { padding: 24px 24px 0; }
+.f16-watch-card .card-body { padding: 16px 24px 24px; }
+.f16-watch { display: flex; flex-direction: column; gap: 10px; }
+.f16-watch__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.f16-watch__item.is-done {
+  background: var(--ok-soft);
+  border-color: transparent;
+}
+.f16-watch__body { flex: 1; min-width: 0; }
+.f16-watch__title {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.f16-watch__text {
+  font-size: 14px;
+  color: var(--ink-2);
+  margin-top: 3px;
+}
+.f16-watch__units {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.f16-watch__unit {
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-alt);
+  color: var(--ink-2);
+}
+.f16-watch__action { flex: none; }
+
+/* ==========================================================================
+   4. 租約到期
+   ========================================================================== */
+.f16-expiry__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.f16-expiry__counts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.f16-count {
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: var(--bg-alt);
+  border: 1px solid transparent;
+  text-align: left;
+  width: 100%;
+  transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.f16-count:hover { background: var(--line-soft); }
+.f16-count.is-active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+.f16-count__label { display: block; font-size: 13px; color: var(--ink-2); }
+.f16-count__value {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+.f16-count__value small { font-size: 14px; font-weight: 400; color: var(--ink-2); margin-left: 3px; }
+.f16-count.is-active .f16-count__value { color: var(--accent); }
+
+/* ==========================================================================
+   5. 權限遮罩
+   ========================================================================== */
+.f16-locked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 180px;
+  padding: 24px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-m);
+  color: var(--ink-3);
+  text-align: center;
+}
+.f16-locked .icon { width: 28px; height: 28px; }
+.f16-locked p { font-size: 14px; margin: 0; max-width: 34ch; }
+.f16-masked { color: var(--ink-3); letter-spacing: 0.08em; }
+
+/* ==========================================================================
+   6. 快報（modal 內容）
+   ========================================================================== */
+.f16-report__lines { display: flex; flex-direction: column; gap: 10px; }
+.f16-report__line {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.f16-report__line .icon { width: 18px; height: 18px; color: var(--accent); flex: none; margin-top: 3px; }
+
+/* ==========================================================================
+   7. 導覽畫面（stage-screen 內：960 × 600，會被等比縮小，字級要放大）
+   ========================================================================== */
+.f16-stage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+  font-size: 17px;
+}
+.f16-stage__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--glass);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m);
+  flex: none;
+}
+.f16-stage__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.f16-stage__brand .icon { width: 22px; height: 22px; color: var(--accent); }
+.f16-stage__date { margin-left: auto; font-size: 15px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.f16-stage__role {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+.f16-stage__title {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  flex: none;
+}
+.f16-stage__lead { font-size: 16px; color: var(--ink-2); margin-top: 4px; }
+.f16-stage__body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 16px; }
+
+.f16-stage .f16-card {
+  background: var(--bg);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-1);
+  padding: 18px 20px;
+}
+.f16-stage .f16-card--dark { background: var(--bg-dark-2); color: var(--ink-on-dark); }
+.f16-stage .f16-card__title {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.f16-stage .f16-card__title .icon { width: 20px; height: 20px; color: var(--accent); }
+.f16-stage .f16-card__title .badge { margin-left: auto; }
+
+.f16-grid { display: grid; gap: 14px; }
+.f16-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.f16-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.f16-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.f16-grid--hero { grid-template-columns: 1.15fr 1fr; }
+
+.f16-tile {
+  background: var(--bg);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-1);
+  padding: 14px 16px;
+}
+.f16-tile__label { font-size: 14px; color: var(--ink-2); }
+.f16-tile__value {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+.f16-tile__value small { font-size: 15px; font-weight: 400; color: var(--ink-2); margin-left: 3px; }
+.f16-tile__hint { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
+.f16-stage .f16-tile--dark { background: var(--bg-dark-2); color: var(--ink-on-dark); }
+.f16-stage .f16-tile--dark .f16-tile__label,
+.f16-stage .f16-tile--dark .f16-tile__hint,
+.f16-stage .f16-tile--dark .f16-tile__value small { color: var(--ink-2-on-dark); }
+.f16-stage .f16-tile--wide { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 6px 18px; flex-wrap: wrap; }
+.f16-stage .f16-tile--wide .f16-tile__value { font-size: 34px; }
+.f16-stage .f16-tile--wide .f16-tile__hint { margin-left: auto; }
+.f16-tile--ok .f16-tile__value { color: var(--ok-ink); }
+.f16-tile--warn .f16-tile__value { color: var(--warn-ink); }
+.f16-tile--danger .f16-tile__value { color: var(--danger-ink); }
+
+.f16-stage .f16-hero-value {
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.f16-stage .f16-hero-value .f16-hero__unit { font-size: 22px; vertical-align: 12px; }
+
+.f16-stage .f16-kv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+}
+.f16-stage .f16-card--dark .f16-kv { border-top-color: rgba(255, 255, 255, 0.16); }
+.f16-stage .f16-kv > div { min-width: 0; }
+.f16-stage .f16-kv > div > span { display: block; font-size: 14px; color: var(--ink-2); }
+.f16-stage .f16-card--dark .f16-kv > div > span { color: var(--ink-2-on-dark); }
+.f16-stage .f16-kv b { font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.f16-stage .f16-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  background: var(--bg-alt);
+  font-size: 16px;
+}
+.f16-stage .f16-row + .f16-row { margin-top: 8px; }
+.f16-stage .f16-row.is-done { background: var(--ok-soft); }
+.f16-stage .f16-row__name { font-weight: 600; flex: none; width: 210px; }
+.f16-stage .f16-row__text { color: var(--ink-2); flex: 1; min-width: 0; }
+.f16-stage .f16-row__tail { margin-left: auto; flex: none; }
+
+.f16-stage .f16-mini-table { width: 100%; font-size: 16px; font-variant-numeric: tabular-nums; }
+.f16-stage .f16-mini-table th,
+.f16-stage .f16-mini-table td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line-soft); }
+.f16-stage .f16-mini-table th { font-size: 14px; font-weight: 500; color: var(--ink-2); }
+.f16-stage .f16-mini-table td.num,
+.f16-stage .f16-mini-table th.num { text-align: right; }
+.f16-stage .f16-mini-table tr:last-child td { border-bottom: 0; }
+.f16-stage .f16-mini-table tr.is-active td { background: var(--accent-soft); font-weight: 600; }
+
+.f16-stage .f16-seg {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--bg-alt);
+  border-radius: var(--radius-pill);
+}
+.f16-stage .f16-seg span {
+  padding: 5px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.f16-stage .f16-seg span.is-active {
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: var(--shadow-1);
+}
+.f16-stage .f16-note {
+  font-size: 15px;
+  color: var(--ink-2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.f16-stage .f16-note .icon { width: 18px; height: 18px; color: var(--accent); }
+
+/* ==========================================================================
+   8. 響應：1024 / 768 / 480
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .f16-hero__value { font-size: 42px; }
+}
+@media (max-width: 768px) {
+  .f16-toolbar { padding: 12px; margin-bottom: 20px; }
+  .f16-toolbar__main { width: 100%; }
+  .f16-toolbar .segmented { width: 100%; overflow-x: auto; }
+  .f16-section { margin-top: 28px; }
+  .f16-hero__value { font-size: 38px; }
+  .f16-expiry__counts { grid-template-columns: 1fr; gap: 8px; }
+  .f16-count { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 12px 14px; }
+  .f16-count__value { font-size: 24px; margin-top: 0; }
+  .f16-watch__item { flex-direction: column; gap: 10px; }
+  .f16-watch__action { width: 100%; }
+  .f16-watch__action .btn { width: 100%; }
+}
+@media (max-width: 480px) {
+  .f16-hero__value { font-size: 34px; }
+  .f16-toolbar__meta { width: 100%; }
+}

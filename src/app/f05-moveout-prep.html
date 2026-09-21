@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>退租整備流程｜租務中樞</title>
+  <meta name="description" content="退租後的 14 項整備清單：逐項檢查、需修繕直接開工單，全部完成才把房間標記為可出租。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f05.css">
+</head>
+<body class="app" data-feature="f05">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>退租整備流程</h1>
+      <p class="page-lead">租客搬走後，每間房都有一張 14 項整備清單。逐項打勾、需要修繕就直接開工單，全部完成才能重新出租。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--secondary" id="f05-rules">查看逾期規則</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f05-kpis" aria-label="整備概況"></section>
+
+    <div id="f05-alerts" class="f05-alerts"></div>
+
+    <div class="f05-layout">
+      <section class="card card--flush card--static f05-list-card" aria-labelledby="f05-list-title">
+        <div class="card-head f05-list-head">
+          <h2 class="card-title" id="f05-list-title">退租物件</h2>
+        </div>
+        <div class="f05-filters">
+          <div class="segmented segmented--block" role="tablist" id="f05-stage-tabs"></div>
+          <label class="f05-region">
+            <span class="sr-only">篩選區域</span>
+            <select class="select" id="f05-region"></select>
+          </label>
+        </div>
+        <div id="f05-rooms" class="f05-rooms"></div>
+      </section>
+
+      <section class="f05-detail" id="f05-detail" aria-live="polite"></section>
+    </div>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f05.js"></script>
+</body>
+</html>

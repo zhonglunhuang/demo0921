@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="320" height="220" role="img" aria-labelledby="t"><title id="t">退租點交當日的室內現況照片</title>
+<style>text { font-family: -apple-system, BlinkMacSystemFont, "SF Pro TC", "PingFang TC", "Helvetica Neue", "Noto Sans TC", sans-serif; }</style>
+<rect width="320" height="220" fill="#f7f8fa"/>
+<rect x="0" y="156" width="320" height="64" fill="#e3dbcd"/>
+<path d="M0 156h320" stroke="#d3cabb" stroke-width="2"/>
+<rect x="196" y="36" width="96" height="72" rx="6" fill="#dceafc" stroke="#c9ced8" stroke-width="2"/>
+<path d="M244 36v72M196 72h96" stroke="#c9ced8" stroke-width="2"/>
+<rect x="34" y="92" width="112" height="64" rx="8" fill="#ffffff" stroke="#e8e8ed" stroke-width="2"/>
+<rect x="44" y="80" width="92" height="16" rx="8" fill="#eef1f6"/>
+<rect x="168" y="124" width="58" height="32" rx="5" fill="#ffffff" stroke="#e8e8ed" stroke-width="2"/>
+<rect x="238" y="118" width="46" height="38" rx="5" fill="#f0ece4" stroke="#ddd6ca" stroke-width="2"/>
+<rect x="18" y="18" width="162" height="26" rx="13" fill="#e8f2fd"/>
+<circle cx="33" cy="31" r="5" fill="#0071e3"/>
+<text x="46" y="35" font-size="12" fill="#0057b3">公司拍攝 · 點交現況存證</text>
+</svg>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>設備履歷｜租務中樞</title>
+  <meta name="description" content="每間房的冷氣、冰箱、熱水器都有品牌、保固與維修紀錄；修太多次、花太多錢的，系統直接建議汰換並建立採購待辦。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f06.css">
+</head>
+<body class="app" data-feature="f06">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>設備履歷</h1>
+      <p class="page-lead">每台冷氣、冰箱、熱水器都記著品牌、購入日期、保固與每一次維修。修太多次、花的錢接近一台新機時，系統直接建議汰換。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--secondary" id="f06-rules">查看汰換建議規則</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f06-kpis" aria-label="設備概況"></section>
+
+    <div id="f06-alerts" class="f06-alerts"></div>
+
+    <div class="f06-layout">
+      <section class="card card--flush card--static f06-list-card" aria-labelledby="f06-list-title">
+        <div class="card-head f06-list-head">
+          <h2 class="card-title" id="f06-list-title">物件設備</h2>
+        </div>
+        <div class="f06-filters">
+          <div class="segmented segmented--block" role="tablist" id="f06-tabs"></div>
+          <div class="f06-filter-row">
+            <label class="search">
+              <span class="sr-only">搜尋房號或品牌</span>
+              <input type="search" class="input" id="f06-search" placeholder="搜尋房號或品牌" autocomplete="off">
+            </label>
+            <label>
+              <span class="sr-only">篩選棟別</span>
+              <select class="select" id="f06-building"></select>
+            </label>
+          </div>
+        </div>
+        <p class="f06-count small muted" id="f06-count"></p>
+        <div id="f06-units" class="f06-units"></div>
+      </section>
+
+      <section class="f06-detail" id="f06-detail" aria-live="polite"></section>
+    </div>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f06.js"></script>
+</body>
+</html>

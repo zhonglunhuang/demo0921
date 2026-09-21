@@ -1,0 +1,176 @@
+/* tour-index.css — 功能導覽首頁（只有 tour/index.html 載入）
+ * 契約：docs/DESIGN.md §2（Apple 風、卡片、焦點、斷點）、§4（body.tour 骨架）。
+ * 規則：顏色一律 var(--…)，tokens 定義於 main.css 的 :root，本檔不寫裸 hex。
+ */
+
+/* ---------------------------------------------------------------------------
+ * 1. 頁面底色與頁首
+ * ------------------------------------------------------------------------- */
+body.ti-page { background: var(--bg-alt); }
+body.ti-page .tour-main { max-width: var(--container-wide); }
+body.ti-page .tour-head h1 { text-wrap: balance; }
+body.ti-page .tour-head .page-lead { text-wrap: pretty; }
+
+.ti-head-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 10px;
+  margin-top: 20px;
+}
+.ti-head-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  box-shadow: var(--shadow-1);
+  font-size: 14px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.ti-head-meta .icon { width: 15px; height: 15px; color: var(--accent); }
+
+/* ---------------------------------------------------------------------------
+ * 2. 群組快捷列
+ * ------------------------------------------------------------------------- */
+.ti-groupnav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+.ti-groupnav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  box-shadow: var(--shadow-1);
+  color: var(--ink);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.ti-groupnav a .icon { width: 15px; height: 15px; color: var(--accent); }
+.ti-groupnav a:hover { background: var(--ink); color: var(--bg); text-decoration: none; }
+.ti-groupnav a:hover .icon { color: var(--bg); }
+
+/* ---------------------------------------------------------------------------
+ * 3. 群組區塊
+ * ------------------------------------------------------------------------- */
+.ti-group { padding-top: 56px; scroll-margin-top: calc(var(--topbar-h) + 16px); }
+.ti-group + .ti-group { margin-top: 8px; border-top: 1px solid var(--line); }
+.ti-group__head { display: grid; gap: 8px; max-width: 680px; margin-bottom: 28px; }
+.ti-group__num { font-size: 14px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+.ti-group__name { margin: 0; font-size: 32px; font-weight: 600; line-height: 1.15; letter-spacing: -.01em; }
+.ti-group__blurb { margin: 0; font-size: 17px; line-height: 1.47; color: var(--ink-2); }
+
+/* ---------------------------------------------------------------------------
+ * 4. 功能卡片（整張可點；內含一個次要連結）
+ * ------------------------------------------------------------------------- */
+.ti-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ti-cards > li { display: flex; min-width: 0; }
+.ti-card {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 24px 18px;
+  border-radius: var(--radius-l);
+  background: var(--bg);
+  box-shadow: var(--shadow-1);
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.ti-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+.ti-card:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ti-card .icon-circle { margin-bottom: 2px; }
+.ti-card__name { margin: 0; text-wrap: balance; font-size: 21px; font-weight: 600; line-height: 1.2; letter-spacing: -.005em; }
+.ti-card__name a { color: inherit; text-decoration: none; }
+.ti-card__name a:hover { text-decoration: none; }
+.ti-card__name a:focus-visible { outline: none; }
+.ti-card__name a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.ti-card__tagline { margin: 0; flex: 1; font-size: 15px; line-height: 1.47; color: var(--ink-2); }
+.ti-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 14px;
+}
+.ti-card__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ti-card__meta .icon { width: 14px; height: 14px; }
+.ti-card__app {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: var(--ink-2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease);
+}
+.ti-card__app:hover { color: var(--accent); text-decoration: none; }
+
+/* ---------------------------------------------------------------------------
+ * 5. 底部 CTA
+ * ------------------------------------------------------------------------- */
+.ti-cta { margin-top: 72px; padding: 56px 32px; text-align: center; }
+.ti-cta__title { margin: 0; text-wrap: balance; font-size: 32px; font-weight: 600; line-height: 1.15; letter-spacing: -.01em; }
+.ti-cta__text { margin: 12px auto 0; text-wrap: pretty; max-width: 46ch; font-size: 17px; line-height: 1.47; color: var(--ink-2-on-dark); }
+.ti-cta__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+
+/* ---------------------------------------------------------------------------
+ * 6. 響應：1024 / 768 / 480
+ * ------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .ti-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ti-group__name { font-size: 28px; }
+}
+@media (max-width: 768px) {
+  .ti-group { padding-top: 40px; }
+  .ti-group__head { margin-bottom: 20px; }
+  .ti-group__name { font-size: 24px; }
+  .ti-group__blurb { font-size: 15px; }
+  .ti-cards { grid-template-columns: 1fr; gap: 14px; }
+  .ti-card { padding: 20px 20px 16px; border-radius: var(--radius-m); }
+  .ti-card:hover { transform: none; }
+  .ti-cta { margin-top: 48px; padding: 40px 20px; border-radius: var(--radius-m); }
+  .ti-cta__title { font-size: 26px; }
+  .ti-cta__actions .btn { flex: 1 1 100%; }
+}
+@media (max-width: 480px) {
+  .ti-card__name { font-size: 19px; }
+  .ti-card__foot { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ti-card, .ti-groupnav a, .ti-card__app { transition: none; }
+  .ti-card:hover { transform: none; }
+}

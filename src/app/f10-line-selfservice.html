@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>租客 LINE 自助中心｜租務中樞</title>
+  <meta name="description" content="租客在 LINE 綁定房號後，帳單、繳費、租約、報修、續租、退租九件事都能自己查，公司端同步看到紀錄與自動開出的單據。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f10.css">
+</head>
+<body class="app" data-feature="f10">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>租客 LINE 自助中心</h1>
+      <p class="page-lead">租客在 LINE 上輸入房號綁定身分，帳單、繳費、租約、報修、續租、退租自己查自己報。公司端同步看到每一筆紀錄，需要開單的系統直接開好。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f10-invite-all">發送綁定邀請</button>
+        <button type="button" class="btn btn--secondary" id="f10-reset">重播示範對話</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f10-kpis" aria-label="自助服務概況"></section>
+
+    <div id="f10-alerts" class="f10-alerts" aria-live="polite"></div>
+
+    <div class="f10-layout">
+      <section class="card f10-phone-card" aria-labelledby="f10-phone-title">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f10-phone-title">租客手機（LINE）</h2>
+            <p class="card-sub">示範租客：A01 王○○</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="f10-phone-who" id="f10-phone-who"></div>
+          <div id="f10-phone"></div>
+          <div class="f10-phone-foot">
+            <span class="muted" id="f10-stage-hint"></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="f10-side">
+        <section class="card" aria-labelledby="f10-log-title">
+          <div class="card-head">
+            <h2 class="card-title" id="f10-log-title">這次自助服務紀錄</h2>
+          </div>
+          <div class="card-body" id="f10-log" aria-live="polite"></div>
+        </section>
+
+        <section class="card" aria-labelledby="f10-docs-title">
+          <div class="card-head">
+            <h2 class="card-title" id="f10-docs-title">系統自動開出的單據</h2>
+          </div>
+          <div class="card-body" id="f10-docs" aria-live="polite"></div>
+        </section>
+
+        <section class="card" aria-labelledby="f10-bind-title">
+          <div class="card-head">
+            <h2 class="card-title" id="f10-bind-title">租客綁定狀況</h2>
+          </div>
+          <div class="card-body">
+            <div class="f10-filters">
+              <div class="segmented" role="tablist" id="f10-tabs"></div>
+              <label>
+                <span class="sr-only">篩選棟別</span>
+                <select class="select" id="f10-building"></select>
+              </label>
+            </div>
+            <div class="f10-table-scroll" id="f10-table"></div>
+            <p class="f10-role-note" id="f10-role-note"></p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="card f10-menu-guide" aria-labelledby="f10-menu-title">
+      <div class="card-head">
+        <div>
+          <h2 class="card-title" id="f10-menu-title">圖文選單的九件事</h2>
+          <p class="card-sub">點任一項，左邊手機就會跑一次租客看到的回覆</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="f10-menu-grid" id="f10-menu-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f10.js"></script>
+</body>
+</html>

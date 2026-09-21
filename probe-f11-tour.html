@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>probe f11 tour</title>
+  <style>
+    html,body{margin:0;padding:0;font:13px/1.5 monospace}
+    pre{margin:0;padding:8px;background:#fff;color:#000}
+    iframe{border:0;width:1440px;height:1000px;display:block}
+  </style>
+</head>
+<body>
+  <pre id="log"></pre>
+  <iframe id="f" src="/src/tour/f11-ai-support.html"></iframe>
+  <script>
+    var logEl = document.getElementById('log');
+    function log(s) { logEl.textContent += s + '\n'; }
+    document.getElementById('f').addEventListener('load', function () {
+      var d = this.contentDocument;
+      function q(s) { return d.querySelector(s); }
+      function txt(el) { return el ? el.textContent.replace(/\s+/g, ' ').trim() : ''; }
+      function report(i) {
+        var stage = q('.stage-screen');
+        var typed = txt(stage.querySelector('[data-a]'));
+        var nums = [];
+        Array.prototype.forEach.call(stage.querySelectorAll('[data-k]'), function (n) { nums.push(n.getAttribute('data-k') + '=' + txt(n)); });
+        log('step' + (i + 1) +
+          ' typed:' + typed.length + '字 "' + typed.slice(0, 18) + '"' +
+          ' checked:' + stage.querySelectorAll('input:checked').length +
+          ' typing:' + stage.querySelectorAll('.typing').length +
+          ' badges:' + txt(stage.querySelector('[data-hit],[data-pending],[data-clear],[data-a-tag]')) +
+          ' nums:' + nums.join(','));
+      }
+      var dots = d.querySelectorAll('.tour-dot');
+      var k = 0;
+      function next() {
+        if (k >= dots.length) { log('DONE'); return; }
+        var i = k++;
+        dots[i].click();
+        setTimeout(function () { report(i); next(); }, 5000);
+      }
+      setTimeout(next, 600);
+    });
+  </script>
+</body>
+</html>

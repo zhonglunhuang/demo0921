@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="320" height="220" role="img" aria-labelledby="t"><title id="t">牆面檢查照片，牆角有壁癌與污漬，需要油漆</title>
+<style>text { font-family: -apple-system, BlinkMacSystemFont, "SF Pro TC", "PingFang TC", "Helvetica Neue", "Noto Sans TC", sans-serif; }</style>
+<rect width="320" height="220" fill="#eceff4"/>
+<rect x="0" y="168" width="320" height="52" fill="#ddd6cb"/>
+<path d="M0 168h320" stroke="#cbc4b8" stroke-width="2"/>
+<path d="M24 60c18-10 34 4 52-2s28-16 44-8 20 26 38 24 26-16 42-10 22 22 38 18" fill="none" stroke="#c9b9a6" stroke-width="2" opacity=".65"/>
+<ellipse cx="72" cy="128" rx="36" ry="26" fill="#d8cbb8" opacity=".75"/>
+<ellipse cx="60" cy="146" rx="26" ry="16" fill="#cdbca4" opacity=".7"/>
+<ellipse cx="214" cy="104" rx="24" ry="17" fill="#d8cbb8" opacity=".6"/>
+<circle cx="150" cy="78" r="2.5" fill="#a89a88"/>
+<circle cx="166" cy="92" r="2.5" fill="#a89a88"/>
+<circle cx="182" cy="74" r="2.5" fill="#a89a88"/>
+<rect x="18" y="18" width="126" height="26" rx="13" fill="#ffe9e7"/>
+<circle cx="33" cy="31" r="5" fill="#ff3b30"/>
+<text x="46" y="35" font-size="12" fill="#c62828">壁癌 3 處</text>
+</svg>

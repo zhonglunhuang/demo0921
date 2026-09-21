@@ -1,0 +1,181 @@
+/* f11.css — AI 客服與知識庫（f11）專屬樣式
+ * 契約：docs/DESIGN.md §2 tokens、§3 元件 class、§6.1 檔案所有權。
+ * 規則：顏色一律用 main.css :root 的 token，不寫裸 hex；只有 app/f11-ai-support.html
+ *      與 tour/f11-ai-support.html 兩頁引用。
+ */
+
+/* ========================================================================
+   1. 操作頁：版面
+   ======================================================================== */
+.f11-alerts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0 0; }
+.f11-alerts:empty { display: none; }
+
+.f11-layout {
+  display: grid;
+  grid-template-columns: 400px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+.f11-side { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+/* ========================================================================
+   2. 操作頁：租客端對話模擬
+   ======================================================================== */
+.f11-sim { position: sticky; top: calc(var(--topbar-h) + 16px); }
+.f11-sim .card-head { align-items: center; }
+
+.f11-tenant-tabs { width: 100%; margin-bottom: 14px; }
+.f11-tenant-tabs .tab { flex: 1 1 auto; padding: 0 8px; font-size: 13px; }
+
+.f11-identity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: var(--radius-s);
+  background: var(--bg-alt);
+}
+.f11-identity .icon-circle { grid-row: 1 / span 2; width: 38px; height: 38px; }
+.f11-identity .icon-circle .icon { width: 19px; height: 19px; }
+.f11-identity-name { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.f11-identity-meta { font-size: 13px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 2px 12px; font-variant-numeric: tabular-nums; }
+
+.f11-phone { display: flex; justify-content: center; }
+.f11-phone .phone { width: 300px; }
+
+.f11-asks-label { font-size: 13px; color: var(--ink-3); margin: 16px 0 8px; }
+.f11-asks { display: flex; flex-wrap: wrap; gap: 8px; }
+.f11-asks .btn { max-width: 100%; }
+.f11-asks .btn--ghost { border: 1px dashed var(--line); }
+.f11-sim-foot { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line-soft); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); }
+
+/* ========================================================================
+   3. 操作頁：知識庫
+   ======================================================================== */
+.f11-kb-head { padding: 20px 24px 0; }
+.f11-kb-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 14px 24px; }
+.f11-kb-toolbar .search { flex: 1 1 200px; }
+.f11-kb-toolbar .search .input { height: 36px; font-size: 14px; }
+.f11-kb-toolbar .segmented .tab { padding: 0 12px; font-size: 13px; }
+
+.f11-kb-note { margin: 0 24px 14px; }
+
+.f11-kb-list { max-height: 560px; overflow-y: auto; padding: 0 12px 12px; }
+.f11-kb-list .empty-state { margin: 8px; }
+
+.f11-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  padding: 14px;
+  border-radius: var(--radius-s);
+  border: 1px solid transparent;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.f11-entry + .f11-entry { margin-top: 2px; }
+.f11-entry:hover { background: var(--row-hover); }
+.f11-entry.is-cited { background: var(--accent-soft); border-color: var(--accent); }
+.f11-entry.is-new { border-color: var(--ok); }
+.f11-entry-q { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.f11-entry-a { grid-column: 1 / -1; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.f11-entry-meta { grid-column: 1 / -1; font-size: 13px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 2px 14px; font-variant-numeric: tabular-nums; }
+.f11-entry-actions { grid-row: 1; grid-column: 2; align-self: start; }
+
+/* ========================================================================
+   4. 操作頁：轉人工與待補問答
+   ======================================================================== */
+.f11-pending { display: flex; flex-direction: column; gap: 10px; }
+.f11-pending-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  padding: 14px;
+  border-radius: var(--radius-s);
+  background: var(--bg-alt);
+}
+.f11-pending-item.is-new { box-shadow: inset 0 0 0 1px var(--warn); }
+.f11-pending-q { font-size: 15px; font-weight: 600; }
+.f11-pending-meta { grid-column: 1 / -1; font-size: 13px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.f11-pending-item .btn { align-self: start; }
+
+/* ========================================================================
+   5. 導覽頁：舞台（960 × 600）
+   ======================================================================== */
+.f11-stage { display: flex; flex-direction: column; gap: 16px; height: 100%; }
+.f11-stage__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.f11-stage__title { font-size: 21px; font-weight: 600; line-height: 1.2; }
+.f11-stage__sub { font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+.f11-stage__cols { display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 24px; align-items: start; min-height: 0; }
+.f11-stage__panels { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+/* 舞台高 600px，扣掉標題與留白後剩 470px 左右，手機外框改用固定高度才不會被切掉 */
+.f11-stage .phone { width: 268px; height: 466px; aspect-ratio: auto; padding: 8px; border-radius: 34px; font-size: 13px; }
+.f11-stage .phone-screen { border-radius: 28px; }
+.f11-stage .phone::before { width: 80px; height: 22px; top: 16px; }
+.f11-stage .bubble-row { max-width: 94%; }
+.f11-stage .phone-chat { gap: 6px; }
+
+.f11-panel { background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1); padding: 16px 18px; }
+.f11-panel__title { font-size: 13px; color: var(--ink-3); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+.f11-panel--flat { background: transparent; box-shadow: none; padding: 0; }
+
+.f11-match { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 14px; }
+.f11-match .icon { width: 18px; height: 18px; color: var(--ink-3); }
+
+.f11-kb-rows { display: flex; flex-direction: column; gap: 6px; }
+.f11-kb-row {
+  display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  padding: 8px 12px; border-radius: var(--radius-s); background: var(--bg-alt); font-size: 14px;
+  border: 1px solid transparent;
+}
+.f11-kb-row.is-dim { opacity: .45; }
+.f11-kb-row.is-hit { background: var(--accent-soft); border-color: var(--accent); }
+.f11-kb-row__b { font-weight: 600; }
+.f11-kb-row__q { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.f11-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.f11-compare__card { background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1); padding: 14px 16px; }
+.f11-compare__b { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.f11-compare__a { font-size: 14px; color: var(--ink-2); line-height: 1.5; min-height: 66px; }
+
+.f11-eq { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: center; }
+.f11-eq .icon-circle { grid-row: 1 / span 2; }
+.f11-eq__name { font-size: 15px; font-weight: 600; }
+.f11-eq__meta { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+.f11-mini-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.f11-mini-kpi { background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1); padding: 14px 16px; }
+.f11-mini-kpi__label { font-size: 13px; color: var(--ink-2); }
+.f11-mini-kpi__value { font-size: 30px; font-weight: 600; line-height: 1.1; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.f11-mini-kpi__value small { font-size: 14px; font-weight: 400; color: var(--ink-2); margin-left: 2px; }
+
+.f11-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 14px; }
+.f11-flow__step { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: var(--radius-pill); background: var(--bg-alt); color: var(--ink-2); }
+.f11-flow__step.is-on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.f11-flow .icon { width: 16px; height: 16px; color: var(--ink-3); }
+
+/* ========================================================================
+   6. 響應
+   ======================================================================== */
+@media (max-width: 1024px) {
+  .f11-layout { grid-template-columns: minmax(0, 1fr); }
+  .f11-sim { position: static; }
+  .f11-kb-list { max-height: none; }
+}
+
+@media (max-width: 768px) {
+  .f11-layout { gap: 14px; margin-top: 14px; }
+  .f11-side { gap: 14px; }
+  .f11-kb-head { padding: 20px 20px 0; }
+  .f11-kb-toolbar { padding: 12px 20px; gap: 8px; }
+  .f11-kb-note { margin: 0 20px 12px; }
+  .f11-kb-list { padding: 0 8px 8px; }
+  .f11-kb-toolbar .segmented { width: 100%; }
+  .f11-kb-toolbar .segmented .tab { flex: 1 1 auto; padding: 0 6px; }
+  .f11-entry { grid-template-columns: minmax(0, 1fr); }
+  .f11-entry-actions { grid-row: auto; grid-column: 1; justify-self: start; }
+  .f11-phone .phone { width: 100%; max-width: 300px; }
+  .f11-pending-item { grid-template-columns: minmax(0, 1fr); }
+}

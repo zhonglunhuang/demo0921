@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 客服與知識庫｜租務中樞</title>
+  <meta name="description" content="租客在 LINE 問問題，AI 只照公司知識庫回答，而且依棟別與房間回答；答不出來就轉人工，補上答案就成為下一次的標準回覆。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f11.css">
+</head>
+<body class="app" data-feature="f11">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>AI 客服與知識庫</h1>
+      <p class="page-lead">租客在 LINE 問的每一題，AI 都只照公司知識庫回答，而且會依他住的棟別與房間給答案。答不出來的直接轉人工，管理員補上答案，下次就自己答得出來。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f11-add">新增問答條目</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f11-kpis" aria-label="AI 客服概況"></section>
+
+    <div id="f11-alerts" class="f11-alerts"></div>
+
+    <div class="f11-layout">
+      <section class="card card--static f11-sim" aria-labelledby="f11-sim-title">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f11-sim-title">租客端對話</h2>
+            <p class="card-sub">切換租客，看同一題在不同棟別的答案</p>
+          </div>
+          <button type="button" class="btn btn--ghost btn--sm" id="f11-reset">重來一次</button>
+        </div>
+
+        <div class="segmented segmented--block f11-tenant-tabs" role="tablist" id="f11-tenant-tabs"></div>
+        <div class="f11-identity" id="f11-identity"></div>
+        <div class="f11-phone" id="f11-phone"></div>
+
+        <p class="f11-asks-label" id="f11-asks-label">點一題，看 AI 怎麼回</p>
+        <div class="f11-asks" id="f11-asks" aria-labelledby="f11-asks-label"></div>
+
+        <div class="f11-sim-foot">
+          <span id="f11-sim-note"></span>
+          <a class="link-more" href="../tour/f11-ai-support.html">看功能導覽 ›</a>
+        </div>
+      </section>
+
+      <div class="f11-side">
+        <section class="card card--flush card--static" aria-labelledby="f11-kb-title">
+          <div class="card-head f11-kb-head">
+            <div>
+              <h2 class="card-title" id="f11-kb-title">公司知識庫</h2>
+              <p class="card-sub" id="f11-kb-sub"></p>
+            </div>
+          </div>
+          <div class="f11-kb-note" id="f11-kb-note"></div>
+          <div class="f11-kb-toolbar">
+            <div class="segmented" role="tablist" id="f11-building-tabs"></div>
+            <label class="search">
+              <span class="sr-only">搜尋問答條目</span>
+              <input type="search" class="input" id="f11-search" placeholder="搜尋問題或答案">
+            </label>
+          </div>
+          <div class="f11-kb-list" id="f11-kb-list"></div>
+        </section>
+
+        <section class="card card--static" id="f11-escalation" aria-labelledby="f11-esc-title">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title" id="f11-esc-title">轉人工與待補問答</h2>
+              <p class="card-sub">AI 找不到答案就轉人工，補完答案就回到知識庫</p>
+            </div>
+          </div>
+          <div class="f11-pending" id="f11-pending"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f11.js"></script>
+</body>
+</html>

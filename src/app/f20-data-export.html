@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>資料匯出與所有權｜租務中樞</title>
+  <meta name="description" content="租客、租約、帳款、修繕、照片隨時完整匯出，提供 API。資料屬於安居包租代管，將來換系統商也帶得走。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f20.css">
+</head>
+<body class="app" data-feature="f20">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>資料匯出與所有權</h1>
+      <p class="page-lead">這一頁不是畫面功能，是一份承諾。做到 300 戶以後最怕的不是系統不好用，是資料被綁住、想換也換不掉——所以匯出、API 與所有權要先講清楚。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--secondary" id="f20-goto-api">看 API 說明</button>
+      </div>
+    </header>
+
+    <section class="card card--static" aria-labelledby="f20-export-title">
+      <div class="card-head">
+        <h2 class="card-title" id="f20-export-title">匯出中心</h2>
+        <span class="muted small">不需要提出申請，隨時自己匯</span>
+      </div>
+      <div class="card-body">
+        <div class="f20-export">
+          <div class="f20-sets">
+            <div class="f20-sets-head">
+              <h3 class="f20-sub">要匯出哪些資料</h3>
+              <button type="button" class="btn btn--ghost btn--sm" id="f20-toggle-all">全選</button>
+            </div>
+            <div id="f20-set-list"></div>
+          </div>
+          <div class="f20-formats">
+            <h3 class="f20-sub">檔案格式</h3>
+            <div id="f20-format-list"></div>
+            <div class="f20-summary" id="f20-summary"></div>
+            <button type="button" class="btn btn--primary btn--block" id="f20-run">開始匯出</button>
+            <div class="f20-progress-wrap" id="f20-progress"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card--flush card--static" aria-labelledby="f20-history-title">
+      <div class="card-head f20-history-head">
+        <h2 class="card-title" id="f20-history-title">匯出紀錄</h2>
+        <span class="muted small" id="f20-history-count"></span>
+      </div>
+      <div id="f20-history"></div>
+    </section>
+
+    <section class="card card--static" id="f20-api" aria-labelledby="f20-api-title">
+      <div class="card-head">
+        <h2 class="card-title" id="f20-api-title">API 說明</h2>
+        <span class="muted small">給你未來的工程師或另一套系統用</span>
+      </div>
+      <div class="card-body">
+        <p class="muted f20-api-lead">匯出是一次性的，API 是持續的。有了 API，你的會計系統、報表工具或下一家軟體商都能直接讀資料，不必靠人工複製貼上。</p>
+        <div id="f20-endpoints"></div>
+      </div>
+    </section>
+
+    <section class="card card--dark f20-promise" aria-labelledby="f20-promise-title">
+      <h2 class="f20-promise-title" id="f20-promise-title">資料是你的</h2>
+      <div class="f20-promise-grid" id="f20-promises"></div>
+      <p class="f20-promise-foot">這三句話會寫進合約，不是口頭承諾。</p>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f20.js"></script>
+</body>
+</html>

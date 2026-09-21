@@ -1,0 +1,83 @@
+/* f14.css — 權限與操作紀錄（f14）專屬樣式
+ * 契約：docs/DESIGN.md §2 tokens、§3 元件 class、§6.1 檔案所有權。顏色一律用 token。
+ */
+
+.f14-demo .card-body { padding-top: 4px; }
+.f14-roles { margin-bottom: 18px; flex-wrap: wrap; }
+
+.f14-tenant {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+  padding: 18px 20px; background: var(--bg);
+}
+.f14-tenant-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.f14-tenant-name { font-size: 19px; font-weight: 600; }
+
+.f14-fields {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px 24px; margin: 0;
+}
+.f14-field { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.f14-field dt { font-size: 12px; color: var(--ink-3); }
+.f14-field dd {
+  margin: 0; font-size: 16px; font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  display: flex; align-items: center; gap: 5px; min-width: 0;
+}
+.f14-field.is-masked dd { color: var(--ink-3); font-weight: 500; letter-spacing: .06em; }
+.f14-field.is-masked dd svg { width: 15px; height: 15px; flex: none; color: var(--ink-3); }
+
+.f14-tenant-note {
+  display: flex; align-items: flex-start; gap: 7px;
+  margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line-soft);
+  font-size: 13px; color: var(--ink-2);
+}
+.f14-tenant-note svg { width: 17px; height: 17px; flex: none; margin-top: 1px; color: var(--warn); }
+.f14-tenant-note--ok svg { color: var(--ok); }
+
+.f14-matrix-lead { margin: 0 0 14px; }
+.f14-matrix-note { margin: 12px 0 0; }
+.f14-matrix-table th:not(:first-child),
+.f14-matrix-table td:not(:first-child) { text-align: center; width: 132px; }
+.f14-matrix-table td:first-child { font-weight: 600; white-space: nowrap; }
+.f14-yes, .f14-no { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; }
+.f14-yes { background: var(--ok-soft); color: var(--ok-ink, var(--ok)); }
+.f14-no { background: var(--bg-alt); color: var(--ink-3); }
+.f14-yes svg, .f14-no svg { width: 16px; height: 16px; }
+
+.f14-try { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.f14-try-info { display: flex; flex-direction: column; gap: 2px; }
+.f14-try-label { font-size: 13px; color: var(--ink-2); }
+.f14-try-rent { font-size: 32px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.f14-try-form { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+.f14-try-form .field { margin: 0; }
+.f14-try-form .input { width: 150px; }
+.f14-try-locked {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px; border-radius: var(--radius-s);
+  background: var(--bg-alt); color: var(--ink-2); font-size: 13px;
+}
+.f14-try-locked svg { width: 18px; height: 18px; flex: none; }
+
+.f14-audit-head { padding: 20px 20px 0; }
+.f14-audit-filters { display: flex; gap: 10px; flex-wrap: wrap; padding: 14px 20px 16px; }
+.f14-select .select { min-width: 150px; height: 36px; font-size: 14px; }
+.f14-audit-table .f14-from { color: var(--ink-3); text-decoration: line-through; font-variant-numeric: tabular-nums; }
+.f14-audit-table .f14-to { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.f14-audit-table svg { width: 14px; height: 14px; margin: 0 4px; color: var(--ink-3); vertical-align: -2px; }
+.f14-flash { animation: f14-flash 1.6s var(--ease); }
+@keyframes f14-flash {
+  0%, 30% { background: var(--accent-soft); }
+  100% { background: transparent; }
+}
+
+@media (max-width: 768px) {
+  .f14-try { flex-direction: column; align-items: stretch; gap: 16px; }
+  .f14-try-form { width: 100%; }
+  .f14-try-form .input { flex: 1 1 auto; width: auto; }
+  .f14-roles { overflow-x: auto; }
+  .f14-audit-filters .f14-select { flex: 1 1 140px; }
+  .f14-select .select { width: 100%; min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .f14-flash { animation: none; }
+}

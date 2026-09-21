@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>重大事件管理｜租務中樞</title>
+  <meta name="description" content="漏水到樓下、鄰居噪音、租客失聯，不跟燈泡壞了混在同一個清單：獨立的等級、照片、對話、負責人與完整時間軸。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f12.css">
+</head>
+<body class="app" data-feature="f12">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>重大事件管理</h1>
+      <p class="page-lead">漏水到樓下、鄰居噪音、警察到場、租客失聯——這些事跟「燈泡壞了」不是同一件事，不能丟進同一個修繕清單。每一件都有等級、照片、對話紀錄、負責人與完整時間軸，事後要交代得出來。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f12-new">建立事件</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f12-kpis" aria-label="事件概況"></section>
+
+    <div id="f12-alert" class="f12-alert-wrap"></div>
+
+    <div class="f12-layout">
+      <section class="card card--flush card--static f12-list-card" aria-labelledby="f12-list-title">
+        <div class="card-head f12-list-head">
+          <h2 class="card-title" id="f12-list-title">事件清單</h2>
+          <span class="muted small" id="f12-count"></span>
+        </div>
+        <div class="f12-filters">
+          <div class="segmented segmented--block" role="tablist" aria-label="依等級篩選" id="f12-level-tabs"></div>
+          <label class="f12-select">
+            <span class="sr-only">依類型篩選</span>
+            <select class="select" id="f12-type"></select>
+          </label>
+        </div>
+        <div class="f12-items" id="f12-items"></div>
+      </section>
+
+      <section class="f12-detail" id="f12-detail" aria-live="polite" aria-label="事件詳情"></section>
+    </div>
+
+    <section class="card card--static f12-compare" aria-labelledby="f12-compare-title">
+      <div class="card-head">
+        <h2 class="card-title" id="f12-compare-title">為什麼要跟修繕工單分開</h2>
+      </div>
+      <div class="card-body" id="f12-compare-body"></div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f12.js"></script>
+</body>
+</html>

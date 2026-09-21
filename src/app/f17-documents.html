@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>自動產生文件｜租務中樞</title>
+  <meta name="description" content="選文件、選租客，姓名、地址、租金、租期自動帶入，一鍵用 LINE 傳給租客。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f17.css">
+</head>
+<body class="app" data-feature="f17">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>自動產生文件</h1>
+      <p class="page-lead">選一種文件、選一位租客，姓名、地址、租金、租期就自動帶入，不用再打一次。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f17-generate">產生文件</button>
+      </div>
+    </header>
+
+    <div class="grid grid--4 mb-24" id="f17-kpis"></div>
+
+    <div class="stack stack--lg">
+      <section class="card card--static" aria-labelledby="f17-step1-title">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f17-step1-title">1　選文件類型</h2>
+            <p class="card-sub">8 種常用文件都在這裡，每一種要填的欄位由系統自己帶。</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="f17-role-note"></div>
+          <div class="f17-types" id="f17-types" role="group" aria-label="文件類型"></div>
+        </div>
+      </section>
+
+      <section class="card card--static" aria-labelledby="f17-step2-title">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f17-step2-title">2　選租客與物件</h2>
+            <p class="card-sub">點一列就選定，資料會直接帶進文件。</p>
+          </div>
+          <span class="badge badge--neutral" id="f17-tenant-count"></span>
+        </div>
+        <div class="card-body">
+          <div class="toolbar">
+            <div class="search">
+              <span class="icon" aria-hidden="true" id="f17-search-icon"></span>
+              <input class="input" type="search" id="f17-search" placeholder="搜尋物件編號或租客姓名" aria-label="搜尋物件編號或租客姓名" autocomplete="off">
+            </div>
+            <select class="select" id="f17-building" aria-label="篩選棟別"></select>
+            <select class="select" id="f17-scope" aria-label="篩選適用狀態">
+              <option value="fit">只看適用這份文件的</option>
+              <option value="all">全部物件</option>
+            </select>
+          </div>
+          <div id="f17-tenants"></div>
+        </div>
+      </section>
+
+      <section class="card card--static" aria-labelledby="f17-step3-title">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f17-step3-title">3　預覽並送出</h2>
+            <p class="card-sub">欄位全部由系統帶入，確認無誤就能下載或用 LINE 傳出去。</p>
+          </div>
+          <span class="badge badge--accent" id="f17-preview-state">預覽</span>
+        </div>
+        <div class="card-body" id="f17-preview"></div>
+      </section>
+
+      <section class="card card--static" aria-labelledby="f17-history-title">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f17-history-title">文件歷史</h2>
+            <p class="card-sub">誰的文件、什麼時候產生、用什麼方式送出，都留在這裡。</p>
+          </div>
+          <div class="segmented" id="f17-history-scope" role="tablist" aria-label="文件歷史範圍"></div>
+        </div>
+        <div class="card-body" id="f17-history"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f17.js"></script>
+</body>
+</html>

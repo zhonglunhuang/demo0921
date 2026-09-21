@@ -101,10 +101,10 @@
   var ROLE_ORDER = ['boss', 'manager', 'accountant', 'maintenance'];
   var ROLE_ICON = { boss: 'star', manager: 'user-check', accountant: 'wallet', maintenance: 'wrench' };
   var PERMS = {
-    boss:        { idNo: true,  bank: true,  rent: true,  deposit: true,  phone: true,  repairCost: true,  ownerRent: true,  salary: true,  audit: true },
-    manager:     { idNo: true,  bank: false, rent: true,  deposit: true,  phone: true,  repairCost: true,  ownerRent: true,  salary: false, audit: true },
-    accountant:  { idNo: false, bank: true,  rent: true,  deposit: true,  phone: false, repairCost: true,  ownerRent: true,  salary: true,  audit: true },
-    maintenance: { idNo: false, bank: false, rent: false, deposit: false, phone: true,  repairCost: true,  ownerRent: false, salary: false, audit: false }
+    boss:        { idNo: true,  bank: true,  rent: true,  deposit: true,  phone: true,  repairCost: true,  ownerRent: true,  salary: true,  audit: true,  pnl: true },
+    manager:     { idNo: true,  bank: false, rent: true,  deposit: true,  phone: true,  repairCost: true,  ownerRent: true,  salary: false, audit: true,  pnl: false },
+    accountant:  { idNo: false, bank: true,  rent: true,  deposit: true,  phone: false, repairCost: true,  ownerRent: true,  salary: true,  audit: true,  pnl: false },
+    maintenance: { idNo: false, bank: false, rent: false, deposit: false, phone: true,  repairCost: true,  ownerRent: false, salary: false, audit: false, pnl: false }
   };
   var STORE_KEY = 'zwzs.role';
   var currentRole = 'boss';

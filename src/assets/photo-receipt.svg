@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="320" height="220" role="img" aria-labelledby="t"><title id="t">廠商上傳的發票：馬桶水箱零件更換，金額 1,800 元</title>
+<style>text { font-family: -apple-system, BlinkMacSystemFont, "SF Pro TC", "PingFang TC", "Helvetica Neue", "Noto Sans TC", sans-serif; }</style>
+<rect width="320" height="220" fill="#f5f5f7"/>
+<rect x="52" y="24" width="216" height="172" rx="8" fill="#ffffff" stroke="#d2d2d7" stroke-width="2"/>
+<rect x="52" y="24" width="216" height="34" rx="8" fill="#f5f5f7"/>
+<path d="M52 58h216" stroke="#e8e8ed" stroke-width="2"/>
+<text x="70" y="47" font-size="13" fill="#1d1d1f">電子發票證明聯</text>
+<text x="70" y="80" font-size="11" fill="#6e6e73">大同水電行</text>
+<text x="70" y="98" font-size="11" fill="#6e6e73">品項　馬桶水箱零件更換</text>
+<text x="70" y="116" font-size="11" fill="#6e6e73">物件　B02</text>
+<path d="M70 130h180" stroke="#e8e8ed" stroke-width="2"/>
+<text x="70" y="152" font-size="11" fill="#6e6e73">合計</text>
+<text x="250" y="154" font-size="18" font-weight="600" fill="#1d1d1f" text-anchor="end">1,800</text>
+<text x="70" y="176" font-size="10" fill="#86868b">INV-260922-05　2026/09/22</text>
+<g fill="#1d1d1f">
+<rect x="186" y="168" width="2" height="16"/><rect x="191" y="168" width="4" height="16"/><rect x="198" y="168" width="2" height="16"/>
+<rect x="203" y="168" width="5" height="16"/><rect x="211" y="168" width="2" height="16"/><rect x="216" y="168" width="3" height="16"/>
+<rect x="222" y="168" width="2" height="16"/><rect x="227" y="168" width="5" height="16"/><rect x="235" y="168" width="2" height="16"/>
+<rect x="240" y="168" width="3" height="16"/><rect x="246" y="168" width="2" height="16"/>
+</g>
+</svg>

@@ -1,0 +1,163 @@
+/* f05.css — 退租整備流程（f05）專屬樣式
+ * 契約：docs/DESIGN.md §2 tokens、§3 元件 class、§6.1 檔案所有權。
+ * 規則：顏色一律用 main.css :root 的 token，不寫裸 hex；只有 app/f05-moveout-prep.html
+ *      與 tour/f05-moveout-prep.html 兩頁引用。
+ */
+
+/* ========================================================================
+   1. 操作頁：清單 ＋ 詳情兩欄
+   ======================================================================== */
+.f05-alerts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0 0; }
+.f05-alerts:empty { display: none; }
+
+.f05-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+.f05-list-card { position: sticky; top: calc(var(--topbar-h) + 16px); padding-bottom: 8px; }
+.f05-list-head { padding: 20px 20px 0; margin-bottom: 12px; }
+.f05-filters { display: flex; flex-direction: column; gap: 10px; padding: 0 20px 14px; }
+.f05-filters .segmented { width: 100%; }
+.f05-filters .segmented .tab { flex: 1 1 auto; padding: 0 8px; font-size: 13px; }
+.f05-region { display: block; }
+.f05-region .select { width: 100%; height: 36px; font-size: 14px; }
+
+.f05-rooms { max-height: min(76vh, 700px); overflow-y: auto; padding: 0 12px 12px; }
+.f05-rooms .empty-state { margin: 8px 8px 16px; }
+.f05-count { padding: 0 14px 6px; }
+
+.f05-room {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-s);
+  border: 1px solid transparent;
+  text-align: left;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.f05-room + .f05-room { margin-top: 4px; }
+.f05-room:hover { background: var(--row-hover); }
+.f05-room.is-active { background: var(--accent-soft); border-color: var(--accent); }
+.f05-room-id { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.f05-room-sub { grid-column: 1; font-size: 13px; color: var(--ink-2); }
+.f05-room-right { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.f05-room-progress { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.f05-room .progress { grid-column: 1 / -1; margin-top: 2px; }
+
+/* ========================================================================
+   2. 操作頁：整備詳情
+   ======================================================================== */
+.f05-detail { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.f05-detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.f05-detail-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.f05-detail-title h2 { font-size: 28px; letter-spacing: -.01em; }
+.f05-detail-sub { font-size: 14px; color: var(--ink-2); margin-top: 4px; display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.f05-detail-sub span { white-space: nowrap; }
+.f05-detail-sub span + span::before { content: "｜"; color: var(--line); margin-right: 10px; }
+
+.f05-progress-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.f05-progress-num { font-size: 32px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.f05-progress-total { font-size: 15px; color: var(--ink-2); }
+
+.f05-check { display: flex; flex-direction: column; gap: 2px; }
+.f05-check .checklist-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: start; }
+.f05-check .checklist-meta { align-self: center; }
+.f05-note-btn {
+  align-self: center; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  color: var(--ink-3); transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.f05-note-btn:hover { background: var(--bg-alt); color: var(--accent); }
+.f05-note-btn .icon { width: 18px; height: 18px; }
+.f05-note-btn.has-note { color: var(--accent); }
+.f05-check .checklist-item.is-locked { cursor: not-allowed; }
+.f05-check .checklist-item.is-locked .checklist-label { color: var(--ink-3); }
+.f05-note { display: block; font-size: 13px; color: var(--accent); margin-top: 2px; }
+
+.f05-actions {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg);
+}
+.f05-actions .f05-actions-hint { font-size: 14px; color: var(--ink-2); flex: 1 1 200px; }
+
+.f05-wo { display: flex; flex-direction: column; gap: 10px; }
+.f05-wo-item {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px;
+  padding: 14px 16px; border: 1px solid var(--line-soft); border-radius: var(--radius-s);
+}
+.f05-wo-title { font-weight: 600; }
+.f05-wo-sub { grid-column: 1; font-size: 13px; color: var(--ink-2); }
+.f05-wo-right { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: flex; align-items: center; gap: 8px; }
+
+.f05-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.f05-photo { border-radius: var(--radius-s); overflow: hidden; border: 1px solid var(--line-soft); background: var(--bg-alt); }
+.f05-photo img { width: 100%; height: auto; aspect-ratio: 32 / 22; object-fit: cover; }
+.f05-photo figcaption { padding: 6px 8px; font-size: 12px; color: var(--ink-2); }
+
+/* ========================================================================
+   3. 導覽頁：960 × 600 舞台內的迷你系統畫面
+   ======================================================================== */
+.f05s { display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.f05s-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.f05s-top h3 { font-size: 20px; }
+.f05s-top .f05s-meta { margin-left: auto; font-size: 13px; color: var(--ink-2); }
+.f05s-alert { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius-s); font-size: 14px; }
+.f05s-alert .icon { width: 18px; height: 18px; flex: none; }
+.f05s-alert--warn { background: var(--warn-soft); color: var(--warn-ink); }
+.f05s-alert--ok { background: var(--ok-soft); color: var(--ok-ink); }
+.f05s-grid { display: grid; grid-template-columns: 536px minmax(0, 1fr); gap: 16px; align-items: start; }
+.f05s-card { background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1); padding: 16px 18px; }
+.f05s-card h4 { font-size: 15px; margin-bottom: 10px; }
+.f05s-card + .f05s-card { margin-top: 12px; }
+.f05s-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 14px; }
+.f05s-item { display: flex; align-items: center; gap: 8px; padding: 5px 4px; font-size: 13px; }
+.f05s-box {
+  flex: none; width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid var(--line); display: inline-flex; align-items: center; justify-content: center;
+  color: var(--bg); transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.f05s-box .icon { width: 12px; height: 12px; stroke-width: 3; opacity: 0; transition: opacity var(--dur) var(--ease); }
+.f05s-item.is-done .f05s-box { background: var(--ok); border-color: var(--ok); }
+.f05s-item.is-done .f05s-box .icon { opacity: 1; }
+.f05s-item.is-done .f05s-text { color: var(--ink-3); text-decoration: line-through; }
+.f05s-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.f05s-num { font-size: 34px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.f05s-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.f05s-kpi { background: var(--bg); border-radius: var(--radius-s); padding: 10px 12px; box-shadow: var(--shadow-1); }
+.f05s-kpi-label { font-size: 12px; color: var(--ink-2); }
+.f05s-kpi-value { font-size: 24px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.f05s-ask { border: 1px solid var(--accent); background: var(--accent-soft); border-radius: var(--radius-s); padding: 12px 14px; font-size: 13px; }
+.f05s-ask .row { margin-top: 10px; }
+.f05s-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.f05s-photos img { width: 100%; border-radius: 8px; border: 1px solid var(--line-soft); }
+.f05s-quote { font-size: 13px; color: var(--ink-2); min-height: 20px; }
+.f05s-btn-wrap { margin-top: 12px; }
+
+/* ========================================================================
+   4. 響應
+   ======================================================================== */
+@media (max-width: 1024px) {
+  .f05-layout { grid-template-columns: 1fr; }
+  .f05-list-card { position: static; }
+  .f05-rooms { max-height: none; }
+}
+@media (max-width: 768px) {
+  .f05-detail-title h2 { font-size: 24px; }
+  .f05-check .checklist-item { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .f05-check .f05-note-btn { grid-column: 3; grid-row: 1; }
+  .f05-check .checklist-meta { grid-column: 2; grid-row: 2; white-space: normal; text-align: left; }
+  .f05-check .checklist-meta:empty { display: none; }
+  .f05-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .f05-actions { flex-direction: column; align-items: stretch; padding-bottom: 12px; }
+  .f05-actions .btn { width: 100%; }
+  .f05-wo-item { grid-template-columns: 1fr; }
+  .f05-wo-right { grid-row: auto; justify-content: flex-start; }
+}

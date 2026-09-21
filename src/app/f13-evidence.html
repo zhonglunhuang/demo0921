@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>證據留存｜租務中樞</title>
+  <meta name="description" content="催租、續約、退租、點交的每一則通知都留著：什麼時候送到、對方什麼時候回、回了什麼，照片也依日期與房間歸檔，隨時匯出證據包。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f13.css">
+</head>
+<body class="app" data-feature="f13">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>證據留存</h1>
+      <p class="page-lead">對外發出的每一則通知都留著：什麼時候送到、對方什麼時候讀、回了什麼。照片依日期與房間歸檔，要用的時候一鍵打包。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f13-export-all">匯出證據包</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f13-kpis" aria-label="證據留存概況"></section>
+
+    <div class="f13-alerts" id="f13-alerts"></div>
+
+    <section class="f13-toolbar" id="f13-toolbar" aria-label="篩選通知與照片">
+      <div class="segmented" role="tablist" id="f13-type-tabs" aria-label="通知類型"></div>
+      <label class="f13-field">
+        <span>棟別</span>
+        <select class="select" id="f13-building"></select>
+      </label>
+      <button type="button" class="btn btn--secondary btn--sm" id="f13-unreplied" aria-pressed="false">只看未回覆</button>
+      <p class="f13-toolbar-note" id="f13-role-note"></p>
+    </section>
+
+    <div class="f13-layout">
+      <section class="card card--flush card--static" aria-labelledby="f13-list-title">
+        <div class="card-head f13-list-head">
+          <h2 class="card-title" id="f13-list-title">通知紀錄</h2>
+          <span class="muted" id="f13-count"></span>
+        </div>
+        <div id="f13-table"></div>
+      </section>
+
+      <section class="card f13-detail" id="f13-detail" aria-live="polite" aria-label="通知往返明細"></section>
+    </div>
+
+    <section class="card" id="f13-photos-card" aria-labelledby="f13-photos-title">
+      <div class="card-head f13-photos-head">
+        <div>
+          <h2 class="card-title" id="f13-photos-title">照片歸檔</h2>
+          <p class="card-sub" id="f13-photos-sub">依拍攝日期與房間分組，租客上傳與公司拍攝分開標示。點縮圖看大圖。</p>
+        </div>
+        <div class="segmented" role="tablist" id="f13-source-tabs" aria-label="照片來源"></div>
+      </div>
+      <div class="card-body" id="f13-photos"></div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f13.js"></script>
+</body>
+</html>

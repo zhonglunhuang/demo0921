@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body>
+<iframe id="f" src="src/tour/f10-line-selfservice.html" style="width:1200px;height:900px;border:0"></iframe>
+<pre id="out">waiting</pre>
+<script>
+var log=[]; var i=0;
+function step(){
+  var d=document.getElementById('f').contentDocument;
+  var dots=d.querySelectorAll('.tour-dot');
+  if(i>=dots.length){ document.getElementById('out').textContent=log.join('\n'); return; }
+  dots[i].click();
+  var idx=i; i++;
+  setTimeout(function(){
+    var st=d.querySelector('.stage-screen');
+    var t=d.querySelector('.tour-step-title').textContent;
+    var txt=d.querySelector('.tour-step-text').textContent;
+    log.push('#'+(idx+1)+' "'+t+'"('+t.length+') text('+txt.length+') bubbles='+st.querySelectorAll('.bubble').length+
+      ' menu='+st.querySelectorAll('.phone-menu button').length+' cards='+st.querySelectorAll('.f10s-card').length+
+      ' kpis='+Array.prototype.map.call(st.querySelectorAll('.f10s-kpi [data-v]'),function(e){return e.textContent;}).join('/'));
+    step();
+  }, 5200);
+}
+document.getElementById('f').onload=function(){ setTimeout(step, 1200); };
+window.onerror=function(m){log.push('ERR '+m);};
+</script></body></html>
