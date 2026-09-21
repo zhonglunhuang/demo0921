@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>權限與操作紀錄｜租務中樞</title>
+  <meta name="description" content="身分證、銀行帳戶、租金、押金依角色決定看得到看不到；任何金額改動都留下一筆紀錄，誰在什麼時候把什麼從多少改成多少，查得到。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f14.css">
+</head>
+<body class="app" data-feature="f14">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>權限與操作紀錄</h1>
+      <p class="page-lead">不是每個員工都該看到租客的身分證和屋主的銀行帳戶。這一頁決定誰看得到什麼，並且把每一次金額改動都記下來——誰、什麼時候、把什麼從多少改成多少。</p>
+      <div class="page-actions">
+        <span class="muted small" id="f14-role-hint"></span>
+      </div>
+    </header>
+
+    <section class="card card--static f14-demo" aria-labelledby="f14-demo-title">
+      <div class="card-head">
+        <h2 class="card-title" id="f14-demo-title">切換角色，看同一位租客</h2>
+        <span class="muted small">用右上角的角色切換，或直接點下面的角色</span>
+      </div>
+      <div class="card-body">
+        <div class="segmented f14-roles" role="tablist" aria-label="切換角色" id="f14-roles"></div>
+        <div class="f14-card-wrap" id="f14-tenant-card" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="card card--static" aria-labelledby="f14-matrix-title">
+      <div class="card-head">
+        <h2 class="card-title" id="f14-matrix-title">權限矩陣</h2>
+        <span class="muted small">每一格都可以按公司的規矩調整</span>
+      </div>
+      <div class="card-body" id="f14-matrix"></div>
+    </section>
+
+    <section class="card card--static" aria-labelledby="f14-try-title">
+      <div class="card-head">
+        <h2 class="card-title" id="f14-try-title">改一次租金試試看</h2>
+        <span class="muted small">改完立刻回到下面的操作紀錄找那一筆</span>
+      </div>
+      <div class="card-body" id="f14-try"></div>
+    </section>
+
+    <section class="card card--flush card--static" aria-labelledby="f14-audit-title">
+      <div class="card-head f14-audit-head">
+        <h2 class="card-title" id="f14-audit-title">操作紀錄</h2>
+        <span class="muted small" id="f14-audit-count"></span>
+      </div>
+      <div class="f14-audit-filters">
+        <label class="f14-select"><span class="sr-only">依人員篩選</span><select class="select" id="f14-filter-who"></select></label>
+        <label class="f14-select"><span class="sr-only">依動作篩選</span><select class="select" id="f14-filter-action"></select></label>
+        <label class="f14-select"><span class="sr-only">依物件篩選</span><select class="select" id="f14-filter-unit"></select></label>
+      </div>
+      <div id="f14-audit-table"></div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f14.js"></script>
+</body>
+</html>

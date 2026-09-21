@@ -1,0 +1,179 @@
+/* f03.css — 空房招租漏斗（f03）專屬樣式。
+ * 只有 app/f03-vacancy-funnel.html 與 tour/f03-vacancy-funnel.html 載入。
+ * 共用元件（.card / .badge / .btn / .table / .checklist…）一律用 main.css，這裡只補看板、日曆、文案框。
+ * 顏色一律用 main.css 的 tokens，不出現裸 hex。
+ */
+
+/* ---------------------------------------------------------------- 招租看板 */
+.f03-board {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 2px 14px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.f03-col {
+  /* 桌機七欄剛好排滿；寬度不夠時才橫向捲動（容器內捲，頁面不捲） */
+  flex: 1 1 0;
+  min-width: 150px;
+  scroll-snap-align: start;
+  background: var(--bg-alt);
+  border-radius: var(--radius-m);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 132px;
+}
+.f03-col-head { display: flex; align-items: center; gap: 5px; }
+.f03-col-head .icon { width: 16px; height: 16px; color: var(--ink-2); }
+.f03-col-name { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.f03-col-count {
+  margin-left: auto; font-size: 12px; font-weight: 600; color: var(--ink-2);
+  background: var(--bg); border-radius: var(--radius-pill); padding: 2px 8px;
+  font-variant-numeric: tabular-nums;
+}
+.f03-col-empty { font-size: 13px; color: var(--ink-3); padding: 6px 2px 10px; }
+
+.f03-card {
+  background: var(--bg);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-s);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-1);
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.f03-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
+.f03-card.is-selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow-1); }
+.f03-card.is-new { animation: f03-drop var(--dur-slow) var(--ease) both; }
+.f03-card-top { display: flex; align-items: baseline; gap: 6px; }
+.f03-card-id { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.f03-card-region { font-size: 13px; color: var(--ink-2); }
+.f03-card-meta { font-size: 12px; color: var(--ink-2); display: flex; flex-direction: column; gap: 1px; font-variant-numeric: tabular-nums; }
+.f03-card-rent { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.f03-card-rent small { font-size: 12px; font-weight: 400; color: var(--ink-3); margin-left: 2px; }
+.f03-card-flag {
+  font-size: 11px; line-height: 1.45; border-radius: 8px; padding: 6px 8px;
+  display: flex; gap: 6px; align-items: flex-start;
+}
+.f03-card-flag .icon { width: 14px; height: 14px; flex: none; margin-top: 1px; }
+.f03-card-flag--warn { background: var(--warn-soft); color: var(--warn-ink); }
+.f03-card-flag--danger { background: var(--danger-soft); color: var(--danger-ink); }
+.f03-card-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 2px; }
+.f03-card-link { font-size: 13px; }
+.f03-card .progress { margin-top: 2px; }
+
+@keyframes f03-drop {
+  from { opacity: 0; transform: translateY(-12px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 兩張卡不等高時不互相拉高 */
+.f03-two { align-items: start; }
+
+/* ---------------------------------------------------------------- 招租頁 */
+.f03-panel { display: grid; gap: 20px; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; }
+.f03-rent-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.f03-rent-now { font-size: 32px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.f03-rent-now small { font-size: 14px; font-weight: 400; color: var(--ink-2); margin-left: 4px; }
+.f03-range { margin-top: 14px; }
+.f03-range-bar {
+  position: relative; height: 8px; border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--line-soft), var(--accent-soft), var(--line-soft));
+}
+.f03-range-mark { position: absolute; top: -4px; width: 4px; height: 16px; border-radius: 2px; background: var(--accent); transform: translateX(-2px); }
+.f03-range-mark--now { background: var(--ink); }
+.f03-range-scale { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.f03-copy-box {
+  width: 100%; min-height: 168px; border: 1px solid var(--line); border-radius: var(--radius-s);
+  background: var(--bg-alt); padding: 12px 14px; font: 400 14px/1.6 var(--font); color: var(--ink);
+  white-space: pre-wrap; resize: vertical;
+}
+.f03-copy-box:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+/* 帶看日曆 */
+.f03-cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.f03-cal-day {
+  border: 1px solid var(--line-soft); border-radius: 10px; background: var(--bg);
+  padding: 8px 4px 10px; text-align: center; cursor: pointer; min-height: 76px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.f03-cal-day:hover { border-color: var(--accent); background: var(--accent-soft); }
+.f03-cal-day.is-today { border-color: var(--ink); }
+.f03-cal-dow { font-size: 11px; color: var(--ink-3); }
+.f03-cal-date { font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1; }
+.f03-cal-dots { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; min-height: 6px; }
+.f03-cal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.f03-cal-add { font-size: 11px; color: var(--ink-3); }
+.f03-cal-day:hover .f03-cal-add { color: var(--accent); }
+
+.f03-showing { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; flex-wrap: wrap; }
+.f03-showing:last-child { border-bottom: 0; }
+.f03-showing-when { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.f03-showing-who { min-width: 0; }
+.f03-showing .badge { margin-left: auto; flex: none; }
+
+/* ---------------------------------------------------------------- 導覽畫面用（960px 舞台內，可用區 896×544） */
+.f03-stage { height: 100%; display: flex; flex-direction: column; gap: 12px; font-size: 15px; }
+.f03-stage-head { display: flex; align-items: center; gap: 10px; flex: none; }
+.f03-stage-head .icon { width: 20px; height: 20px; color: var(--accent); }
+.f03-stage-title { font-size: 19px; font-weight: 600; }
+.f03-stage-head .badge { margin-left: auto; }
+.f03-stage-body { flex: 1; min-height: 0; display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
+.f03-stage-body--one { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+.f03-stage-body--one > .f03-sb { flex: 1; min-height: 0; align-items: stretch; }
+.f03-stage-body--one > .f03-sb .f03-sb-col { height: 100%; }
+.f03-stage-panel { background: var(--bg); border: 1px solid var(--line-soft); border-radius: var(--radius-m); padding: 14px 16px; }
+.f03-stage-panel h4 { font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
+.f03-stage-foot { padding: 10px 16px; }
+.f03-stage-phone { display: flex; justify-content: center; align-items: flex-start; }
+.f03-stage .phone { width: 250px; }
+.f03-stage .kv--stack dt { font-size: 12px; }
+.f03-stage .kv--stack dd { font-size: 14px; }
+.f03-stage .checklist-item { padding: 6px 8px; }
+.f03-stage .checklist-label { font-size: 14px; }
+.f03-stage .checklist-hint { font-size: 12px; }
+.f03-stage .kpi { padding: 14px 16px; }
+.f03-stage .kpi-value { font-size: 34px; }
+.f03-stage .alert { padding: 12px 14px; }
+.f03-stage .stat-row .stat-value { font-size: 17px; }
+.f03-stage-num { font-variant-numeric: tabular-nums; }
+.f03-stage-copy { min-height: 190px; font-size: 13px; line-height: 1.7; }
+.f03-stage-cal .f03-cal-day { min-height: 62px; cursor: default; }
+.f03-stage-cal .f03-cal-day.is-picked { border-color: var(--accent); background: var(--accent-soft); }
+.f03-stage-kpis { gap: 12px; }
+.f03-lead { display: flex; align-items: baseline; gap: 8px; font-size: 13px; padding: 7px 0; border-bottom: 1px solid var(--line-soft); }
+.f03-lead:last-child { border-bottom: 0; }
+.f03-lead b { font-size: 14px; }
+.f03-lead span { color: var(--ink-2); }
+
+/* 導覽用的精簡看板 */
+.f03-sb { display: flex; gap: 7px; align-items: flex-start; }
+.f03-sb-col { flex: 1 1 0; min-width: 0; background: var(--bg-alt); border-radius: 12px; padding: 8px 7px 10px; min-height: 150px; }
+.f03-sb-head { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--ink-2); margin-bottom: 7px; }
+.f03-sb-head span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.f03-sb-head b { margin-left: auto; background: var(--bg); border-radius: var(--radius-pill); padding: 1px 7px; font-variant-numeric: tabular-nums; }
+.f03-sb-cards { display: flex; flex-direction: column; gap: 6px; }
+.f03-sb-card { background: var(--bg); border: 1px solid var(--line-soft); border-radius: 9px; padding: 7px 8px; box-shadow: var(--shadow-1); }
+.f03-sb-card b { display: block; font-size: 15px; font-weight: 600; }
+.f03-sb-card span { display: block; font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.f03-sb-card.is-focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow-1); }
+.f03-sb-card.is-focus b { color: var(--accent); }
+
+/* ---------------------------------------------------------------- 響應 */
+@media (max-width: 768px) {
+  .f03-panel { grid-template-columns: minmax(0, 1fr); }
+  .f03-col { flex: 0 0 210px; min-width: 210px; }
+  .f03-cal { gap: 4px; }
+  .f03-cal-day { min-height: 68px; padding: 6px 2px 8px; }
+  .f03-cal-date { font-size: 15px; }
+  .f03-cal-add { display: none; }
+  .f03-rent-now { font-size: 28px; }
+}

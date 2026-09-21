@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>probe mobile</title>
+<style>body{margin:0;font:12px -apple-system,sans-serif}#log{padding:4px 6px;margin:0}iframe{border:0;display:block}</style>
+</head>
+<body>
+<pre id="log">start</pre>
+<iframe id="fr" src="/src/app/f13-evidence.html" width="375" height="3400"></iframe>
+<script>
+document.getElementById('fr').onload = function () {
+  var d = document.getElementById('fr').contentDocument;
+  setTimeout(function () {
+    var el = d.documentElement;
+    var wide = [];
+    Array.prototype.forEach.call(d.querySelectorAll('body *'), function (n) {
+      var r = n.getBoundingClientRect();
+      if (r.right > el.clientWidth + 1) wide.push(n.tagName + '.' + (n.className || '') + '=' + Math.round(r.right));
+    });
+    document.getElementById('log').textContent =
+      'viewport=' + el.clientWidth + ' scrollWidth=' + el.scrollWidth +
+      ' overflow=' + (el.scrollWidth > el.clientWidth ? 'YES' : 'no') +
+      '\nwide=' + (wide.slice(0, 8).join(' | ') || 'none');
+  }, 900);
+};
+</script>
+</body></html>

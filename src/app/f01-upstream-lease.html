@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>上游租約與到期風險｜租務中樞</title>
+  <meta name="description" content="屋主與租客兩份租約並列，上游先到期的物件用紅色標出，並自動建立續租待辦。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f01.css">
+</head>
+<body class="app" data-feature="f01">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>上游租約與到期風險</h1>
+      <p class="page-lead">屋主→公司、公司→租客兩份租約並列，先到期的一眼看見。</p>
+      <div class="page-actions">
+        <a class="btn btn--secondary" href="../tour/f01-upstream-lease.html">看功能導覽</a>
+      </div>
+    </header>
+
+    <div id="f01-alert" class="mb-24"></div>
+
+    <section class="grid grid--4 mb-24" id="f01-kpis" aria-label="上游租約重點數字"></section>
+
+    <section class="card card--static mb-24" aria-labelledby="f01-list-title">
+      <div class="card-head">
+        <div>
+          <h2 class="card-title" id="f01-list-title">上游租約清單</h2>
+          <p class="card-sub">點一列看兩份租約並列的時間軸與完整條款。</p>
+        </div>
+      </div>
+      <div class="f01-toolbar">
+        <label class="search">
+          <span class="sr-only">搜尋物件編號或屋主姓名</span>
+          <span id="f01-search-icon"></span>
+          <input class="input" type="search" id="f01-search" placeholder="搜尋物件編號或屋主姓名" autocomplete="off">
+        </label>
+        <label class="sr-only" for="f01-region">區域</label>
+        <select class="select" id="f01-region"></select>
+        <div id="f01-filters" class="f01-filter-scroll"></div>
+        <p class="f01-toolbar-count" id="f01-count"></p>
+      </div>
+      <div id="f01-table"></div>
+    </section>
+
+    <section class="card card--static mb-24" id="f01-detail" aria-labelledby="f01-detail-title"></section>
+
+    <section class="card card--static" aria-labelledby="f01-task-title">
+      <div class="card-head">
+        <div>
+          <h2 class="card-title" id="f01-task-title">自動建立的續租待辦</h2>
+          <p class="card-sub">上游租約到期前 60 天，系統自動開一件待辦並指定負責人，同一件事也會出現在 AI 工作中心。</p>
+        </div>
+      </div>
+      <div id="f01-tasks"></div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f01.js"></script>
+</body>
+</html>

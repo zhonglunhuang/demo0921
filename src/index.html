@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>租務中樞｜提案總覽</title>
+  <meta name="description" content="為安居包租代管量身規劃的營運中樞：從屋主到租客，一套管到底。總覽 20 個功能，可進系統操作，也可看功能導覽。">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body class="home">
+
+  <!-- ===== 毛玻璃頂欄 ===== -->
+  <header class="hm-nav">
+    <div class="hm-container hm-nav__inner">
+      <a class="hm-nav__brand" href="index.html">租務中樞</a>
+      <ul class="hm-nav__links">
+        <li><a class="hm-nav__link" href="tour/index.html">功能導覽</a></li>
+        <li><a class="hm-nav__pill" href="app/index.html">進系統操作</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Hero ===== -->
+    <section class="hm-hero" aria-labelledby="hero-title">
+      <div class="hm-container reveal">
+        <p class="hm-hero__eyebrow">租務中樞</p>
+        <h1 class="hm-hero__title" id="hero-title">房子再多，也不漏一件事</h1>
+        <p class="hm-hero__sub">為安居包租代管量身規劃。從屋主到租客，一套管到底。</p>
+        <div class="hm-hero__actions">
+          <a class="hm-btn hm-btn--primary" href="app/index.html">進系統操作</a>
+          <a class="hm-btn hm-btn--secondary" href="tour/index.html">功能導覽</a>
+        </div>
+      </div>
+      <figure class="hm-hero__visual reveal" data-delay="1">
+        <picture>
+          <source media="(max-width: 600px)" srcset="assets/home-hero-mobile.svg">
+          <img src="assets/home-hero.svg" width="1244" height="324" alt="103 間物件分布圖：中壢 A、B 棟各 20 間，內壢 C 棟 25 間，平鎮 D 棟 20 間，中原 E 棟 18 間；其中 7 間今天需要人工處理。">
+        </picture>
+        <figcaption class="hm-hero__caption">
+          103 間物件，今天只有 7 間需要你
+          <span class="hm-dot hm-dot--danger" aria-hidden="true"></span>欠租、屋主合約到期
+          <span class="hm-dot hm-dot--warn" aria-hidden="true"></span>帳款、押金、空房
+          <span class="hm-dot hm-dot--accent" aria-hidden="true"></span>修繕待判斷
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ===== 章節 1：工作中心（白底） ===== -->
+    <section class="hm-section hm-section--alt hm-chapter" id="morning" aria-labelledby="morning-title">
+      <div class="hm-container">
+        <div class="hm-chapter__head reveal">
+          <p class="hm-eyebrow">08:30 管理員的早上</p>
+          <h2 class="hm-h2" id="morning-title">打開系統，只看 7 件</h2>
+          <p class="hm-sub">異常才找人，其餘 96 間不打擾</p>
+          <p class="hm-body">打開系統，看到的不是 103 間的清單，而是今天真的需要人判斷的 7 件：帳款不符、欠租、AI 無法判斷的修繕、屋主合約快到期、押金未結算、空房逾 14 天。處理完，數字歸零。</p>
+          <p class="hm-chapter__links">
+            <a class="hm-link" href="tour/f15-work-center.html">看功能導覽 ›</a>
+            <a class="hm-link" href="app/index.html">進系統操作 ›</a>
+          </p>
+        </div>
+        <div class="hm-chapter__visual reveal" data-delay="1">
+          <div class="hm-screen" role="img" aria-label="工作中心首屏：今天需要人工處理 7 件，七張卡片依類型排列，最底一行 96 間一切正常預設收合。">
+            <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">AI 工作中心 · 2026/09/21（一）</span></div>
+            <div class="hm-screen__body">
+              <p class="hm-wc__headline">今天需要人工處理 <strong>7</strong> 件</p>
+              <ul class="hm-wc__grid">
+                <li class="hm-wc__item"><span><span class="hm-tag hm-tag--danger">帳款不符</span></span><span class="hm-wc__unit">A09</span><span class="hm-wc__note">應收 13,000 元，實收 12,500 元</span></li>
+                <li class="hm-wc__item"><span><span class="hm-tag hm-tag--danger">欠租</span></span><span class="hm-wc__unit">B11</span><span class="hm-wc__note">逾期 12 天，已催繳 2 次</span></li>
+                <li class="hm-wc__item"><span><span class="hm-tag hm-tag--danger">欠租</span></span><span class="hm-wc__unit">E07</span><span class="hm-wc__note">逾期 5 天，LINE 通知未讀</span></li>
+                <li class="hm-wc__item"><span><span class="hm-tag hm-tag--accent">AI 無法判斷修繕</span></span><span class="hm-wc__unit">WO-1051</span><span class="hm-wc__note">C03 熱水忽冷忽熱，租客 24 小時未回覆</span></li>
+                <li class="hm-wc__item"><span><span class="hm-tag hm-tag--warn">屋主合約即將到期</span></span><span class="hm-wc__unit">A03</span><span class="hm-wc__note">上游 11/30 到期，租客租到 2027/06</span></li>
+                <li class="hm-wc__item"><span><span class="hm-tag hm-tag--warn">押金未結算</span></span><span class="hm-wc__unit">D11</span><span class="hm-wc__note">退租已 45 天，尚未結算</span></li>
+                <li class="hm-wc__item"><span><span class="hm-tag hm-tag--warn">空房逾 14 天</span></span><span class="hm-wc__unit">C08</span><span class="hm-wc__note">已空置 33 天，同區行情已附上</span></li>
+              </ul>
+              <div class="hm-wc__rest"><span>96 間一切正常</span><span class="hm-link">展開 ›</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 章節 2：上游租約（黑底） ===== -->
+    <section class="hm-section hm-section--dark hm-chapter hm-chapter--split" id="upstream" aria-labelledby="upstream-title">
+      <div class="hm-container hm-container--wide hm-chapter__inner">
+        <div class="hm-chapter__head reveal">
+          <p class="hm-eyebrow">09:10 一封提前 60 天的提醒</p>
+          <h2 class="hm-h2" id="upstream-title">上游租約先到期，租客還在住</h2>
+          <p class="hm-sub">兩份租約並列，先到期的一眼看見</p>
+          <p class="hm-body">包租代管永遠有兩份租約。A03 的屋主合約 11 月 30 日到期，租客卻租到 2027 年中。系統把兩條時間軸疊在一起，紅色標出先到期的那份，提前 60 天建立續租待辦。今天這樣的物件有 3 間。</p>
+          <p class="hm-chapter__links">
+            <a class="hm-link" href="tour/f01-upstream-lease.html">看功能導覽 ›</a>
+            <a class="hm-link" href="app/f01-upstream-lease.html">進系統操作 ›</a>
+          </p>
+        </div>
+        <div class="hm-chapter__visual reveal" data-delay="1">
+          <div class="hm-screen" role="img" aria-label="物件 A03 詳情：上游與下游兩條時間軸並列，上游在 2026/11/30 截止並亮紅色警示，下游延伸到 2027 年中，右側有建立續租待辦按鈕。">
+            <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">物件 A03 · 中壢 A 棟 3 樓 · 套房</span></div>
+            <div class="hm-screen__body">
+              <div class="hm-tl">
+                <div class="hm-tl__axis"><span>2026/09</span><span style="left:27.3%">2026/12</span><span style="left:54.5%">2027/03</span><span style="left:81.8%">2027/06</span></div>
+                <div class="hm-tl__rows">
+                  <div class="hm-tl__row">
+                    <div class="hm-tl__label"><b>上游租約 · 屋主 陳○○</b><span class="hm-tl__end hm-tl__end--danger">2026/11/30 到期</span></div>
+                    <div class="hm-tl__track"><div class="hm-tl__bar hm-tl__bar--up"></div></div>
+                  </div>
+                  <div class="hm-tl__row">
+                    <div class="hm-tl__label"><b>下游租約 · 租客 張○○</b><span class="hm-tl__end">2027/06/30 到期</span></div>
+                    <div class="hm-tl__track"><div class="hm-tl__bar hm-tl__bar--down"></div></div>
+                  </div>
+                  <div class="hm-tl__today" aria-hidden="true"></div>
+                </div>
+                <p class="hm-tl__gaplabel">缺口 7 個月：租客在住，屋主合約已到期</p>
+              </div>
+              <div class="hm-tl__foot">
+                <span>續租通知已排 2026/10/01（到期前 60 天）· 同樣情況：B07、C12</span>
+                <span class="hm-btn hm-btn--primary hm-btn--sm">建立續租待辦</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 章節 3：空房漏斗（白底） ===== -->
+    <section class="hm-section hm-chapter" id="vacancy" aria-labelledby="vacancy-title">
+      <div class="hm-container hm-container--wide">
+        <div class="hm-chapter__head reveal">
+          <p class="hm-eyebrow">11:00 空房才是最大的損失</p>
+          <h2 class="hm-h2" id="vacancy-title">空房不是等待，是一條流程</h2>
+          <p class="hm-sub">超過 7 天沒租出去，系統先問是不是價格</p>
+          <p class="hm-body">租客在 LINE 說不續租，物件自動切成即將空房，租金建議、刊登文案的待辦跟著產生。整備 14 項全部打勾，才能標記為可出租。C08 空了 33 天，看板標紅，附上同區行情。</p>
+          <p class="hm-chapter__links">
+            <a class="hm-link" href="tour/f03-vacancy-funnel.html">看功能導覽 ›</a>
+            <a class="hm-link" href="app/f03-vacancy-funnel.html">進系統操作 ›</a>
+          </p>
+        </div>
+        <div class="hm-chapter__visual hm-chapter__visual--wide reveal" data-delay="1">
+          <div class="hm-screen" role="img" aria-label="招租看板七欄從即將空房到已入住，C08 卡片標紅顯示空置 33 天與同區同房型的租金建議區間。">
+            <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">招租看板 · 全部區域 · 平均空置 11 天</span></div>
+            <div class="hm-screen__body">
+              <div class="hm-kb">
+                <div class="hm-kb__col"><div class="hm-kb__head"><span>即將空房</span><span>2</span></div>
+                  <div class="hm-kb__card"><strong>B15</strong>10/31 退租，整備待辦已建立</div>
+                  <div class="hm-kb__card"><strong>E03</strong>11/15 退租，已排點交</div></div>
+                <div class="hm-kb__col"><div class="hm-kb__head"><span>整備中</span><span>1</span></div>
+                  <div class="hm-kb__card"><strong>C20</strong>整備 9／14 項，待油漆</div></div>
+                <div class="hm-kb__col"><div class="hm-kb__head"><span>刊登中</span><span>3</span></div>
+                  <div class="hm-kb__card hm-kb__card--alert"><strong>C08</strong><span class="hm-kb__days">空置 33 天</span><div class="hm-kb__hint">同區套房建議 8,500～9,500 元，目前刊登 10,500 元</div></div>
+                  <div class="hm-kb__card"><strong>A12</strong><span class="hm-kb__days hm-kb__days--warn">空置 21 天</span></div>
+                  <div class="hm-kb__card"><strong>D15</strong>空置 9 天，詢問 4 則</div></div>
+                <div class="hm-kb__col"><div class="hm-kb__head"><span>帶看中</span><span>1</span></div>
+                  <div class="hm-kb__card"><strong>B18</strong>週六 2 組預約</div></div>
+                <div class="hm-kb__col"><div class="hm-kb__head"><span>已收訂</span><span>1</span></div>
+                  <div class="hm-kb__card"><strong>E10</strong>訂金 5,000 元，待簽約</div></div>
+                <div class="hm-kb__col"><div class="hm-kb__head"><span>已簽約</span><span>1</span></div>
+                  <div class="hm-kb__card"><strong>A15</strong>10/01 入住，鑰匙已備</div></div>
+                <div class="hm-kb__col"><div class="hm-kb__head"><span>已入住</span><span>本月 3</span></div>
+                  <div class="hm-kb__card"><strong>D07 · C14 · B05</strong>本月完成入住</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 章節 4：報價異常（黑底） ===== -->
+    <section class="hm-section hm-section--dark hm-chapter hm-chapter--split" id="quote" aria-labelledby="quote-title">
+      <div class="hm-container hm-container--wide hm-chapter__inner">
+        <div class="hm-chapter__head reveal">
+          <p class="hm-eyebrow">14:20 一筆報價被抓到</p>
+          <h2 class="hm-h2" id="quote-title">同一個零件，報價差一倍</h2>
+          <p class="hm-sub">廠商報價一進來，系統先比歷史平均</p>
+          <p class="hm-body">B02 換馬桶水箱零件，廠商報 3,500 元。核准畫面標出：同項目平均 1,800 元，價格異常。改派另一家，報價、完工照片、發票、付款全留在工單時間軸。每一筆修繕的錢，都查得到。</p>
+          <p class="hm-chapter__links">
+            <a class="hm-link" href="tour/f07-vendors-workorders.html">看功能導覽 ›</a>
+            <a class="hm-link" href="app/f07-vendors-workorders.html">進系統操作 ›</a>
+          </p>
+        </div>
+        <div class="hm-chapter__visual reveal" data-delay="1">
+          <div class="hm-screen" role="img" aria-label="工單 WO-1043 核准畫面：報價 3,500 元旁邊一個橘色價格異常標籤，下方一行同項目平均 1,800 元，右側可改派其他廠商。">
+            <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">工單 WO-1043 · 待核准</span></div>
+            <div class="hm-screen__body">
+              <div class="hm-wo__head">
+                <div>
+                  <h3 class="hm-wo__title">B02 更換馬桶水箱零件</h3>
+                  <p class="hm-wo__meta">廠商 永盛水電（中壢）· 報修 09/19 · 派工 09/19 · 報價 09/20</p>
+                </div>
+                <span class="hm-tag hm-tag--neutral">待核准</span>
+              </div>
+              <div class="hm-wo__quote">
+                <div>
+                  <div class="hm-wo__label">本次報價</div>
+                  <div class="hm-wo__amount"><span>3,500<small> 元</small></span><span class="hm-tag hm-tag--warn">價格異常</span></div>
+                  <div class="hm-wo__avg">同項目平均 1,800 元（近 12 筆、3 家廠商）</div>
+                  <div class="hm-wo__bars">
+                    <div class="hm-wo__bar hm-wo__bar--alert"><span>本次報價</span><i style="width:100%"></i><b>3,500</b></div>
+                    <div class="hm-wo__bar"><span>歷史平均</span><i style="width:51%"></i><b>1,800</b></div>
+                    <div class="hm-wo__bar"><span>歷史最低</span><i style="width:43%"></i><b>1,500</b></div>
+                  </div>
+                </div>
+                <div class="hm-wo__actions">
+                  <span class="hm-btn hm-btn--secondary hm-btn--sm">改派其他廠商</span>
+                </div>
+              </div>
+              <ol class="hm-steps">
+                <li class="is-done">報修</li><li class="is-done">派工</li><li class="is-done">報價</li><li class="is-now">核准</li><li>完工照片</li><li>發票</li><li>付款</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 章節 5：租客那一端（白底） ===== -->
+    <section class="hm-section hm-section--alt hm-chapter hm-chapter--split" id="tenant" aria-labelledby="tenant-title">
+      <div class="hm-container hm-container--wide hm-chapter__inner">
+        <div class="hm-chapter__head reveal">
+          <p class="hm-eyebrow">16:00 租客那一端</p>
+          <h2 class="hm-h2" id="tenant-title">租客自己查，客服就少接一通</h2>
+          <p class="hm-sub">LINE 綁定身分，AI 依他住的那間回答</p>
+          <p class="hm-body">租客加 LINE、輸入房號與手機末三碼，就綁定成 A01 的王○○。帳單、到期日、報修、退租，選單點一下就有。問「垃圾怎麼丟」，AI 依公司知識庫照 A 棟回答，不靠網路亂答。</p>
+          <p class="hm-chapter__links">
+            <a class="hm-link" href="tour/f10-line-selfservice.html">看功能導覽 ›</a>
+            <a class="hm-link" href="app/f10-line-selfservice.html">進系統操作 ›</a>
+          </p>
+        </div>
+        <div class="hm-chapter__visual reveal" data-delay="1">
+          <div class="hm-phone" role="img" aria-label="手機外框裡的 LINE 對話：綁定成功卡片顯示已綁定 A01 租客 王○○，下方九格圖文選單，最後一則是 AI 回覆 A 棟垃圾車時間。">
+            <div class="hm-phone__screen">
+              <div class="hm-phone__bar">安居包租代管</div>
+              <div class="hm-chat">
+                <div class="hm-bubble hm-bubble--them">您好，請輸入房號與手機末三碼，完成身分綁定。</div>
+                <div class="hm-bubble hm-bubble--me">A01 512</div>
+                <div class="hm-bound">
+                  <svg class="hm-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg>
+                  <span>已綁定：A01 租客 王○○<small>中壢 A 棟 · 租約到 2027/03/31</small></span>
+                </div>
+                <div class="hm-bubble hm-bubble--me">垃圾怎麼丟？</div>
+                <div class="hm-bubble hm-bubble--them">A 棟垃圾車：週一、三、五 19:40 停在中山路口；資源回收週二、五。大型家具請先在選單「聯絡客服」預約。</div>
+              </div>
+              <div class="hm-menu" aria-hidden="true">
+                <span>本月帳單</span><span>繳費狀態</span><span>租約到期</span>
+                <span>我要報修</span><span>申請續租</span><span>申請退租</span>
+                <span>點交時間</span><span>公告</span><span class="is-active">聯絡客服</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 章節 6：老闆儀表板（黑底） ===== -->
+    <section class="hm-section hm-section--dark hm-chapter" id="boss" aria-labelledby="boss-title">
+      <div class="hm-container">
+        <div class="hm-chapter__head reveal">
+          <p class="hm-eyebrow">21:00 老闆的晚上</p>
+          <h2 class="hm-h2" id="boss-title">不是收租率，是真正的損益</h2>
+          <p class="hm-sub">每一間都算到淨利，哪 5 間最賺、哪 5 間快沒了</p>
+          <p class="hm-body">收租率 94% 很好看，但 B07 這個月是虧的。收入減掉付屋主租金、水電、網路、管理費、修繕、折舊、空置成本，才是淨利。老闆一句話看完：中壢 40 間，淨利 82,000 元。</p>
+          <p class="hm-chapter__links">
+            <a class="hm-link" href="tour/f02-unit-pnl.html">看功能導覽 ›</a>
+            <a class="hm-link" href="app/f16-owner-dashboard.html">進系統操作 ›</a>
+          </p>
+        </div>
+        <div class="hm-chapter__visual reveal" data-delay="1">
+          <div class="hm-screen" role="img" aria-label="黑底儀表板：三張數字卡收入 293,600、成本 260,900、淨利 32,700，下方左右兩欄最賺 5 間與快沒利潤 5 間，B07 在右欄第一列標紅。">
+            <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">營運儀表板 · 中壢 40 間 · 2026 年 9 月</span></div>
+            <div class="hm-screen__body">
+              <div class="hm-kpis">
+                <div class="hm-kpi"><div class="hm-kpi__label">本月收入</div><div class="hm-kpi__value">293,600<small>元</small></div><div class="hm-kpi__delta">收租率 94%</div></div>
+                <div class="hm-kpi"><div class="hm-kpi__label">總成本</div><div class="hm-kpi__value">260,900<small>元</small></div><div class="hm-kpi__delta">付屋主租金、水電、網路、管理費、修繕、折舊、空置</div></div>
+                <div class="hm-kpi hm-kpi--profit"><div class="hm-kpi__label">本月淨利</div><div class="hm-kpi__value">32,700<small>元</small></div><div class="hm-kpi__delta">年化報酬 19.9%</div></div>
+              </div>
+              <div class="hm-rank">
+                <div class="hm-rank__col">
+                  <p class="hm-rank__head">最賺 5 間<span>本月淨利</span></p>
+                  <ol>
+                    <li><i>1</i><b>A01</b><span>5,900 元</span></li>
+                    <li><i>2</i><b>A05</b><span>5,600 元</span></li>
+                    <li><i>3</i><b>B02</b><span>5,400 元</span></li>
+                    <li><i>4</i><b>C01</b><span>5,100 元</span></li>
+                    <li><i>5</i><b>D04</b><span>4,900 元</span></li>
+                  </ol>
+                </div>
+                <div class="hm-rank__col">
+                  <p class="hm-rank__head">快沒利潤 5 間<span>本月淨利</span></p>
+                  <ol>
+                    <li class="is-alert"><i>1</i><b>B07<span class="hm-rank__note">虧損</span></b><span>−1,450 元</span></li>
+                    <li class="is-alert"><i>2</i><b>B11<span class="hm-rank__note">虧損</span></b><span>−900 元</span></li>
+                    <li class="is-alert"><i>3</i><b>C05<span class="hm-rank__note">虧損</span></b><span>−620 元</span></li>
+                    <li class="is-alert"><i>4</i><b>D02<span class="hm-rank__note">虧損</span></b><span>−410 元</span></li>
+                    <li class="is-alert"><i>5</i><b>D09<span class="hm-rank__note">虧損</span></b><span>−260 元</span></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 章節 7：證據與權限（白底） ===== -->
+    <section class="hm-section hm-chapter" id="trail" aria-labelledby="trail-title">
+      <div class="hm-container">
+        <div class="hm-chapter__head reveal">
+          <p class="hm-eyebrow">每一天，每一筆</p>
+          <h2 class="hm-h2" id="trail-title">誰改了什麼，三年後還查得到</h2>
+          <p class="hm-sub">幾年後的爭議，今天就留證據</p>
+          <p class="hm-body">會計看不到身分證，修繕人員看不到押金。劉○○把 A01 租金從 13,000 改成 12,000，紀錄立刻多一筆。通知何時送達、何時回覆，全部留存。資料屬於安居，隨時完整帶走。</p>
+          <p class="hm-chapter__links">
+            <a class="hm-link" href="tour/f14-permissions-audit.html">看功能導覽 ›</a>
+            <a class="hm-link" href="app/f14-permissions-audit.html">進系統操作 ›</a>
+          </p>
+        </div>
+        <div class="hm-chapter__visual reveal" data-delay="1">
+          <div class="hm-screen" role="img" aria-label="操作紀錄列表最上面一列：2026/09/20 14:36 劉○○ 將 A01 租金由 13,000 改為 12,000；角色切到會計時，租客身分證欄位變成打碼。">
+            <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">權限與操作紀錄 · 目前角色：會計</span></div>
+            <div class="hm-screen__body">
+              <div class="hm-audit">
+                <div class="hm-panel">
+                  <p class="hm-panel__head">操作紀錄</p>
+                  <ul class="hm-log">
+                    <li><span class="hm-log__time">2026/09/20 14:36</span><span><b>劉○○</b> 將 A01 租金由 13,000 改為 12,000</span></li>
+                    <li><span class="hm-log__time">2026/09/20 11:02</span><span><b>陳○○</b> 核准工單 WO-1038 報價 2,200 元</span></li>
+                    <li><span class="hm-log__time">2026/09/19 17:45</span><span><b>系統</b> 催租通知已送達 B11（LINE，17:52 已讀）</span></li>
+                    <li><span class="hm-log__time">2026/09/19 09:12</span><span><b>陳○○</b> 開始 D11 押金結算</span></li>
+                  </ul>
+                </div>
+                <div class="hm-panel">
+                  <p class="hm-panel__head">租客 王○○ · A01</p>
+                  <div class="hm-role" aria-label="角色切換"><span>老闆</span><span>租務管理員</span><span class="is-active">會計</span><span>修繕人員</span></div>
+                  <ul class="hm-record">
+                    <li><span class="hm-record__k">身分證</span><span class="hm-record__v is-masked"><svg class="hm-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>A1••••••••</span></li>
+                    <li><span class="hm-record__k">銀行帳戶</span><span class="hm-record__v is-masked"><svg class="hm-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>•••-••••-1234</span></li>
+                    <li><span class="hm-record__k">租金</span><span class="hm-record__v">12,000 元</span></li>
+                    <li><span class="hm-record__k">本月繳費</span><span class="hm-record__v">已繳 09/05</span></li>
+                    <li><span class="hm-record__k">手機</span><span class="hm-record__v">0912-•••-512</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 20 功能總覽（7 群） ===== -->
+    <section class="hm-section hm-section--alt hm-features" id="features" aria-labelledby="features-title">
+      <div class="hm-container hm-container--wide">
+        <div class="hm-features__head reveal">
+          <p class="hm-eyebrow">20 個功能，7 個群組</p>
+          <h2 class="hm-h2" id="features-title">從屋主到租客，一套管到底</h2>
+          <p class="hm-sub">每個功能都有一條導覽，也都能進系統操作</p>
+        </div>
+        <ul class="hm-groupnav reveal" aria-label="功能群組">
+          <li><a href="#g1">租約與屋主</a></li>
+          <li><a href="#g2">損益與儀表板</a></li>
+          <li><a href="#g3">空房到入住</a></li>
+          <li><a href="#g4">設備、修繕與資產</a></li>
+          <li><a href="#g5">租客服務與通知</a></li>
+          <li><a href="#g6">事件、權限與工作中心</a></li>
+          <li><a href="#g7">資料所有權</a></li>
+        </ul>
+
+        <div class="hm-group reveal" id="g1">
+          <div class="hm-group__head">
+            <span class="hm-group__num">01</span>
+            <h3 class="hm-group__name">租約與屋主</h3>
+            <p class="hm-group__blurb">上游、下游兩份租約並列管理，押金獨立結算，文件自動帶入資料。</p>
+          </div>
+          <div class="hm-cards">
+            <article class="hm-card" data-feature="f01">
+              <p class="hm-card__name">上游租約與到期風險</p>
+              <h4 class="hm-card__title"><a href="tour/f01-upstream-lease.html">屋主的約先到期，租客還在住</a></h4>
+              <p class="hm-card__blurb">兩份租約並列，先到期的紅色標出，60 天前自動建立續租待辦；今天有 3 間命中。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f01-upstream-lease.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f04">
+              <p class="hm-card__name">押金管理</p>
+              <h4 class="hm-card__title"><a href="tour/f04-deposits.html">收了多少、扣了什麼、退了沒</a></h4>
+              <p class="hm-card__blurb">每間押金一張卡：收到、扣除項目與依據、退款證明。退租 45 天沒結算，系統會提醒。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f04-deposits.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f17">
+              <p class="hm-card__name">自動產生文件</p>
+              <h4 class="hm-card__title"><a href="tour/f17-documents.html">姓名、地址、租金，不用再手打</a></h4>
+              <p class="hm-card__blurb">契約、續約書、催繳通知、押金結算單等 8 種，選租客就自動帶入，一鍵用 LINE 傳。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f17-documents.html">進系統操作 ›</a></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="hm-group reveal" id="g2">
+          <div class="hm-group__head">
+            <span class="hm-group__num">02</span>
+            <h3 class="hm-group__name">損益與儀表板</h3>
+            <p class="hm-group__blurb">每間房算到淨利，老闆一頁看完出租率、到期數與現金流。</p>
+          </div>
+          <div class="hm-cards hm-cards--2">
+            <article class="hm-card" data-feature="f02">
+              <p class="hm-card__name">每間房真正損益</p>
+              <h4 class="hm-card__title"><a href="tour/f02-unit-pnl.html">收入減七項成本，才是淨利</a></h4>
+              <p class="hm-card__blurb">每間房自動算出本月淨利與年化報酬，最賺 5 間、快沒利潤 5 間一眼看見。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f02-unit-pnl.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f16">
+              <p class="hm-card__name">老闆營運儀表板</p>
+              <h4 class="hm-card__title"><a href="tour/f16-owner-dashboard.html">你真正會看的那一頁</a></h4>
+              <p class="hm-card__blurb">出租率、空置天數、續租率、欠租率、包租淨利、30／60／90 天到期數與現金流。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f16-owner-dashboard.html">進系統操作 ›</a></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="hm-group reveal" id="g3">
+          <div class="hm-group__head">
+            <span class="hm-group__num">03</span>
+            <h3 class="hm-group__name">空房到入住</h3>
+            <p class="hm-group__blurb">從通知不續租到重新入住，一條漏斗加一張整備清單，空房天數一清二楚。</p>
+          </div>
+          <div class="hm-cards hm-cards--2">
+            <article class="hm-card" data-feature="f03">
+              <p class="hm-card__name">空房招租漏斗</p>
+              <h4 class="hm-card__title"><a href="tour/f03-vacancy-funnel.html">空房第 8 天，系統先問是不是價格</a></h4>
+              <p class="hm-card__blurb">不續租、整備、刊登、帶看、收訂、簽約、入住七欄看板，平均空置天數自動統計。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f03-vacancy-funnel.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f05">
+              <p class="hm-card__name">退租整備流程</p>
+              <h4 class="hm-card__title"><a href="tour/f05-moveout-prep.html">14 項打勾完，才能再出租</a></h4>
+              <p class="hm-card__blurb">電表、鑰匙、家具、牆面到清潔逐項檢查，需修繕直接開工單，全部完成才回到庫存。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f05-moveout-prep.html">進系統操作 ›</a></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="hm-group reveal" id="g4">
+          <div class="hm-group__head">
+            <span class="hm-group__num">04</span>
+            <h3 class="hm-group__name">設備、修繕與資產</h3>
+            <p class="hm-group__blurb">設備有履歷、廠商有評分、報價有比對，水電異常自動抓。</p>
+          </div>
+          <div class="hm-cards hm-cards--4">
+            <article class="hm-card" data-feature="f06">
+              <p class="hm-card__name">設備履歷</p>
+              <h4 class="hm-card__title"><a href="tour/f06-equipment.html">這台冷氣修了 4 次，該換了</a></h4>
+              <p class="hm-card__blurb">每間房的冷氣、冰箱、熱水器都有品牌、保固與維修紀錄，累計維修費過高，AI 建議汰換。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f06-equipment.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f07">
+              <p class="hm-card__name">廠商與修繕工單</p>
+              <h4 class="hm-card__title"><a href="tour/f07-vendors-workorders.html">報價一進來，先比歷史平均</a></h4>
+              <p class="hm-card__blurb">廠商分類、區域、返修率與評分；工單從報修、派工、報價、核准到付款，每步留紀錄。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f07-vendors-workorders.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f08">
+              <p class="hm-card__name">水電異常偵測</p>
+              <h4 class="hm-card__title"><a href="tour/f08-utility-anomaly.html">8 度變 25 度，可能在漏水</a></h4>
+              <p class="hm-card__blurb">每房用量對照過往基準，超過兩倍或空房仍在用電就警示，一鍵派工檢查。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f08-utility-anomaly.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f09">
+              <p class="hm-card__name">鑰匙與門禁管理</p>
+              <h4 class="hm-card__title"><a href="tour/f09-keys-access.html">幾把鑰匙、幾張磁扣，領退都有數</a></h4>
+              <p class="hm-card__blurb">每間鑰匙、磁扣、遙控器的領用與歸還都有簽收，退租短少自動列入押金扣款。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f09-keys-access.html">進系統操作 ›</a></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="hm-group reveal" id="g5">
+          <div class="hm-group__head">
+            <span class="hm-group__num">05</span>
+            <h3 class="hm-group__name">租客服務與通知</h3>
+            <p class="hm-group__blurb">租客在 LINE 自己查、自己報修，AI 依棟別回答，往返紀錄全留存，逾時自動升級。</p>
+          </div>
+          <div class="hm-cards hm-cards--4">
+            <article class="hm-card" data-feature="f10">
+              <p class="hm-card__name">租客 LINE 自助中心</p>
+              <h4 class="hm-card__title"><a href="tour/f10-line-selfservice.html">租客自己查帳單，不用問客服</a></h4>
+              <p class="hm-card__blurb">加入 LINE 綁定房號，帳單、繳費狀態、租約到期、報修、續租、退租，選單點一下就有。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f10-line-selfservice.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f11">
+              <p class="hm-card__name">AI 客服與知識庫</p>
+              <h4 class="hm-card__title"><a href="tour/f11-ai-support.html">AI 只照公司知識庫回答</a></h4>
+              <p class="hm-card__blurb">垃圾怎麼丟、磁扣怎麼用、熱水器怎麼開，依租客住的棟別與房間回答，不拿網路答案亂猜。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f11-ai-support.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f13">
+              <p class="hm-card__name">證據留存</p>
+              <h4 class="hm-card__title"><a href="tour/f13-evidence.html">何時送、送給誰、有沒有回</a></h4>
+              <p class="hm-card__blurb">催租、續約、退租通知每筆留下發送、送達與回覆紀錄；照片依日期與房間永久歸檔。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f13-evidence.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f19">
+              <p class="hm-card__name">通知升級機制</p>
+              <h4 class="hm-card__title"><a href="tour/f19-escalation.html">24 小時沒回再問，48 小時找人</a></h4>
+              <p class="hm-card__blurb">AI 先處理第一層，逾時才逐級升級到管理員；重大漏水立即電話加 LINE 通知值班人員。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f19-escalation.html">進系統操作 ›</a></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="hm-group reveal" id="g6">
+          <div class="hm-group__head">
+            <span class="hm-group__num">06</span>
+            <h3 class="hm-group__name">事件、權限與工作中心</h3>
+            <p class="hm-group__blurb">重大事件獨立管理，權限分層，操作留痕，每天只看需要人處理的幾件。</p>
+          </div>
+          <div class="hm-cards hm-cards--4">
+            <article class="hm-card" data-feature="f15">
+              <p class="hm-card__name">AI 工作中心</p>
+              <h4 class="hm-card__title"><a href="tour/f15-work-center.html">今天只看需要人處理的 7 件</a></h4>
+              <p class="hm-card__blurb">異常才找人。帳款不符、欠租、屋主合約到期、押金未結算集中在首頁，其餘 96 間收起來。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/index.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f12">
+              <p class="hm-card__name">重大事件管理</p>
+              <h4 class="hm-card__title"><a href="tour/f12-incidents.html">漏水到樓下，不跟燈泡壞了混在一起</a></h4>
+              <p class="hm-card__blurb">漏水、噪音、警察到場、租客失聯另開事件：等級、照片、對話、負責人與完整時間軸。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f12-incidents.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f14">
+              <p class="hm-card__name">權限與操作紀錄</p>
+              <h4 class="hm-card__title"><a href="tour/f14-permissions-audit.html">誰能看、誰改了，都查得到</a></h4>
+              <p class="hm-card__blurb">身分證、銀行帳戶、租金、押金依角色打碼；任何金額改動都留下一筆操作紀錄。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f14-permissions-audit.html">進系統操作 ›</a></div>
+            </article>
+            <article class="hm-card" data-feature="f18">
+              <p class="hm-card__name">待辦與員工績效</p>
+              <h4 class="hm-card__title"><a href="tour/f18-todos-performance.html">每件事都有負責人和期限</a></h4>
+              <p class="hm-card__blurb">管理員目前 20 件待辦、逾期 3 件一眼看見；本月入住、退租、報修、帶看各完成幾件。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f18-todos-performance.html">進系統操作 ›</a></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="hm-group reveal" id="g7">
+          <div class="hm-group__head">
+            <span class="hm-group__num">07</span>
+            <h3 class="hm-group__name">資料所有權</h3>
+            <p class="hm-group__blurb">所有資料可完整匯出、有 API，換系統商也帶得走。</p>
+          </div>
+          <div class="hm-cards hm-cards--2">
+            <article class="hm-card" data-feature="f20">
+              <p class="hm-card__name">資料匯出與所有權</p>
+              <h4 class="hm-card__title"><a href="tour/f20-data-export.html">資料是你的，換系統也帶得走</a></h4>
+              <p class="hm-card__blurb">租客、租約、帳款、修繕、照片隨時完整匯出，提供 API；資料屬於安居包租代管。</p>
+              <div class="hm-card__foot"><span class="hm-card__tour">看導覽 ›</span><a class="hm-card__app" href="app/f20-data-export.html">進系統操作 ›</a></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 收尾（黑底） ===== -->
+    <section class="hm-section hm-section--dark hm-closing" id="closing" aria-labelledby="closing-title">
+      <div class="hm-container reveal">
+        <h2 class="hm-h2" id="closing-title">資料屬於你，不屬於系統商</h2>
+        <p class="hm-sub">租客、租約、帳款、修繕、照片，隨時完整匯出，也有 API。今天 103 間，做到 300 間也不用重來。</p>
+        <div class="hm-closing__actions">
+          <a class="hm-btn hm-btn--primary" href="app/index.html">進系統操作</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== 頁尾 ===== -->
+  <footer class="hm-footer">
+    <div class="hm-container">
+      <ul class="hm-footer__links">
+        <li><a href="index.html">總覽</a></li>
+        <li><a href="app/index.html">進系統操作</a></li>
+        <li><a href="tour/index.html">功能導覽</a></li>
+      </ul>
+      <p>租務中樞提案示範 · 畫面中的物件、人名與金額皆為模擬資料 · 提案聯絡：提案者 林○○ · 09xx-xxx-xxx</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    // 滾動淡入：有 common.js 就交給 App.reveal()；沒有（或載入失敗）就直接全部顯示，內容不會被藏住。
+    (function () {
+      if (window.App && typeof window.App.reveal === 'function') { window.App.reveal(); return; }
+      var els = document.querySelectorAll('.reveal');
+      for (var i = 0; i < els.length; i++) { els[i].classList.add('is-visible'); }
+    })();
+  </script>
+</body>
+</html>

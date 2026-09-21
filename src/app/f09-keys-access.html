@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>鑰匙與門禁管理｜租務中樞</title>
+  <meta name="description" content="每間房的鑰匙、門禁磁扣、車庫遙控器、信箱鑰匙各有幾把、誰領走、還了沒；退租點交短少會自動列入押金扣款。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f09.css">
+</head>
+<body class="app" data-feature="f09">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>鑰匙與門禁管理</h1>
+      <p class="page-lead">每間房的鑰匙、門禁磁扣、車庫遙控器、信箱鑰匙各有幾把、誰領走、還了沒，系統都記著。退租點交少一把，當場就會算進押金扣款。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--secondary" id="f09-lock-guide">查看智慧鎖流程</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f09-kpis" aria-label="鑰匙門禁概況"></section>
+
+    <div id="f09-alerts" class="f09-alerts"></div>
+
+    <section id="f09-stock" aria-label="全社區鑰匙與門禁總量"></section>
+
+    <div class="f09-layout">
+      <section class="card card--flush card--static f09-list-card" aria-labelledby="f09-list-title">
+        <div class="card-head f09-list-head">
+          <h2 class="card-title" id="f09-list-title">物件鑰匙清單</h2>
+        </div>
+        <div class="f09-filters">
+          <div class="segmented segmented--block" role="tablist" id="f09-scope-tabs"></div>
+          <label class="f09-region">
+            <span class="sr-only">篩選區域</span>
+            <select class="select" id="f09-region"></select>
+          </label>
+        </div>
+        <div id="f09-rooms" class="f09-rooms"></div>
+      </section>
+
+      <section class="f09-detail" id="f09-detail" aria-live="polite"></section>
+    </div>
+
+    <section class="f09-lock" id="f09-lock" aria-labelledby="f09-lock-title"></section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f09.js"></script>
+</body>
+</html>

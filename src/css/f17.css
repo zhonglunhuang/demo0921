@@ -1,0 +1,445 @@
+/* f17.css — 自動產生文件（f17）專屬樣式。
+ * 操作頁 app/f17-documents.html 與導覽頁 tour/f17-documents.html 共用，
+ * 只定義 main.css 沒有的三種東西：文件範本選擇器、文件預覽紙張、導覽畫面的精簡列表。
+ * 顏色一律用 main.css 的 tokens，不出現裸 hex。 */
+
+/* -------------------------------------------------------------------------
+ * 1. 文件範本選擇器
+ * ------------------------------------------------------------------------- */
+.f17-types {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.f17-type {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 132px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+.f17-type:hover:not([disabled]) {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-1);
+  transform: translateY(-2px);
+}
+.f17-type .icon-circle {
+  width: 36px;
+  height: 36px;
+}
+.f17-type .icon-circle .icon {
+  width: 18px;
+  height: 18px;
+}
+.f17-type__name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.f17-type__meta {
+  margin-top: auto;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.f17-type.is-selected {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  background: var(--accent-soft);
+}
+.f17-type__check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  opacity: 0;
+  transform: scale(.7);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.f17-type.is-selected .f17-type__check {
+  opacity: 1;
+  transform: none;
+}
+.f17-type__check .icon {
+  width: 13px;
+  height: 13px;
+}
+.f17-type[disabled] {
+  opacity: .42;
+  cursor: not-allowed;
+}
+
+/* -------------------------------------------------------------------------
+ * 2. 文件預覽（紙張 + 右側送出面板）
+ * ------------------------------------------------------------------------- */
+.f17-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.f17-doc {
+  padding: 28px 32px 24px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  box-shadow: var(--shadow-1);
+}
+.f17-doc__head {
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: center;
+}
+.f17-doc__org {
+  font-size: 13px;
+  letter-spacing: .12em;
+  color: var(--ink-2);
+}
+.f17-doc__title {
+  margin-top: 6px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.f17-doc__meta {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.f17-doc__meta span {
+  display: inline-block;
+  margin: 0 8px;
+  white-space: nowrap;
+}
+.f17-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+}
+.f17-field {
+  min-width: 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--accent);
+}
+.f17-field--manual {
+  border-left-color: var(--line);
+}
+.f17-field--wide {
+  grid-column: 1 / -1;
+}
+.f17-field__label {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.f17-field__value {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.f17-field__src {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.f17-field__src .icon {
+  width: 12px;
+  height: 12px;
+  flex: none;
+}
+.f17-doc__note {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.f17-doc__sign {
+  display: flex;
+  gap: 32px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.f17-doc__sign span {
+  flex: 1;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+/* 右側送出面板 */
+.f17-send {
+  padding: 20px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m);
+  background: var(--bg-alt);
+}
+.f17-send .btn {
+  width: 100%;
+}
+.f17-send .stat-row {
+  margin-bottom: 4px;
+}
+.f17-send__hint {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+/* -------------------------------------------------------------------------
+ * 3. 導覽畫面用的精簡元件（固定 960 × 600 舞台內）
+ * ------------------------------------------------------------------------- */
+.f17-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+.f17-stage__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.f17-stage__title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.f17-stage__sub {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.f17-stage__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 16px;
+  align-items: start;
+}
+.f17-panel {
+  padding: 16px 18px;
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  box-shadow: var(--shadow-1);
+}
+.f17-panel__title {
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.f17-srcs {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.f17-srcs li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.f17-srcs .icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  color: var(--ok-ink);
+}
+.f17-rows {
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+.f17-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--line-soft);
+  transition: background-color var(--dur-fast) var(--ease);
+}
+.f17-row:last-child {
+  border-bottom: 0;
+}
+.f17-row.is-head {
+  background: var(--bg-alt);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.f17-row.is-selected {
+  background: var(--accent-soft);
+}
+.f17-row__id {
+  flex: none;
+  width: 74px;
+  font-weight: 600;
+}
+.f17-row__name {
+  flex: none;
+  width: 96px;
+}
+.f17-row__date {
+  flex: none;
+  width: 150px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.f17-row__tail {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.f17-mini-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.f17-mini-kpi {
+  padding: 12px 14px;
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  box-shadow: var(--shadow-1);
+}
+.f17-mini-kpi__label {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.f17-mini-kpi__value {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+.f17-mini-kpi__value small {
+  margin-left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.f17-stage .f17-doc {
+  padding: 18px 22px 16px;
+  box-shadow: none;
+}
+.f17-stage .f17-doc__title {
+  font-size: 19px;
+}
+.f17-stage .f17-fields {
+  gap: 12px 20px;
+}
+.f17-stage .f17-field__value {
+  font-size: 15px;
+  min-height: 21px;
+}
+.f17-doc--compact .f17-field__src {
+  display: none;
+}
+.f17-doc--compact .f17-fields {
+  gap: 14px 20px;
+}
+.f17-stage .f17-types {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.f17-stage .f17-type {
+  min-height: 104px;
+  padding: 12px;
+}
+.f17-stage .phone {
+  width: 260px;
+  padding: 8px;
+  border-radius: 34px;
+  font-size: 13px;
+}
+.f17-stage .phone-screen {
+  border-radius: 28px;
+}
+.f17-stage .phone::before {
+  width: 80px;
+  height: 22px;
+  top: 16px;
+}
+.f17-stage .bubble-row {
+  max-width: 100%;
+}
+.f17-stage .checklist-item {
+  font-size: 14px;
+}
+/* 導覽的「自動核對」是確認清單，不是待辦：打勾後文字要留著看得清楚 */
+.f17-panel .checklist-item.is-done .checklist-label {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* -------------------------------------------------------------------------
+ * 4. 響應（操作頁）
+ * ------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .f17-types {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .f17-preview {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .f17-fields {
+    grid-template-columns: 1fr;
+  }
+  .f17-doc__sign {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .f17-doc {
+    padding: 20px 18px 18px;
+  }
+  .f17-doc__title {
+    font-size: 21px;
+  }
+}
+@media (max-width: 480px) {
+  .f17-types {
+    grid-template-columns: 1fr;
+  }
+  .f17-type {
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  .f17-type__name {
+    flex: 1;
+    min-width: 0;
+  }
+  .f17-type__meta {
+    margin-top: 0;
+    margin-left: auto;
+    padding-right: 22px;
+    white-space: nowrap;
+  }
+}

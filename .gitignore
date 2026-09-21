@@ -27,3 +27,6 @@ venv/
 .DS_Store
 .idea/
 .vscode/
+
+# 截圖工具的臨時量測載具（scripts/shot.sh 手機模式）
+.shot-frame.html

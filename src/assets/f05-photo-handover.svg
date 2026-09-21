@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="320" height="220" role="img" aria-labelledby="t"><title id="t">退租點交當日的室內照片，尚有遺留物待清運</title>
+<style>text { font-family: -apple-system, BlinkMacSystemFont, "SF Pro TC", "PingFang TC", "Helvetica Neue", "Noto Sans TC", sans-serif; }</style>
+<rect width="320" height="220" fill="#eef1f6"/>
+<rect x="0" y="162" width="320" height="58" fill="#dcd4c8"/>
+<rect x="196" y="36" width="94" height="72" rx="6" fill="#ffffff" stroke="#c9ced8" stroke-width="2"/>
+<path d="M243 36v72M196 72h94" stroke="#c9ced8" stroke-width="2"/>
+<rect x="30" y="96" width="112" height="66" rx="8" fill="#c7cedd"/>
+<rect x="38" y="84" width="96" height="16" rx="8" fill="#b7c0d3"/>
+<rect x="150" y="128" width="46" height="34" rx="4" fill="#d9c9a8" stroke="#c4b08a" stroke-width="2"/>
+<path d="M150 142h46" stroke="#c4b08a" stroke-width="2"/>
+<rect x="206" y="132" width="34" height="30" rx="4" fill="#d9c9a8" stroke="#c4b08a" stroke-width="2"/>
+<path d="M0 162h320" stroke="#c9c1b3" stroke-width="2"/>
+<rect x="18" y="18" width="142" height="26" rx="13" fill="#fff4e0"/>
+<circle cx="33" cy="31" r="5" fill="#ff9f0a"/>
+<text x="46" y="35" font-size="12" fill="#a35a00">遺留物待清運</text>
+</svg>

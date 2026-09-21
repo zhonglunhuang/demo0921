@@ -1,9 +1,9 @@
 ---
 id: DEMO-01
 title: 提案站骨架
-status: 待開發        # 待開發 | 開發中 | 完成 | 作廢
+status: 開發中        # 待開發 | 開發中 | 完成 | 作廢
 roles: [客戶,提案者]
-owner:
+owner: jon-mac
 spec: docs/SPEC.md#31-提案站骨架
 created: 2026-09-21
 updated: 2026-09-21
@@ -83,4 +83,13 @@ updated: 2026-09-21
 
 ## 開發備註（/dev 填寫）
 
--
+- 基礎層完成：`docs/DESIGN.md` 設計與架構契約、`css/main.css`＋`home.css`＋`tour.css` 設計系統、`js/data.js`（103 間物件共用假資料，39 項完整性檢查通過）、`js/common.js`＋`icons.js` 外殼與共用元件、`js/tour-player.js` 導覽播放器、`src/index.html` 總覽首頁、`tour/index.html` 導覽清單。另建 `scripts/shot.sh`（無頭 Chrome 截圖，手機模式用等寬 iframe 量測）與 `scripts/console-check.sh`。commit 9684174、5013acc。
+
+### 驗收現況（2026-09-21，誠實記錄）
+
+**已驗（有機器證據）**：頁面無 JavaScript 錯誤、DOM 有實際內容、站內連結皆 200、
+假資料 39 項一致性檢查通過、`make check` 綠燈。
+
+**未驗**：本票驗收標準尚未逐條對照實際畫面查證；多數頁面的桌機與手機畫面未經人工或獨立 agent 檢視；
+互動流程未逐條點過。原因：並行驗收階段因額度中斷未執行（69 個 agent 只完成 10 個）。
+待完整驗收通過後才可標「完成」。

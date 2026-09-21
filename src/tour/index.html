@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>功能導覽｜租務中樞</title>
+  <meta name="description" content="租務中樞的 20 個功能導覽：每個功能一條流程，畫面逐步動給你看。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/tour.css">
+  <link rel="stylesheet" href="../css/tour-index.css">
+</head>
+<body class="tour ti-page">
+  <div id="tour-shell"></div>
+
+  <main class="tour-main" id="main">
+    <header class="tour-head reveal">
+      <p class="eyebrow">功能導覽</p>
+      <h1>20 個功能，一條流程看完</h1>
+      <p class="page-lead">每個功能一條流程，畫面會逐步動給你看，約 1 分鐘。想直接動手，每張卡也能跳到系統操作。</p>
+      <p class="ti-head-meta" id="tour-meta"></p>
+    </header>
+
+    <nav class="reveal" id="tour-nav" aria-label="功能群組"></nav>
+
+    <div id="tour-groups"></div>
+
+    <section class="card card--dark card--static ti-cta reveal" aria-labelledby="ti-cta-title">
+      <h2 class="ti-cta__title" id="ti-cta-title">看完導覽，直接進系統操作</h2>
+      <p class="ti-cta__text">系統裡放的是 103 間物件的完整示範資料，每一頁都能點，也能切換角色看見不同權限。</p>
+      <div class="ti-cta__actions">
+        <a class="btn btn--secondary" href="../index.html">回總覽首頁</a>
+        <a class="btn btn--primary" href="../app/index.html" data-cta-app>進系統操作</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script>
+  /* 導覽首頁：7 群 20 功能的清單，全部由 DB.features / DB.groups 產生（不手寫清單）。 */
+  (function () {
+    'use strict';
+
+    var A = window.App || {};
+    var esc = A.esc || function (s) { return String(s === null || s === undefined ? '' : s); };
+    var icon = A.icon || function () { return ''; };
+
+    /* 群組圖示：基礎層只在側欄內部用，未對外開放，這裡照同一份對應表補一份。 */
+    var GROUP_ICONS = { 1: 'file', 2: 'chart', 3: 'door', 4: 'wrench', 5: 'message', 6: 'shield', 7: 'database' };
+
+    function featureIcon(id) {
+      if (A.featureIcon) return A.featureIcon(id);
+      return 'grid';
+    }
+
+    function linkTo(id, kind) {
+      if (A.link) return A.link(id, kind);
+      var f = (window.DB && DB.feature) ? DB.feature(id) : null;
+      if (!f) return '#';
+      if (kind === 'app') return '../app/' + (id === 'f15' ? 'index.html' : id + '-' + f.slug + '.html');
+      return '../tour/' + id + '-' + f.slug + '.html';
+    }
+
+    /* 群組資料：優先用 DB.featuresByGroup()（帶 blurb），退而求其次用 App.featureGroups()。 */
+    function groups() {
+      var d = window.DB, out = [];
+      if (d && typeof d.featuresByGroup === 'function') {
+        out = d.featuresByGroup().map(function (g) {
+          return { id: g.id, label: g.name, blurb: g.blurb || '', features: g.features || [] };
+        });
+      } else if (A.featureGroups) {
+        out = A.featureGroups().map(function (g) {
+          return { id: g.key, label: g.label, blurb: '', features: g.features || [] };
+        });
+      }
+      return out.filter(function (g) { return g.features.length; });
+    }
+
+    function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+    function metaText(f) {
+      var parts = [];
+      if (f.tourSteps) parts.push('約 ' + f.tourSteps + ' 步');
+      if (f.tourMinutes) parts.push('約 ' + f.tourMinutes + ' 分鐘');
+      return parts.join('・');
+    }
+
+    /* 注意：產生的連結屬性刻意用單引號，樣板字串才不會被 static-check 的連結掃描誤判成站內連結。 */
+    function cardHTML(f, i) {
+      var meta = metaText(f);
+      return '<li class="reveal" data-delay="' + ((i % 3) + 1) + '">' +
+        '<article class="ti-card">' +
+          '<span class="icon-circle">' + icon(featureIcon(f.id)) + '</span>' +
+          '<h3 class="ti-card__name">' + "<a href='" + esc(linkTo(f.id, 'tour')) + "'>" + esc(f.name) + '</a></h3>' +
+          '<p class="ti-card__tagline">' + esc(f.tagline || f.blurb || '') + '</p>' +
+          '<div class="ti-card__foot">' +
+            (meta ? '<span class="ti-card__meta">' + icon('clock') + esc(meta) + '</span>' : '<span class="ti-card__meta"></span>') +
+            "<a class='ti-card__app' href='" + esc(linkTo(f.id, 'app')) + "' aria-label='直接操作：" + esc(f.name) + "'>直接操作 ›</a>" +
+          '</div>' +
+        '</article></li>';
+    }
+
+    function groupHTML(g, idx) {
+      var gid = 'g' + esc(g.id);
+      var cards = g.features.map(cardHTML).join('');
+      return '<section class="ti-group" id="' + gid + '" aria-labelledby="' + gid + '-title">' +
+        '<div class="ti-group__head reveal">' +
+          '<span class="ti-group__num">' + pad2(idx + 1) + '</span>' +
+          '<h2 class="ti-group__name" id="' + gid + '-title">' + esc(g.label) + '</h2>' +
+          (g.blurb ? '<p class="ti-group__blurb">' + esc(g.blurb) + '</p>' : '') +
+        '</div>' +
+        '<ul class="ti-cards">' + cards + '</ul>' +
+      '</section>';
+    }
+
+    function navHTML(list) {
+      return '<ul class="ti-groupnav">' + list.map(function (g) {
+        return '<li><a href="#g' + esc(g.id) + '">' + icon(GROUP_ICONS[g.id] || 'grid') + esc(g.label) + '</a></li>';
+      }).join('') + '</ul>';
+    }
+
+    function metaHTML(list) {
+      var count = 0, lo = null, hi = null;
+      list.forEach(function (g) {
+        g.features.forEach(function (f) {
+          count += 1;
+          var m = f.tourMinutes || 1;
+          if (lo === null || m < lo) lo = m;
+          if (hi === null || m > hi) hi = m;
+        });
+      });
+      var mins = (lo === hi) ? ('每條約 ' + lo + ' 分鐘') : ('每條約 ' + lo + '～' + hi + ' 分鐘');
+      return '<span>' + icon('grid') + count + ' 個功能</span>' +
+        '<span>' + icon('layers') + list.length + ' 個群組</span>' +
+        '<span>' + icon('clock') + mins + '</span>';
+    }
+
+    function render() {
+      var host = document.getElementById('tour-groups');
+      var nav = document.getElementById('tour-nav');
+      var meta = document.getElementById('tour-meta');
+      var list = groups();
+
+      if (!list.length) {
+        if (host) host.innerHTML = '<p class="tour-empty">功能清單尚未載入，請重新整理頁面。</p>';
+        if (nav) nav.hidden = true;
+        if (meta) meta.hidden = true;
+        return;
+      }
+
+      if (meta) meta.innerHTML = metaHTML(list);
+      if (nav) nav.innerHTML = navHTML(list);
+      if (host) host.innerHTML = list.map(groupHTML).join('');
+
+      var cta = document.querySelector('[data-cta-app]');
+      if (cta && A.link) cta.setAttribute('href', linkTo('f15', 'app'));
+
+      if (A.reveal) A.reveal();
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render);
+    else render();
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>probe</title></head>
+<body>
+<pre id="log">start</pre>
+<iframe id="fr" src="/src/app/f13-evidence.html" style="width:1400px;height:900px;border:0"></iframe>
+<script>
+var out = [];
+function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+function done(){ document.getElementById('log').textContent = out.join('\n'); }
+document.getElementById('fr').onload = function () {
+  var f = document.getElementById('fr');
+  var d = f.contentDocument;
+  var q = function (s) { return d.querySelector(s); };
+  var txt = function (s) { var e = q(s); return e ? e.textContent.replace(/\s+/g, ' ').trim() : 'MISSING:' + s; };
+  var btnByText = function (sel, t) {
+    var list = Array.prototype.slice.call(d.querySelectorAll(sel));
+    for (var i = 0; i < list.length; i++) if (list[i].textContent.indexOf(t) >= 0) return list[i];
+    return null;
+  };
+  (async function () {
+    await sleep(700);
+    out.push('[init] scrollWidth=' + d.documentElement.scrollWidth + ' clientWidth=' + d.documentElement.clientWidth);
+    out.push('[init] kpi3=' + txt('#f13-kpis .kpi:nth-child(3) .kpi-value') + ' | ' + txt('#f13-kpis .kpi:nth-child(3) .kpi-hint'));
+    out.push('[init] rows=' + d.querySelectorAll('tr[data-notice-row]').length + ' count=' + txt('#f13-count'));
+    out.push('[init] photos=' + d.querySelectorAll('.f13-photo').length + ' groups=' + d.querySelectorAll('.f13-day').length);
+    out.push('[init] detail=' + txt('.f13-detail .card-sub'));
+    out.push('[init] alert1=' + txt('#f13-alerts .alert:nth-child(1) .alert-title'));
+
+    /* 篩選到空狀態 */
+    btnByText('#f13-type-tabs .tab', '續約').click();
+    q('#f13-unreplied').click();
+    await sleep(60);
+    out.push('[filter] 續約+只看未回覆 rows=' + d.querySelectorAll('tr[data-notice-row]').length +
+      ' empty=' + txt('.f13-table .empty-state-title'));
+    q('#f13-unreplied').click();
+    btnByText('#f13-type-tabs .tab', '全部').click();
+    await sleep(60);
+
+    /* 棟別篩選同時影響照片 */
+    var sel = q('#f13-building');
+    sel.value = 'E';
+    sel.dispatchEvent(new f.contentWindow.Event('change', { bubbles: true }));
+    await sleep(60);
+    out.push('[filter] E 棟 rows=' + d.querySelectorAll('tr[data-notice-row]').length +
+      ' photoEmpty=' + txt('#f13-photos .empty-state-title'));
+    sel.value = '全部';
+    sel.dispatchEvent(new f.contentWindow.Event('change', { bubbles: true }));
+    await sleep(60);
+
+    /* 主流程 */
+    q('[data-act="remind"]').click();
+    await sleep(80);
+    out.push('[flow] modal=' + txt('.modal-title'));
+    btnByText('.modal-actions .btn', '送出通知').click();
+    await sleep(120);
+    out.push('[flow] sent rows=' + d.querySelectorAll('tr[data-notice-row]').length +
+      ' first=' + txt('tr[data-notice-row]:first-child td:nth-child(4)') +
+      ' alert=' + txt('#f13-alerts .alert:nth-child(1) .alert-title'));
+    await sleep(1200);
+    out.push('[flow] delivered first=' + txt('tr[data-notice-row]:first-child td:nth-child(4)'));
+    await sleep(1800);
+    out.push('[flow] replied first=' + txt('tr[data-notice-row]:first-child td:nth-child(5)'));
+    out.push('[flow] kpi3=' + txt('#f13-kpis .kpi:nth-child(3) .kpi-value') + ' | ' + txt('#f13-kpis .kpi:nth-child(3) .kpi-hint'));
+    out.push('[flow] alert1=' + txt('#f13-alerts .alert:nth-child(1) .alert-title'));
+    out.push('[flow] detailReply=' + txt('.f13-quote--reply'));
+
+    /* 匯出證據包 */
+    btnByText('#f13-alerts .btn', '匯出 B11 證據包').click();
+    await sleep(80);
+    out.push('[export] modal=' + txt('.modal-title') + ' items=' + d.querySelectorAll('.f13-pack-item').length);
+    btnByText('.modal-actions .btn', '產生證據包').click();
+    await sleep(200);
+    out.push('[export] toast=' + txt('.toast-stack .toast-msg'));
+    out.push('[export] badge=' + (txt('tr[data-notice-row]:first-child td:nth-child(2)').indexOf('已匯出') >= 0 ? 'ok' : 'missing'));
+
+    /* 照片大圖 */
+    d.querySelector('.f13-photo').click();
+    await sleep(80);
+    out.push('[photo] modal=' + txt('.modal-title') + ' img=' + (q('.f13-lightbox img') ? q('.f13-lightbox img').getAttribute('src') : 'none'));
+    btnByText('.modal-actions .btn', '關閉').click();
+    await sleep(200);
+
+    /* 角色切換 */
+    var role = d.querySelector('.topbar .role-switch button[data-role="maintenance"]') || d.querySelector('.role-switch button[data-role="maintenance"]');
+    role.click();
+    await sleep(120);
+    out.push('[role] note=' + txt('#f13-role-note'));
+    out.push('[role] exportDisabled=' + q('#f13-export-all').disabled);
+    out.push('[role] content=' + txt('.f13-detail .f13-quote'));
+    var back = d.querySelector('.role-switch button[data-role="boss"]');
+    back.click();
+    await sleep(80);
+    out.push('[end] scrollWidth=' + d.documentElement.scrollWidth + ' clientWidth=' + d.documentElement.clientWidth);
+    done();
+  })();
+};
+</script>
+</body></html>

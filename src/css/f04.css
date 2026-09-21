@@ -1,0 +1,257 @@
+/* f04.css — 押金管理（操作頁與導覽頁共用的小樣式）。
+ * 只補 main.css 沒有的東西：結算步驟條、扣款列、退款證明縮圖。
+ * 顏色一律走 main.css 的 tokens，不出現裸 hex。 */
+
+.f04-block + .f04-block { margin-top: 24px; }
+
+/* ---------- 結算步驟條 ---------- */
+.f04-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: f04step;
+}
+.f04-step {
+  position: relative;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-s);
+  background: var(--bg);
+  font-size: 14px;
+  color: var(--ink-3);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.f04-step::before {
+  counter-increment: f04step;
+  content: counter(f04step);
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  background: var(--bg);
+}
+.f04-step-name { display: block; font-weight: 500; color: inherit; }
+.f04-step-hint { display: block; margin-top: 2px; font-size: 12px; color: var(--ink-3); }
+.f04-step.is-current {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.f04-step.is-current::before { border-color: var(--accent); background: var(--accent); color: var(--bg); }
+.f04-step.is-done { color: var(--ink-2); }
+.f04-step.is-done::before {
+  /* 打勾用內嵌 SVG（與 Icons 的 check 同一條路徑），不用 emoji 或文字符號當圖示 */
+  content: "";
+  border-color: var(--ok);
+  background-color: var(--ok);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m20 6-11 11-5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+}
+
+/* ---------- 扣款項 ---------- */
+.f04-deduct { margin: 0; padding: 0; list-style: none; }
+.f04-deduct-item {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  gap: 4px 12px;
+  align-items: start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.f04-deduct-item:last-child { border-bottom: 0; }
+.f04-deduct-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.f04-deduct-item.is-locked input[type="checkbox"] { cursor: default; }
+.f04-deduct-name { font-weight: 500; }
+.f04-deduct-basis { display: block; margin-top: 2px; font-size: 13px; color: var(--ink-2); }
+.f04-deduct-amount { font-variant-numeric: tabular-nums; font-weight: 500; color: var(--danger-ink); white-space: nowrap; }
+.f04-deduct-item.is-off .f04-deduct-name,
+.f04-deduct-item.is-off .f04-deduct-amount { color: var(--ink-3); text-decoration: line-through; }
+.f04-deduct-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-alt);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-2);
+  vertical-align: 1px;
+}
+
+/* ---------- 金額結算面板 ---------- */
+.f04-sum {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m);
+  background: var(--bg-alt);
+  padding: 20px;
+}
+.f04-sum-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 7px 0;
+  font-size: 15px;
+}
+.f04-sum-row span:last-child { font-variant-numeric: tabular-nums; }
+.f04-sum-row--minus span:last-child { color: var(--danger-ink); }
+.f04-sum-total {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.f04-sum-total-label { font-size: 15px; color: var(--ink-2); }
+.f04-sum-total-value { font-size: 32px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.f04-sum-note { margin-top: 10px; font-size: 13px; color: var(--ink-2); }
+
+/* ---------- 退款證明縮圖 ---------- */
+.f04-proof { display: flex; gap: 16px; flex-wrap: wrap; }
+.f04-proof figure { margin: 0; width: 200px; max-width: 100%; }
+.f04-proof img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line-soft);
+  background: var(--bg);
+}
+.f04-proof figcaption { margin-top: 6px; font-size: 13px; color: var(--ink-2); }
+
+/* ---------- 結算單預覽 ---------- */
+.f04-doc {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-1);
+}
+.f04-doc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.f04-doc-title { font-size: 17px; font-weight: 600; }
+.f04-doc-no { font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.f04-doc .kv { margin-top: 14px; font-size: 14px; }
+
+/* ---------- 工具列與清單 ---------- */
+.f04-toolbar .f04-count { font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.f04-unit { font-weight: 600; }
+.f04-sub { display: block; font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+
+/* ---------- 導覽舞台（tour）：960 × 600，內容區高 544，整片填滿 ---------- */
+.f04-stage { display: flex; flex-direction: column; height: 544px; }
+.f04-stage > * { flex: none; }
+.f04-stage-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.f04-stage-title { font-size: 24px; font-weight: 600; line-height: 1.15; }
+.f04-stage-sub { font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+.f04-stage .card { padding: 20px; }
+.f04-stage .f04-sum { padding: 16px; }
+.f04-stage .f04-sum-total-value { font-size: 28px; }
+.f04-stage .section-title { font-size: 17px; }
+.f04-stage .kv { font-size: 14px; gap: 7px 16px; }
+.f04-stage .timeline { font-size: 14px; }
+.f04-stage .kpi-value { font-size: 34px; }
+.f04-steps--tour { gap: 6px; margin-bottom: 16px; }
+.f04-steps--tour .f04-step { padding: 9px 10px 9px 34px; font-size: 13px; }
+.f04-steps--tour .f04-step::before { top: 9px; left: 9px; }
+
+.f04-stage-grid { flex: 1 1 auto; min-height: 0; grid-auto-rows: minmax(0, 1fr); gap: 16px; }
+.f04-stage-grid > * { min-height: 0; overflow: hidden; }
+.f04-flexcard { display: flex; flex-direction: column; }
+.f04-flexcard .f04-chat-body { flex: 1 1 auto; min-height: 0; height: auto; }
+.f04-stage .f04-proof figure { width: 176px; }
+.f04-proof--one figure { width: 210px; }
+.f04-stage .js-bottom { flex: 1 1 auto; min-height: 0; grid-auto-rows: minmax(0, 1fr); }
+
+@media (max-width: 1024px) {
+  .f04-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .f04-block + .f04-block { margin-top: 20px; }
+  .f04-sum-total-value { font-size: 28px; }
+  .f04-proof figure { width: 100%; }
+}
+@media (max-width: 480px) {
+  .f04-steps { grid-template-columns: 1fr; }
+  .f04-deduct-item { grid-template-columns: 22px 1fr; }
+  .f04-deduct-amount { grid-column: 2; }
+}
+
+/* ---------- 逾期清單（警示條內） ---------- */
+.f04-overdue { margin: 6px 0 0; padding-left: 18px; font-size: 14px; }
+.f04-overdue li { margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+/* ---------- 導覽舞台：LINE 訊息小面板 ---------- */
+.f04-chat-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+  margin-bottom: 10px;
+}
+.f04-chat-head .icon { width: 16px; height: 16px; color: var(--ok); }
+.f04-chat-body {
+  height: 232px;
+  border-radius: var(--radius-s);
+  background: var(--line-bg);
+}
+
+/* ---------- 導覽舞台：扣款清單（打勾＝已帶入，不是取消） ---------- */
+.f04-check-plain .checklist-item.is-done .checklist-label { color: var(--ink); text-decoration: none; }
+.f04-check-plain .checklist-meta { color: var(--danger-ink); font-variant-numeric: tabular-nums; }
+
+/* ---------- 篩選膠囊在窄螢幕可橫向捲動（頁面本身不捲） ---------- */
+.f04-segscroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 -2px;
+  padding: 2px;
+}
+.f04-segscroll::-webkit-scrollbar { display: none; }
+.f04-segscroll > .segmented { max-width: none; }
+
+/* ---------- 導覽舞台固定是 960px 的桌機畫面：不跟著手機斷點改排版 ---------- */
+/* 舞台整片用 transform 縮放，媒體查詢卻是看裝置寬度，不鎖住會在手機上被擠爆並截斷 */
+.f04-stage .grid { gap: 16px; }
+.f04-stage .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.f04-stage .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.f04-stage .f04-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.f04-stage .f04-deduct-item { grid-template-columns: 22px 1fr auto; }
+.f04-stage .f04-deduct-amount { grid-column: auto; }
+.f04-stage .card { padding: 20px; border-radius: var(--radius-l); }
+.f04-stage .kpi { padding: 16px 18px; border-radius: var(--radius-m); }
+.f04-stage .kpi-value { font-size: 34px; }
+.f04-stage .stat-row--divided .stat + .stat { padding-left: 32px; border-left: 1px solid var(--line-soft); }
+.f04-stage .alert { flex-wrap: nowrap; }

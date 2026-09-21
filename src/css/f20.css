@@ -1,0 +1,110 @@
+/* f20.css — 資料匯出與所有權（f20）專屬樣式。顏色一律用 main.css tokens。 */
+
+.f20-export { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.f20-sub { font-size: 14px; font-weight: 600; margin: 0 0 12px; color: var(--ink-2); }
+.f20-sets-head { display: flex; align-items: center; justify-content: space-between; }
+
+.f20-set {
+  display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
+  padding: 12px 14px; margin-bottom: 8px;
+  border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.f20-set:hover { background: var(--row-hover); }
+.f20-set.is-on { border-color: var(--accent); background: var(--accent-soft); }
+.f20-set input { margin-top: 3px; accent-color: var(--accent); flex: none; }
+.f20-set-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; flex: none; border-radius: 9px;
+  background: var(--bg); color: var(--ink-2); border: 1px solid var(--line-soft);
+}
+.f20-set.is-on .f20-set-icon { color: var(--accent); border-color: var(--accent); }
+.f20-set-icon svg { width: 17px; height: 17px; }
+.f20-set-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.f20-set-name { font-weight: 600; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.f20-set-count { font-size: 12px; font-weight: 400; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.f20-set-note { font-size: 13px; color: var(--ink-2); }
+
+.f20-format {
+  display: flex; align-items: flex-start; gap: 10px; cursor: pointer;
+  padding: 11px 13px; margin-bottom: 8px;
+  border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.f20-format:hover { background: var(--row-hover); }
+.f20-format.is-on { border-color: var(--accent); background: var(--accent-soft); }
+.f20-format input { margin-top: 3px; accent-color: var(--accent); flex: none; }
+.f20-format-name { display: block; font-weight: 600; }
+.f20-format-note { display: block; font-size: 12px; color: var(--ink-2); }
+
+.f20-summary { margin: 16px 0 12px; padding: 14px; border-radius: var(--radius-m); background: var(--bg-alt); }
+.f20-summary-note { font-size: 12px; color: var(--ink-2); margin: 10px 0 0; }
+.f20-summary-empty { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 13px; color: var(--ink-2); }
+.f20-summary-empty svg { width: 16px; height: 16px; color: var(--warn); }
+
+.f20-progress-wrap:empty { display: none; }
+.f20-progress { margin-top: 16px; }
+.f20-progress-text { font-size: 13px; color: var(--ink-2); margin: 8px 0 0; }
+
+.f20-done { margin-top: 16px; padding: 16px; border-radius: var(--radius-m); background: var(--ok-soft); }
+.f20-done-head { display: flex; align-items: center; gap: 7px; font-weight: 600; margin-bottom: 12px; }
+.f20-done-head svg { width: 20px; height: 20px; color: var(--ok); }
+.f20-files { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.f20-files li {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px; border-radius: var(--radius-s); background: var(--bg);
+}
+.f20-files svg { width: 16px; height: 16px; color: var(--ink-3); flex: none; }
+.f20-file-name { flex: 1 1 auto; min-width: 0; font-size: 13px; overflow-wrap: anywhere; }
+.f20-done-note { margin: 12px 0 0; }
+
+.f20-history-head { padding: 20px 20px 12px; }
+
+.f20-api-lead { margin: 0 0 16px; max-width: 70ch; }
+.f20-endpoints { display: flex; flex-direction: column; gap: 8px; }
+.f20-endpoint { border: 1px solid var(--line-soft); border-radius: var(--radius-m); overflow: hidden; }
+.f20-endpoint summary {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 12px 14px; cursor: pointer; list-style: none;
+}
+.f20-endpoint summary::-webkit-details-marker { display: none; }
+.f20-endpoint summary:hover { background: var(--row-hover); }
+.f20-endpoint[open] summary { border-bottom: 1px solid var(--line-soft); }
+.f20-method {
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  padding: 3px 7px; border-radius: 5px; flex: none;
+}
+.f20-method--get { background: var(--accent-soft); color: var(--accent); }
+.f20-method--post { background: var(--ok-soft); color: var(--ok-ink, var(--ok)); }
+.f20-path { font-size: 13px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.f20-endpoint-desc { font-size: 13px; color: var(--ink-2); margin-left: auto; }
+.f20-sample {
+  margin: 0; padding: 14px; background: var(--bg-dark-2); color: var(--ink-on-dark);
+  font-size: 12.5px; line-height: 1.6; overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.f20-api-note { margin: 14px 0 0; }
+
+.f20-promise { margin-top: 24px; padding: 40px 36px; }
+.f20-promise-title { font-size: 34px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 28px; color: var(--ink-on-dark); }
+.f20-promise-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.f20-promise-item h3 { font-size: 18px; font-weight: 600; margin: 10px 0 6px; color: var(--ink-on-dark); }
+.f20-promise-item p { margin: 0; color: var(--ink-2-on-dark); font-size: 14px; line-height: 1.6; }
+.f20-promise-n {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255, 255, 255, .12); color: var(--ink-on-dark);
+  font-size: 13px; font-weight: 600;
+}
+.f20-promise-foot { margin: 28px 0 0; color: var(--ink-2-on-dark); font-size: 13px; }
+
+@media (max-width: 1024px) {
+  .f20-export { grid-template-columns: 1fr; gap: 24px; }
+  .f20-promise-grid { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 768px) {
+  .f20-promise { padding: 30px 22px; }
+  .f20-promise-title { font-size: 26px; }
+  .f20-endpoint-desc { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .f20-set, .f20-format { transition: none; } }

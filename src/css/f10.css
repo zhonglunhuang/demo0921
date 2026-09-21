@@ -1,0 +1,192 @@
+/* f10.css — 租客 LINE 自助中心（f10）專屬樣式
+ * 契約：docs/DESIGN.md §2 tokens、§3 元件 class、§6.1 檔案所有權。
+ * 規則：顏色一律用 main.css :root 的 token，不寫裸 hex；只有 app/f10-line-selfservice.html
+ *      與 tour/f10-line-selfservice.html 兩頁引用。
+ */
+
+/* ========================================================================
+   1. 操作頁：手機模擬 ＋ 後台兩欄
+   ======================================================================== */
+.f10-alerts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0 0; }
+.f10-alerts:empty { display: none; }
+
+.f10-layout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+.f10-side { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+/* 左欄：租客手機 */
+.f10-phone-card { position: sticky; top: calc(var(--topbar-h) + 16px); }
+.f10-phone-card .card-head { align-items: flex-start; }
+.f10-phone-who { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; color: var(--ink-2); margin-bottom: 14px; }
+.f10-phone-who span { white-space: nowrap; }
+.f10-phone-foot { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.f10-phone-foot .muted { font-size: 13px; }
+
+/* 手機內：官方帳號名片 */
+.f10-oa { text-align: center; }
+.f10-oa-logo {
+  width: 48px; height: 48px; margin: 0 auto 8px; border-radius: 14px;
+  background: var(--line-green); color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+.f10-oa-logo .icon { width: 26px; height: 26px; }
+.f10-oa strong { display: block; font-size: 15px; }
+.f10-oa p { font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+.f10-oa ul { list-style: none; margin: 10px 0 0; text-align: left; font-size: 13px; color: var(--ink-2); }
+.f10-oa li { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
+.f10-oa li .icon { width: 14px; height: 14px; color: var(--line-green); flex: none; }
+
+/* 手機內：綁定輸入列（取代 .phone-input） */
+.f10-bind {
+  flex: none; background: var(--bg); border-top: 1px solid var(--line-soft);
+  padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px;
+}
+.f10-bind-row { display: flex; align-items: center; gap: 8px; }
+.f10-bind-row .input { height: 36px; font-size: 14px; border-radius: var(--radius-pill); padding: 0 14px; }
+.f10-bind-send {
+  width: 36px; height: 36px; flex: none; border-radius: 50%;
+  background: var(--line-green); color: var(--bg);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.f10-bind-send .icon { width: 18px; height: 18px; }
+.f10-bind-send[disabled] { background: var(--line-soft); color: var(--ink-3); cursor: not-allowed; }
+.f10-bind-hint { font-size: 12px; color: var(--ink-3); }
+.f10-bind-hint.is-error { color: var(--danger-ink); }
+
+/* 手機內：附照片縮圖 */
+.f10-shot { display: block; width: 150px; border-radius: 10px; margin-top: 4px; }
+.f10-bubble-note { display: block; font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+
+/* 右欄：自助紀錄與單據 */
+.f10-doc {
+  display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 4px 12px;
+  padding: 14px; border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+}
+.f10-doc + .f10-doc { margin-top: 10px; }
+.f10-doc-icon {
+  grid-row: 1 / span 3; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.f10-doc-icon .icon { width: 20px; height: 20px; }
+.f10-doc-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.f10-doc-title { font-size: 17px; font-weight: 600; }
+.f10-doc-sub { font-size: 13px; color: var(--ink-2); }
+.f10-doc-foot { font-size: 13px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 2px 14px; }
+
+/* 右欄：綁定清單 */
+.f10-filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 0 0 14px; }
+.f10-filters .segmented { flex: 1 1 320px; overflow-x: auto; scrollbar-width: none; justify-content: flex-start; }
+.f10-filters .segmented::-webkit-scrollbar { display: none; }
+.f10-filters .segmented .tab { flex: 0 0 auto; padding: 0 10px; font-size: 13px; }
+.f10-filters .select { width: 130px; height: 36px; font-size: 14px; }
+.f10-table-scroll { max-height: 460px; overflow-y: auto; }
+.f10-role-note { margin-top: 12px; font-size: 13px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.f10-role-note .icon { width: 16px; height: 16px; color: var(--ink-3); flex: none; }
+
+/* 底部：圖文選單九件事 */
+.f10-menu-guide { margin-top: 20px; }
+.f10-menu-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.f10-menu-btn {
+  display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 2px 12px;
+  padding: 12px 14px; border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+  text-align: left; background: var(--bg);
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.f10-menu-btn:hover { border-color: var(--accent); box-shadow: var(--shadow-1); transform: translateY(-1px); }
+.f10-menu-btn .icon-circle { grid-row: 1 / span 2; }
+.f10-menu-name { font-size: 15px; font-weight: 600; }
+.f10-menu-desc { font-size: 13px; color: var(--ink-2); }
+
+@media (max-width: 1024px) {
+  .f10-layout { grid-template-columns: minmax(0, 1fr); }
+  .f10-phone-card { position: static; }
+  .f10-menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .f10-menu-grid { grid-template-columns: minmax(0, 1fr); }
+  .f10-alerts .alert { flex-wrap: wrap; }
+  .f10-alerts .alert .alert-body { flex: 1 1 100%; }
+  .f10-alerts .alert .btn { margin: 8px 0 0 32px; }
+  .f10-filters .select { width: 100%; }
+  .f10-filters .segmented { flex-basis: 100%; }
+  .f10-filters .segmented .tab { padding: 0 8px; font-size: 12px; }
+  .f10-table-scroll { max-height: none; }
+}
+
+/* ========================================================================
+   2. 導覽舞台（960 × 600，只在 tour 頁生效）
+   ======================================================================== */
+.f10s {
+  display: grid; grid-template-columns: 280px minmax(0, 1fr);
+  gap: 24px; height: 100%; align-items: start;
+}
+.f10s .phone {
+  width: 280px; height: 544px; aspect-ratio: auto;
+  padding: 8px; border-radius: 38px; margin: 0;
+}
+.f10s .phone::before { width: 84px; height: 22px; top: 16px; }
+.f10s .phone-screen { border-radius: 30px; }
+.f10s .phone-status { height: 40px; }
+.f10s .phone-menu button { padding: 8px 2px; font-size: 11px; }
+.f10s .phone-menu button .icon { width: 18px; height: 18px; }
+
+.f10s-panel { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.f10s-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.f10s-head h3 { font-size: 19px; font-weight: 600; letter-spacing: -.01em; }
+.f10s-head .muted { font-size: 13px; }
+
+.f10s-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.f10s-kpi { background: var(--bg); border-radius: var(--radius-m); padding: 12px 14px; box-shadow: var(--shadow-1); }
+.f10s-kpi-label { font-size: 12px; color: var(--ink-2); }
+.f10s-kpi-value { font-size: 28px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; margin-top: 2px; }
+.f10s-kpi-value small { font-size: 13px; font-weight: 400; color: var(--ink-2); margin-left: 3px; }
+.f10s-kpi.is-ok .f10s-kpi-value { color: var(--ok-ink); }
+
+.f10s-card { background: var(--bg); border-radius: var(--radius-m); padding: 14px 16px; box-shadow: var(--shadow-1); }
+.f10s-card h4 { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.f10s-card h4 .icon { width: 17px; height: 17px; color: var(--ink-2); }
+.f10s-card .muted { font-size: 13px; color: var(--ink-2); }
+
+.f10s-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.f10s-row + .f10s-row { margin-top: 6px; }
+.f10s-row .muted { font-size: 13px; }
+
+.f10s-list { list-style: none; margin: 8px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 10px; }
+.f10s-list li { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); }
+.f10s-list li .icon { width: 14px; height: 14px; color: var(--line-green); flex: none; }
+
+.f10s-check { list-style: none; margin: 10px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.f10s-check li { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+.f10s-box {
+  width: 20px; height: 20px; border-radius: 50%; flex: none;
+  border: 1.5px solid var(--line); color: transparent;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.f10s-box .icon { width: 13px; height: 13px; }
+.f10s-check li.is-done { color: var(--ink); }
+.f10s-check li.is-done .f10s-box { background: var(--ok); border-color: var(--ok); color: var(--bg); }
+
+.f10s-alert {
+  display: flex; align-items: center; gap: 8px; font-size: 14px;
+  padding: 10px 14px; border-radius: var(--radius-m);
+  background: var(--warn-soft); color: var(--warn-ink);
+}
+.f10s-alert .icon { width: 18px; height: 18px; flex: none; }
+.f10s-alert--ok { background: var(--ok-soft); color: var(--ok-ink); }
+
+.f10s-fake-input {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px 10px; background: var(--bg); flex: none;
+}
+.f10s-fake-input .f10s-field {
+  flex: 1; height: 32px; border-radius: var(--radius-pill); background: var(--bg-alt);
+  display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--ink);
+}
+.f10s-fake-input .icon { width: 22px; height: 22px; color: var(--line-green); }

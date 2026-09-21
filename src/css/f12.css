@@ -1,0 +1,192 @@
+/* f12.css — 重大事件管理（f12）專屬樣式
+ * 契約：docs/DESIGN.md §2 tokens、§3 元件 class、§6.1 檔案所有權。
+ * 顏色一律用 main.css :root 的 token，不寫裸 hex。
+ */
+
+.f12-alert-wrap { margin: 20px 0 0; }
+.f12-alert-wrap:empty { display: none; }
+
+.f12-layout {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+.f12-list-card { position: sticky; top: calc(var(--topbar-h) + 16px); padding-bottom: 8px; }
+.f12-list-head { padding: 20px 20px 0; margin-bottom: 12px; }
+.f12-filters { display: flex; flex-direction: column; gap: 10px; padding: 0 20px 14px; }
+.f12-filters .segmented { width: 100%; overflow-x: auto; }
+.f12-filters .segmented .tab { flex: 1 1 auto; padding: 0 8px; font-size: 13px; gap: 4px; white-space: nowrap; }
+.f12-tab-n { font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.f12-select { display: block; }
+.f12-select .select { width: 100%; height: 36px; font-size: 14px; }
+
+.f12-items { max-height: min(70vh, 620px); overflow-y: auto; padding: 0 12px 12px; display: flex; flex-direction: column; gap: 6px; }
+.f12-items .empty-state { margin: 8px; }
+
+.f12-item {
+  display: flex; flex-direction: column; gap: 4px;
+  width: 100%; text-align: left; cursor: pointer;
+  padding: 12px; border: 1px solid transparent; border-radius: var(--radius-m);
+  background: transparent; font: inherit; color: inherit;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.f12-item:hover { background: var(--row-hover); }
+.f12-item.is-active { background: var(--accent-soft); border-color: var(--accent); }
+.f12-item-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.f12-item-id { font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.f12-item-title { font-size: 15px; font-weight: 600; line-height: 1.35; }
+.f12-item-meta { font-size: 12px; color: var(--ink-2); }
+
+.f12-detail-card { padding: 24px; }
+.f12-detail-head { margin-bottom: 18px; }
+.f12-detail-badges { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.f12-detail-id { font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.f12-detail-title { font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 8px; }
+.f12-detail-summary { color: var(--ink-2); margin: 0; }
+
+.f12-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 22px; }
+
+.f12-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.f12-block + .f12-block, .f12-detail-grid + .f12-block { margin-top: 24px; }
+.f12-block-title {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 15px; font-weight: 600; margin: 0 0 12px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--line-soft);
+}
+.f12-block-title svg { width: 18px; height: 18px; color: var(--ink-3); }
+
+.f12-photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+.f12-photo { margin: 0; }
+.f12-photo img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: var(--radius-s); border: 1px solid var(--line-soft); background: var(--bg-alt);
+}
+.f12-photo figcaption { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+
+.f12-chat { display: flex; flex-direction: column; gap: 8px; max-height: 300px; overflow-y: auto; padding-right: 4px; }
+
+.f12-compare { margin-top: 24px; }
+.f12-compare-lead { margin: 0 0 14px; }
+.f12-compare-table td:first-child { font-weight: 600; white-space: nowrap; }
+
+.f12-radio-list { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; }
+.f12-radio {
+  display: flex; align-items: flex-start; gap: 10px; cursor: pointer;
+  padding: 10px 12px; border-radius: var(--radius-s); border: 1px solid var(--line-soft);
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.f12-radio:hover { background: var(--row-hover); }
+.f12-radio input { margin-top: 3px; accent-color: var(--accent); }
+.f12-radio input:checked ~ span strong { color: var(--accent); }
+.f12-radio:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+
+@media (max-width: 1024px) {
+  .f12-layout { grid-template-columns: 1fr; }
+  .f12-list-card { position: static; }
+  .f12-items { max-height: 320px; }
+}
+@media (max-width: 768px) {
+  .f12-detail-grid { grid-template-columns: 1fr; gap: 20px; }
+  .f12-detail-card { padding: 18px; }
+  .f12-detail-title { font-size: 20px; }
+  .f12-actions .btn { flex: 1 1 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .f12-item { transition: none; }
+  .f12-radio { transition: none; }
+}
+
+/* 對話泡泡：姓名與時間各自成行，文字才不會被擠成怪樣 */
+.f12-chat .bubble { display: block; max-width: 86%; }
+.f12-chat .bubble-name { display: block; font-size: 11px; margin-bottom: 2px; opacity: .8; }
+.f12-chat .bubble-meta { display: block; font-size: 11px; margin-top: 4px; opacity: .7; }
+
+/* ========================================================================
+   導覽舞台（960 × 600）——只在 tour/f12-incidents.html 使用
+   ======================================================================== */
+.f12t-stage { padding: 26px 30px; font-size: 15px; color: var(--ink); }
+.f12t-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+
+.f12t-card {
+  background: var(--bg); border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m); padding: 18px 20px; box-shadow: var(--shadow-1);
+}
+.f12t-card h4 {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 15px; font-weight: 600; margin: 0 0 14px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line-soft);
+}
+.f12t-card h4 svg { width: 18px; height: 18px; color: var(--ink-3); }
+.f12t-hint { margin: 0; font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+
+.f12t-row { display: flex; justify-content: space-between; gap: 14px; padding: 7px 0; font-size: 14px; }
+.f12t-row + .f12t-row { border-top: 1px solid var(--line-soft); }
+.f12t-row > span:first-child { color: var(--ink-2); flex: none; }
+.f12t-row > span:last-child { text-align: right; font-weight: 600; }
+.f12t-num { font-variant-numeric: tabular-nums; font-size: 17px; }
+
+.f12t-phone {
+  border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  background: var(--line-bg, var(--bg-alt));
+}
+.f12t-phone-bar {
+  background: var(--bg-dark-2); color: var(--ink-on-dark);
+  font-size: 12px; padding: 9px 14px; text-align: center;
+}
+.f12t-phone-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; min-height: 150px; }
+.f12t-msg { max-width: 86%; padding: 9px 12px; border-radius: 14px; font-size: 14px; line-height: 1.5; }
+.f12t-msg--them { align-self: flex-start; background: var(--bg); border: 1px solid var(--line-soft); }
+.f12t-msg--me { align-self: flex-end; background: var(--line-green, #8de055); }
+.f12t-msg-who { display: block; font-size: 11px; color: var(--ink-3); margin-bottom: 2px; }
+.f12t-msg--me .f12t-msg-who { color: var(--ink-2); }
+
+.f12t-assignee { display: flex; align-items: center; gap: 12px; }
+.f12t-avatar {
+  width: 42px; height: 42px; border-radius: 50%; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent); font-weight: 600; font-size: 18px;
+}
+.f12t-assignee strong { display: block; font-size: 16px; }
+.f12t-assignee small { color: var(--ink-2); font-size: 13px; }
+.f12t-notify {
+  display: flex; align-items: center; gap: 8px; font-size: 14px;
+  padding: 9px 11px; border-radius: var(--radius-s); background: var(--ok-soft);
+}
+.f12t-notify + .f12t-notify { margin-top: 8px; }
+.f12t-notify svg { width: 16px; height: 16px; color: var(--ok); }
+
+.f12t-tl { list-style: none; margin: 0; padding: 0; }
+.f12t-tl li {
+  display: grid; grid-template-columns: 70px minmax(0, 1fr);
+  gap: 2px 12px; padding: 8px 0 8px 14px; position: relative; font-size: 13.5px;
+  border-left: 2px solid var(--line-soft);
+}
+.f12t-tl li::before {
+  content: ''; position: absolute; left: -5px; top: 13px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--line); border: 2px solid var(--bg);
+}
+.f12t-tl li.is-danger::before { background: var(--danger); }
+.f12t-tl li.is-accent::before { background: var(--accent); }
+.f12t-tl-time { color: var(--ink-3); font-variant-numeric: tabular-nums; font-size: 12px; }
+.f12t-tl-text { line-height: 1.5; }
+.f12t-tl-by { grid-column: 2; color: var(--ink-3); font-size: 12px; }
+
+.f12t-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.f12t-photos img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover;
+  border-radius: var(--radius-s); border: 1px solid var(--line-soft); background: var(--bg-alt);
+}
+.f12t-chatlog { display: flex; flex-direction: column; gap: 8px; }
+.f12t-chatline { font-size: 13.5px; line-height: 1.5; }
+.f12t-chatline b { display: block; font-size: 11.5px; color: var(--ink-3); font-weight: 500; }
+
+.f12t-result { text-align: center; padding: 40px 20px; }
+.f12t-result-icon svg { width: 56px; height: 56px; color: var(--ok); }
+.f12t-result h3 { font-size: 28px; font-weight: 600; margin: 16px 0 10px; }
+.f12t-result p { color: var(--ink-2); margin: 0 0 26px; font-size: 15px; }
+.f12t-result [data-count] { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+.f12t-result-stats { display: flex; justify-content: center; gap: 48px; }
+.f12t-result-stats strong { display: block; font-size: 34px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.f12t-result-stats span { font-size: 13px; color: var(--ink-3); }

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>押金管理｜租務中樞</title>
+  <meta name="description" content="每一戶押金一張卡：收了多少、扣了什麼、退了沒。退租超過 30 天還沒結算，系統會主動提醒。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f04.css">
+</head>
+<body class="app" data-feature="f04">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>押金管理</h1>
+      <p class="page-lead">每一戶押金一張卡：收了多少、扣了什麼、什麼時候退。退租超過 30 天還沒結算，系統會主動提醒。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f04-start">開始結算</button>
+      </div>
+    </header>
+
+    <section id="f04-alert" class="f04-block" aria-label="押金警示"></section>
+
+    <section class="f04-block" aria-label="押金總覽數字">
+      <div class="grid grid--4" id="f04-kpis"></div>
+    </section>
+
+    <section class="f04-block" aria-labelledby="f04-settle-title">
+      <div class="card" id="f04-settle"></div>
+    </section>
+
+    <section class="f04-block" aria-labelledby="f04-list-title">
+      <div class="card" id="f04-list"></div>
+    </section>
+
+    <section class="f04-block" aria-labelledby="f04-detail-title">
+      <div class="card" id="f04-detail"></div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f04.js"></script>
+</body>
+</html>

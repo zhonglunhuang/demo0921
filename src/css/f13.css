@@ -1,0 +1,179 @@
+/* f13.css — 證據留存（f13）專屬樣式
+ * 契約：docs/DESIGN.md §2 tokens、§3 元件 class、§6.1 檔案所有權。
+ * 規則：顏色一律用 main.css :root 的 token，不寫裸 hex；只有 app/f13-evidence.html
+ *      與 tour/f13-evidence.html 兩頁引用。
+ */
+
+/* ========================================================================
+   1. 操作頁：警示、篩選工具列
+   ======================================================================== */
+.f13-alerts { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.f13-alerts:empty { display: none; }
+.f13-alerts .alert .btn { flex: none; align-self: center; }
+
+.f13-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+  margin-top: 20px; padding: 14px 18px;
+  background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1);
+}
+.f13-toolbar .segmented { flex: 1 1 380px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.f13-toolbar .segmented::-webkit-scrollbar { display: none; }
+.f13-toolbar .segmented .tab { flex: 1 0 auto; padding: 0 10px; font-size: 14px; }
+.f13-field { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+.f13-field .select { height: 36px; font-size: 14px; }
+.f13-toolbar-note {
+  flex: 1 1 100%; display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13px; color: var(--ink-2); line-height: 1.5;
+}
+.f13-toolbar-note .icon { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--ink-3); }
+
+/* ========================================================================
+   2. 操作頁：通知紀錄 ＋ 往返明細兩欄
+   ======================================================================== */
+.f13-layout {
+  display: grid; grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 20px; align-items: start; margin-top: 20px;
+}
+.f13-list-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.f13-list-head .muted { font-size: 14px; }
+
+.f13-table tbody tr { cursor: pointer; }
+.f13-table tbody tr.is-active td { background: var(--accent-soft); }
+.f13-table tbody tr.is-new td { background: var(--ok-soft); }
+.f13-cell-sub { display: block; font-size: 13px; color: var(--ink-2); }
+.f13-time { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.f13-row-actions { display: flex; gap: 6px; justify-content: flex-end; }
+
+.f13-detail { position: sticky; top: calc(var(--topbar-h) + 16px); }
+.f13-detail .card-body { display: flex; flex-direction: column; gap: 14px; }
+.f13-detail-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.f13-detail-title h2 { font-size: 21px; font-weight: 600; }
+.f13-kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; font-size: 14px; }
+.f13-kv dt { color: var(--ink-2); }
+.f13-kv dd { min-width: 0; }
+.f13-quote {
+  padding: 12px 14px; border-radius: var(--radius-s); background: var(--bg-alt);
+  font-size: 14px; line-height: 1.6; border-left: 3px solid var(--line);
+}
+.f13-quote--reply { background: var(--ok-soft); border-left-color: var(--ok); color: var(--ok-ink); }
+.f13-quote-label { display: block; font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
+.f13-quote--reply .f13-quote-label { color: var(--ok-ink); opacity: .8; }
+.f13-detail .phone { margin: 0 auto; }
+.f13-detail .timeline { margin-top: 2px; }
+.f13-detail-foot { display: flex; flex-direction: column; gap: 8px; }
+.f13-detail-foot .btn { width: 100%; }
+
+/* ========================================================================
+   3. 操作頁：照片歸檔
+   ======================================================================== */
+.f13-photos-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.f13-photos-head .segmented { margin-left: auto; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.f13-photos-head .segmented::-webkit-scrollbar { display: none; }
+.f13-day + .f13-day { margin-top: 22px; }
+.f13-day-head {
+  display: flex; align-items: baseline; gap: 10px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); margin-bottom: 14px;
+}
+.f13-day-title { font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.f13-photo-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.f13-photo {
+  display: block; width: 100%; padding: 0; text-align: left; cursor: pointer;
+  background: var(--bg); border: 1px solid var(--line-soft); border-radius: var(--radius-m); overflow: hidden;
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.f13-photo:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
+.f13-photo img { display: block; width: 100%; height: auto; aspect-ratio: 32 / 22; object-fit: cover; background: var(--bg-alt); }
+.f13-photo-meta { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; }
+.f13-photo-unit { font-size: 15px; font-weight: 600; }
+.f13-photo-note { font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+.f13-lightbox img { display: block; width: 100%; border-radius: var(--radius-s); border: 1px solid var(--line-soft); }
+.f13-lightbox-meta { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+
+.f13-pack { display: flex; flex-direction: column; gap: 10px; }
+.f13-pack-item { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.f13-pack-item .icon { width: 18px; height: 18px; flex: none; color: var(--ink-3); }
+.f13-pack-item .muted { margin-left: auto; font-size: 13px; }
+
+/* ========================================================================
+   4. 導覽頁：960 × 600 舞台內的迷你系統畫面
+   ======================================================================== */
+.f13s { display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.f13s-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.f13s-top h3 { font-size: 20px; font-weight: 600; }
+.f13s-top .f13s-meta { margin-left: auto; font-size: 13px; color: var(--ink-2); }
+.f13s-grid { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 16px; align-items: start; }
+.f13s-grid--wide { grid-template-columns: minmax(0, 1fr); }
+.f13s-card { background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1); padding: 16px 18px; }
+.f13s-card + .f13s-card { margin-top: 12px; }
+.f13s-card h4 { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+.f13s-card h4 .icon { width: 18px; height: 18px; color: var(--ink-2); }
+.f13s-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.f13s-row + .f13s-row { margin-top: 8px; }
+.f13s-row .f13s-label { color: var(--ink-2); }
+.f13s-row .f13s-value { margin-left: auto; font-variant-numeric: tabular-nums; }
+.f13s-num { font-size: 34px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.f13s-num--danger { color: var(--danger-ink); }
+.f13s-num--ok { color: var(--ok-ink); }
+.f13s-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.f13s-kpi { background: var(--bg); border-radius: var(--radius-s); padding: 10px 12px; box-shadow: var(--shadow-1); }
+.f13s-kpi-label { font-size: 12px; color: var(--ink-2); }
+.f13s-kpi-value { font-size: 24px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.f13s-alert { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius-s); font-size: 14px; }
+.f13s-alert .icon { width: 18px; height: 18px; flex: none; }
+.f13s-alert--danger { background: var(--danger-soft); color: var(--danger-ink); }
+.f13s-alert--warn { background: var(--warn-soft); color: var(--warn-ink); }
+.f13s-alert--ok { background: var(--ok-soft); color: var(--ok-ink); }
+.f13s-draft { border: 1px solid var(--accent); background: var(--accent-soft); border-radius: var(--radius-s); padding: 12px 14px; font-size: 13px; }
+.f13s-draft-body { min-height: 60px; font-size: 14px; line-height: 1.6; color: var(--ink); }
+.f13s-btn { display: inline-flex; align-items: center; justify-content: center; height: 34px; padding: 0 16px; border-radius: var(--radius-pill); background: var(--accent); color: var(--bg); font-size: 14px; font-weight: 500; }
+.f13s-btn--ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.f13s-actions { display: flex; gap: 8px; margin-top: 10px; }
+.f13s-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.f13s-table th { text-align: left; font-size: 12px; font-weight: 500; color: var(--ink-2); padding: 0 8px 8px; border-bottom: 1px solid var(--line-soft); }
+.f13s-table td { padding: 9px 8px; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+.f13s-table tr:last-child td { border-bottom: 0; }
+.f13s-table .f13s-t { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink-2); }
+.f13s-photos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.f13s-photo { border-radius: 10px; overflow: hidden; border: 1px solid var(--line-soft); background: var(--bg); }
+.f13s-photo img { display: block; width: 100%; aspect-ratio: 32 / 22; object-fit: cover; }
+.f13s-photo figcaption { padding: 6px 8px; font-size: 11px; color: var(--ink-2); }
+.f13s-pack { display: flex; flex-direction: column; gap: 6px; }
+.f13s-pack-item { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 5px 2px; }
+.f13s-pack-item .f13s-box {
+  flex: none; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line);
+  display: inline-flex; align-items: center; justify-content: center; color: var(--bg);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.f13s-pack-item .f13s-box .icon { width: 12px; height: 12px; stroke-width: 3; opacity: 0; transition: opacity var(--dur) var(--ease); }
+.f13s-pack-item.is-done .f13s-box { background: var(--ok); border-color: var(--ok); }
+.f13s-pack-item.is-done .f13s-box .icon { opacity: 1; }
+.f13s-pack-item .muted { margin-left: auto; }
+.f13s .phone { margin: 0; }
+
+/* ========================================================================
+   5. 響應
+   ======================================================================== */
+@media (max-width: 1024px) {
+  .f13-layout { grid-template-columns: minmax(0, 1fr); }
+  .f13-detail { position: static; }
+  .f13-photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .f13-toolbar { padding: 12px 14px; }
+  .f13-toolbar .segmented { flex-basis: 100%; }
+  .f13-field { flex: 1 1 100%; }
+  .f13-field .select { flex: 1 1 auto; width: 100%; }
+  .f13-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .f13-row-actions { justify-content: flex-end; flex-wrap: wrap; }
+  .f13-photos-head .segmented { margin-left: 0; width: 100%; }
+  .f13-photos-head .segmented .tab { flex: 1 1 auto; }
+}
+@media (max-width: 480px) {
+  .f13-photo-grid { grid-template-columns: minmax(0, 1fr); }
+  .f13-day-head { flex-wrap: wrap; gap: 4px 10px; }
+  .f13-toolbar .segmented .tab { padding: 0 8px; font-size: 13px; }
+  .f13-detail-foot .btn { font-size: 15px; }
+  /* 警示裡的按鈕換到下一行，標題才不會被擠成細長條 */
+  .f13-alerts .alert-body { flex: 1 1 100%; }
+  .f13-alerts .alert .btn { align-self: flex-start; margin-left: 32px; }
+}

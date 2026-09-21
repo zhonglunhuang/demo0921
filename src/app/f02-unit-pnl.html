@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>每間房真正損益｜租務中樞</title>
+  <meta name="description" content="每間房扣掉付屋主租金、水電差額、網路、管理費、修繕、家具折舊、空置成本之後的本月淨利與年化報酬。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f02.css">
+</head>
+<body class="app" data-feature="f02">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>每間房真正損益</h1>
+      <p class="page-lead">收到的租金不等於賺到的錢。系統把每一間房的租金收入，扣掉付屋主租金、水電差額、網路、管理費、修繕、家具折舊與空置成本，算出本月真正留下多少。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f02-start-review">檢討虧損物件</button>
+      </div>
+    </header>
+
+    <div id="f02-banner" class="mb-24"></div>
+
+    <section class="mb-24" aria-label="篩選條件">
+      <div class="toolbar f02-toolbar" id="f02-toolbar"></div>
+    </section>
+
+    <section class="mb-24" aria-labelledby="f02-sum-title">
+      <h2 class="sr-only" id="f02-sum-title">本月彙總</h2>
+      <div class="grid grid--4 mb-16" id="f02-kpis"></div>
+      <div class="card card--static" id="f02-say"></div>
+    </section>
+
+    <section class="grid grid--2 mb-24" aria-label="損益排行">
+      <article class="card card--static" id="f02-rank-top"></article>
+      <article class="card card--static" id="f02-rank-thin"></article>
+    </section>
+
+    <section class="card card--static mb-24" id="f02-detail" aria-live="polite"></section>
+
+    <section aria-labelledby="f02-table-title">
+      <div class="row row--between mb-16">
+        <h2 class="section-title" id="f02-table-title">每間房損益明細</h2>
+        <p class="small muted" id="f02-table-count"></p>
+      </div>
+      <div id="f02-table"></div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f02.js"></script>
+</body>
+</html>

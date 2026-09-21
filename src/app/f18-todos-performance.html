@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>待辦與員工績效｜租務中樞</title>
+  <meta name="description" content="每件事都有負責人和期限，逾期會亮紅字。不是用來盯人，是避免事情只留在群組裡最後沒人負責。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f18.css">
+</head>
+<body class="app" data-feature="f18">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>待辦與員工績效</h1>
+      <p class="page-lead">每件事都有負責人和期限。逾期的亮紅字，誰手上壓了幾件一眼看得出來——目的不是盯人，是避免事情只留在 LINE 群組裡，最後沒有人負責。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--secondary" id="f18-remind">提醒逾期負責人</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f18-kpis" aria-label="待辦概況"></section>
+
+    <div id="f18-alert" class="f18-alert-wrap"></div>
+
+    <section class="card card--flush card--static" aria-labelledby="f18-board-title">
+      <div class="card-head f18-board-head">
+        <h2 class="card-title" id="f18-board-title">待辦清單</h2>
+        <span class="muted small" id="f18-count"></span>
+      </div>
+      <div class="f18-filters">
+        <div class="segmented" role="tablist" aria-label="依負責人篩選" id="f18-staff-tabs"></div>
+        <div class="f18-filters-right">
+          <label class="f18-select"><span class="sr-only">依狀態篩選</span><select class="select" id="f18-status"></select></label>
+          <label class="f18-check"><input type="checkbox" id="f18-overdue-only"><span>只看逾期</span></label>
+        </div>
+      </div>
+      <div id="f18-list"></div>
+    </section>
+
+    <div class="grid grid--2 f18-perf-grid">
+      <section class="card card--static" aria-labelledby="f18-load-title">
+        <div class="card-head">
+          <h2 class="card-title" id="f18-load-title">每個人手上壓了幾件</h2>
+          <span class="muted small">紅色是逾期</span>
+        </div>
+        <div class="card-body" id="f18-load"></div>
+      </section>
+      <section class="card card--static" aria-labelledby="f18-done-title">
+        <div class="card-head">
+          <h2 class="card-title" id="f18-done-title">本月完成了什麼</h2>
+          <span class="muted small" id="f18-month"></span>
+        </div>
+        <div class="card-body" id="f18-done"></div>
+      </section>
+    </div>
+
+    <section class="card card--static" aria-labelledby="f18-note-title">
+      <div class="card-head"><h2 class="card-title" id="f18-note-title">這張表不是拿來考績的</h2></div>
+      <div class="card-body">
+        <p class="muted f18-note">
+          數字只回答兩個問題：這件事現在在誰手上、有沒有卡住。事情做完沒人記得、做不完沒人知道，才是 100 間以上最大的風險。
+          真的要看誰做得好，看的是逾期件數與平均處理天數，不是完成數量——負責難案子的人，數量本來就比較少。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f18.js"></script>
+</body>
+</html>

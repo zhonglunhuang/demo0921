@@ -1,0 +1,218 @@
+/* f15.css — AI 工作中心（f15）專屬樣式
+ * 契約：docs/DESIGN.md §2（tokens、字級、響應）§6.1（只有 f15 引用）
+ * 規則：只用 :root token，不出現裸 hex；不覆寫共用元件的既有行為。 */
+
+/* ========================================================================
+   1. 首屏：今天需要人工處理 N 件
+   ======================================================================== */
+.f15-hero { padding: 32px 36px; margin-bottom: 20px; }
+.f15-hero .eyebrow { color: var(--ink-2-on-dark); }
+.f15-hero-line {
+  margin-top: 10px;
+  font-size: 40px; font-weight: 600; line-height: 1.12; letter-spacing: -.012em;
+}
+.f15-hero-num {
+  display: inline-block; min-width: 1.1em; text-align: center;
+  font-size: 64px; line-height: 1; letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  vertical-align: -6px; margin: 0 6px;
+}
+.f15-hero-sub { margin-top: 10px; font-size: 17px; color: var(--ink-2-on-dark); max-width: 56ch; }
+.f15-hero-progress { margin-top: 24px; max-width: 480px; }
+.f15-hero-progress .progress { background: rgba(255, 255, 255, .16); }
+.f15-hero-progress .progress-label { color: var(--ink-2-on-dark); font-size: 14px; }
+.f15-hero .stat-row { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, .14); }
+.f15-hero .stat-row .stat-label { color: var(--ink-2-on-dark); }
+.f15-hero .stat-row .stat-value { color: var(--ink-on-dark); }
+.f15-hero .stat-row .stat-value small { color: var(--ink-2-on-dark); }
+
+.f15-hero-clear { display: flex; align-items: center; gap: 16px; }
+.f15-hero-clear .icon { width: 44px; height: 44px; flex: none; color: var(--ok); }
+.f15-hero.is-clear .f15-hero-line { font-size: 32px; }
+
+/* ========================================================================
+   2. 工具列與篩選
+   ======================================================================== */
+.f15-toolbar { margin: 24px 0 16px; }
+.f15-toolbar .segmented { overflow-x: auto; scrollbar-width: none; }
+.f15-toolbar .segmented::-webkit-scrollbar { display: none; }
+.f15-toolbar .search { flex: 1 1 200px; max-width: 280px; }
+.f15-toolbar .select { width: auto; min-width: 132px; }
+.f15-filter-note { font-size: 14px; color: var(--ink-2); margin-bottom: 14px; }
+
+/* ========================================================================
+   3. 待處理卡片
+   ======================================================================== */
+.f15-card { display: flex; flex-direction: column; gap: 12px; }
+.f15-card .card-head { margin-bottom: 0; align-items: center; }
+.f15-card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.f15-card-title { font-size: 19px; font-weight: 600; line-height: 1.25; }
+.f15-card-unit {
+  font-size: 14px; font-weight: 600; color: var(--accent);
+  font-variant-numeric: tabular-nums; letter-spacing: .01em;
+}
+.f15-card-desc { font-size: 15px; color: var(--ink-2); }
+.f15-card .card-foot { margin-top: auto; }
+.f15-card-done-at { font-size: 13px; color: var(--ok-ink); display: inline-flex; align-items: center; gap: 4px; }
+.f15-card-done-at .icon { width: 14px; height: 14px; }
+
+.f15-card.is-done { box-shadow: none; border: 1px solid var(--line-soft); background: var(--row-alt); }
+.f15-card.is-done:hover { transform: none; box-shadow: none; }
+.f15-card.is-done .f15-card-title { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--line); }
+.f15-card.is-done .icon-circle { background: var(--ok-soft); color: var(--ok-ink); }
+
+.f15-card.is-focus { box-shadow: 0 0 0 2px var(--accent), var(--shadow-2); }
+
+/* ========================================================================
+   4. 96 間一切正常（預設收合）
+   ======================================================================== */
+.f15-normal { margin-top: 24px; padding: 0; }
+.f15-normal-toggle {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 20px 24px; text-align: left; border-radius: var(--radius-l);
+}
+.f15-normal-toggle .icon-circle { flex: none; }
+.f15-normal-toggle .f15-normal-text { display: block; flex: 1; min-width: 0; }
+.f15-normal-title { display: block; font-size: 17px; font-weight: 600; }
+.f15-normal-sub { display: block; font-size: 14px; color: var(--ink-2); margin-top: 2px; }
+.f15-normal-chev { color: var(--ink-3); transition: transform var(--dur) var(--ease); flex: none; }
+.f15-normal-toggle[aria-expanded="true"] .f15-normal-chev { transform: rotate(180deg); }
+.f15-normal-body { padding: 0 24px 24px; }
+.f15-normal-scroll { max-height: 420px; overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-s); }
+.f15-normal-scroll .table-wrap { border-radius: var(--radius-s); }
+.f15-normal-foot { font-size: 13px; color: var(--ink-3); margin-top: 10px; }
+
+/* ========================================================================
+   5. 處理對話框內容
+   ======================================================================== */
+.f15-modal-kv { margin-bottom: 4px; }
+.f15-modal-suggest {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 14px 16px; border-radius: var(--radius-m); background: var(--accent-soft); font-size: 15px;
+}
+.f15-modal-suggest .icon { width: 20px; height: 20px; flex: none; color: var(--accent); margin-top: 2px; }
+.f15-modal-suggest strong { display: block; margin-bottom: 2px; }
+.f15-modal-link { margin-top: 4px; }
+
+/* ========================================================================
+   6. 響應（斷點 1024 / 768 / 480；375px 不得橫向捲動）
+   ======================================================================== */
+@media (max-width: 768px) {
+  .f15-hero { padding: 24px 20px; }
+  .f15-hero-line { font-size: 28px; }
+  .f15-hero-num { font-size: 44px; vertical-align: -4px; }
+  .f15-hero-sub { font-size: 15px; }
+  .f15-hero.is-clear .f15-hero-line { font-size: 24px; }
+  .f15-hero-clear .icon { width: 36px; height: 36px; }
+  .f15-toolbar .search { max-width: none; }
+  .f15-toolbar .select { flex: 1 1 auto; width: 100%; }
+  .f15-normal-toggle { padding: 18px 20px; }
+  .f15-normal-body { padding: 0 20px 20px; }
+  .f15-normal-scroll { max-height: 360px; }
+}
+
+@media (max-width: 480px) {
+  /* 四個篩選鈕改成兩排，不必橫向捲才看得到「已處理」 */
+  .f15-toolbar .segmented { display: flex; flex-wrap: wrap; width: 100%; overflow: visible; border-radius: var(--radius-m); }
+  .f15-toolbar .segmented .tab { flex: 1 1 45%; }
+  .f15-hero-line { font-size: 24px; }
+  .f15-hero-num { font-size: 38px; }
+  .f15-card-title { font-size: 17px; }
+  .f15-card .card-foot .btn { flex: 1 1 auto; }
+}
+
+/* ========================================================================
+   7. 功能導覽畫面（只出現在 .stage-screen 內，960×600 固定寬度，不隨頁面縮放）
+   ======================================================================== */
+.s15 { display: flex; flex-direction: column; gap: 14px; height: 100%; min-height: 0; }
+.s15-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--ink-3); }
+.s15-top strong { font-size: 14px; font-weight: 600; color: var(--ink); }
+.s15-top-role { display: inline-flex; align-items: center; gap: 6px; }
+.s15-top-role .icon { width: 15px; height: 15px; }
+
+/* 首屏：大數字 */
+.s15-hero { background: var(--bg-dark-2); color: var(--ink-on-dark); border-radius: var(--radius-m); padding: 22px 26px; }
+.s15-eyebrow { font-size: 12px; letter-spacing: .05em; color: var(--ink-2-on-dark); }
+.s15-line { font-size: 30px; font-weight: 600; line-height: 1.15; margin-top: 6px; letter-spacing: -.01em; }
+.s15-num {
+  display: inline-block; min-width: .95em; margin: 0 4px; text-align: center;
+  font-size: 52px; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; vertical-align: -5px;
+}
+.s15-sub { font-size: 14px; color: var(--ink-2-on-dark); margin-top: 8px; min-height: 1.4em; }
+.s15-hero--tall { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.s15-hero--tall .s15-line { font-size: 36px; }
+.s15-hero--tall .s15-num { font-size: 64px; vertical-align: -7px; }
+.s15-hero--tall .s15-sub { font-size: 16px; }
+
+.s15-normal-row { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1); }
+.s15-normal-t { display: block; font-size: 15px; font-weight: 600; }
+.s15-normal-s { display: block; margin-top: 2px; font-size: 12px; color: var(--ink-2); }
+.s15-normal-chev { margin-left: auto; color: var(--ink-3); }
+
+/* 首屏：處理中的窄版狀態列 */
+.s15-bar { display: flex; align-items: center; gap: 20px; background: var(--bg-dark-2); color: var(--ink-on-dark); border-radius: var(--radius-m); padding: 14px 20px; }
+.s15-bar .s15-line { font-size: 19px; margin: 0; }
+.s15-bar .s15-num { font-size: 32px; vertical-align: -3px; }
+.s15-bar-right { margin-left: auto; text-align: right; font-size: 12px; color: var(--ink-2-on-dark); }
+.s15-bar-track { width: 200px; height: 6px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, .18); margin-top: 6px; overflow: hidden; }
+.s15-bar-fill { height: 100%; border-radius: var(--radius-pill); background: var(--ok); transition: width var(--dur-slow) var(--ease); }
+
+/* 七張卡 */
+.s15-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.s15-card { display: flex; gap: 10px; align-items: flex-start; padding: 13px 14px; min-height: 82px; background: var(--bg); border-radius: var(--radius-s); box-shadow: var(--shadow-1); }
+.s15-card-b { min-width: 0; flex: 1; }
+.s15-card-u { font-size: 12px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+.s15-card-t { display: block; margin-top: 2px; font-size: 15px; font-weight: 600; line-height: 1.25; }
+.s15-card-d { margin-top: 4px; font-size: 12px; color: var(--ink-2); }
+.s15-card.is-done { background: var(--row-alt); box-shadow: none; border: 1px solid var(--line-soft); }
+.s15-card.is-done .s15-card-t { color: var(--ink-3); text-decoration: line-through; }
+
+.s15-ic { width: 32px; height: 32px; flex: none; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--accent-soft); color: var(--accent); }
+.s15-ic .icon { width: 18px; height: 18px; }
+.s15-ic--danger { background: var(--danger-soft); color: var(--danger-ink); }
+.s15-ic--warn { background: var(--warn-soft); color: var(--warn-ink); }
+.s15-ic--ok { background: var(--ok-soft); color: var(--ok-ink); }
+
+/* 左清單＋右面板 */
+.s15-split { display: grid; grid-template-columns: 318px 1fr; gap: 14px; flex: 1; min-height: 0; }
+.s15-list { display: flex; flex-direction: column; gap: 7px; }
+.s15-row { display: flex; align-items: center; gap: 9px; padding: 9px 12px; font-size: 13px; background: var(--bg); border-radius: var(--radius-s); box-shadow: var(--shadow-1); }
+.s15-row-u { flex: none; width: 32px; font-size: 12px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+.s15-row-t { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.s15-row.is-active { box-shadow: 0 0 0 2px var(--accent); }
+.s15-row.is-done { background: var(--row-alt); box-shadow: none; }
+.s15-row.is-done .s15-row-t { color: var(--ink-3); text-decoration: line-through; }
+.s15-row-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--warn); }
+.s15-row-dot--danger { background: var(--danger); }
+.s15-row-dot--ok { background: var(--ok); }
+
+.s15-panel { display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; overflow: hidden; background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1); }
+.s15-panel-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.s15-panel-t { font-size: 18px; font-weight: 600; line-height: 1.2; }
+.s15-kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: 13px; }
+.s15-kv dt { color: var(--ink-2); }
+.s15-kv dd { margin: 0; }
+.s15-note { display: flex; gap: 8px; padding: 12px 14px; font-size: 13px; background: var(--accent-soft); border-radius: var(--radius-s); }
+.s15-note .icon { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--accent); }
+.s15-note strong { display: block; margin-bottom: 2px; }
+.s15-steps { display: flex; flex-direction: column; gap: 7px; font-size: 13px; }
+.s15-step { display: flex; align-items: center; gap: 8px; padding: 9px 11px; background: var(--bg-alt); border-radius: var(--radius-s); }
+.s15-step.is-done { background: var(--ok-soft); color: var(--ok-ink); }
+.s15-step-at { margin-left: auto; font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.s15-step.is-done .s15-step-at { color: var(--ok-ink); }
+.s15-msg { padding: 12px 14px; min-height: 84px; font-size: 13px; line-height: 1.5; background: var(--bg-alt); border-radius: var(--radius-s); }
+.s15-msg-h { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; font-size: 12px; color: var(--ink-2); }
+.s15-msg-h .icon { width: 14px; height: 14px; }
+.s15-act { display: flex; align-items: center; gap: 8px; margin-top: auto; }
+
+/* 收尾畫面 */
+.s15-clear { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 28px; text-align: center; background: var(--bg); border-radius: var(--radius-m); box-shadow: var(--shadow-1); }
+.s15-clear .s15-ic { width: 64px; height: 64px; }
+.s15-clear .s15-ic .icon { width: 34px; height: 34px; }
+.s15-clear-t { font-size: 26px; font-weight: 600; letter-spacing: -.01em; }
+.s15-clear-s { font-size: 15px; color: var(--ink-2); max-width: 52ch; }
+.s15-clear-stats { display: flex; gap: 40px; margin-top: 12px; }
+.s15-clear-stat { text-align: center; }
+.s15-clear-stat b { display: block; font-size: 32px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.s15-clear-stat span { font-size: 13px; color: var(--ink-2); }
+.s15-clear-stat--ok b { color: var(--ok-ink); }

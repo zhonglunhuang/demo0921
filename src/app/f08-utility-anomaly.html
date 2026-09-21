@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>水電異常偵測｜租務中樞</title>
+  <meta name="description" content="每月抄表自動和這間房的過往平均比對：用量超過兩倍就警示疑似漏水，空房還在用電也會被抓出來，一鍵派工檢查。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f08.css">
+</head>
+<body class="app" data-feature="f08">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>水電異常偵測</h1>
+      <p class="page-lead">每個月的水電讀數一進系統，就和這間房過去 12 個月的平均比對。用量超過兩倍、或空房還在用電，系統當場跳警示，一鍵派工檢查。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--secondary" id="f08-rules">查看偵測規則</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f08-kpis" aria-label="本月水電異常概況"></section>
+
+    <div id="f08-alerts" class="f08-alerts"></div>
+
+    <section class="card card--flush card--static f08-list" aria-labelledby="f08-list-title">
+      <div class="card-head f08-list-head">
+        <div>
+          <h2 class="card-title" id="f08-list-title">本月異常一覽</h2>
+          <p class="card-sub">2026 年 9 月抄表，103 間全部比對過。點一列看這間房的用量趨勢。</p>
+        </div>
+      </div>
+      <div class="f08-filters">
+        <div id="f08-kind-tabs"></div>
+        <label>
+          <span class="sr-only">篩選區域</span>
+          <select class="select" id="f08-region"></select>
+        </label>
+        <p class="f08-filter-count" id="f08-count"></p>
+      </div>
+      <div class="f08-table" id="f08-table"></div>
+    </section>
+
+    <section class="f08-detail" id="f08-detail" aria-live="polite"></section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f08.js"></script>
+</body>
+</html>

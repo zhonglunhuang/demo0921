@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><title>f08 probe</title>
+<link rel="stylesheet" href="src/css/main.css"><link rel="stylesheet" href="src/css/f08.css"></head>
+<body class="app" data-feature="f08">
+
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>水電異常偵測</h1>
+      <p class="page-lead">每個月的水電讀數一進系統，就和這間房過去 12 個月的平均比對。用量超過兩倍、或空房還在用電，系統當場跳警示，一鍵派工檢查。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--secondary" id="f08-rules">查看偵測規則</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f08-kpis" aria-label="本月水電異常概況"></section>
+
+    <div id="f08-alerts" class="f08-alerts"></div>
+
+    <section class="card card--flush card--static f08-list" aria-labelledby="f08-list-title">
+      <div class="card-head f08-list-head">
+        <div>
+          <h2 class="card-title" id="f08-list-title">本月異常一覽</h2>
+          <p class="card-sub">2026 年 9 月抄表，103 間全部比對過。點一列看這間房的用量趨勢。</p>
+        </div>
+      </div>
+      <div class="f08-filters">
+        <div id="f08-kind-tabs"></div>
+        <label>
+          <span class="sr-only">篩選區域</span>
+          <select class="select" id="f08-region"></select>
+        </label>
+        <p class="f08-filter-count" id="f08-count"></p>
+      </div>
+      <div class="f08-table" id="f08-table"></div>
+    </section>
+
+    <section class="f08-detail" id="f08-detail" aria-live="polite"></section>
+  </main>
+
+  <script src="src/js/data.js"></script>
+  <script src="src/js/icons.js"></script>
+  <script src="src/js/common.js"></script>
+  <script src="src/js/app/f08.js"></script>
+
+<script>
+function L(){ console.log('[probe] ' + Array.prototype.join.call(arguments, ' ')); }
+function q(s){ return document.querySelector(s); }
+function txt(s){ var n = q(s); return n ? n.textContent.replace(/\s+/g,' ').trim() : '(null)'; }
+function btnByText(t, root){ var list=(root||document).querySelectorAll('button, .btn'); for(var i=0;i<list.length;i++){ if(list[i].textContent.indexOf(t)>=0) return list[i]; } return null; }
+function rowBtn(unit){ return document.querySelector('[data-act="dispatch"][data-unit="'+unit+'"]'); }
+function kpis(){ return Array.prototype.map.call(document.querySelectorAll('#f08-kpis .kpi'), function(k){ return k.querySelector('.kpi-label').textContent.trim()+'='+k.querySelector('.kpi-value').textContent.trim(); }).join(' | '); }
+var steps = [
+ function(){ App.setRole('accountant'); },
+ function(){ var s=q('#f08-unit'); s.value='B04'; s.dispatchEvent(new Event('change',{bubbles:true})); },
+ function(){ L('accountant B04 sub', txt('.f08-detail-sub')); L('accountant actions', txt('.f08-actions')); },
+ function(){ App.setRole('boss'); q('#f08-rules').click(); },
+ function(){ L('rules modal', txt('.modal-title')); L('rules body', txt('.modal-body')); btnByText('知道了', q('.modal-actions')).click(); },
+ function(){ var r=document.querySelector('tr[data-act="select"][data-unit="D15"]'); r.click(); },
+ function(){ L('after row click', txt('.f08-detail-title'), '|', txt('.f08-actions-hint')); L('selected rows', document.querySelectorAll('tr.is-selected').length); },
+ function(){ var th=document.querySelectorAll('#f08-table th[data-sort]')[2]; if(th) th.click(); L('sorted ok', document.querySelectorAll('#f08-table tbody tr').length); L('DONE'); }
+];
+var i = 0;
+function run(){ if(i>=steps.length) return; try { steps[i](); } catch(e){ L('ERROR at step', i, e.message); } i++; setTimeout(run, 260); }
+window.addEventListener('load', function(){ setTimeout(run, 400); });
+</script>
+</body></html>

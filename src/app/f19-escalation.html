@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>通知升級機制｜租務中樞</title>
+  <meta name="description" content="租客沒回、租金沒收到、整備卡住，系統先自己追；逾時才照規則一層一層往上找人，每一層都留紀錄。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f19.css">
+</head>
+<body class="app" data-feature="f19">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>通知升級機制</h1>
+      <p class="page-lead">租客沒回、租金沒收到、整備卡住，第一層先讓 AI 自己追。逾時才照規則往上通知管理員，還是沒人動才驚動老闆——每一層在第幾分鐘做了什麼，都看得到。</p>
+      <div class="page-actions">
+        <a class="btn btn--secondary" href="#f19-rules">檢視升級規則</a>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f19-kpis" aria-label="升級概況"></section>
+
+    <div id="f19-alert" class="f19-alert-wrap"></div>
+
+    <div class="f19-layout">
+      <section class="card card--flush card--static f19-list-card" aria-labelledby="f19-list-title">
+        <div class="card-head f19-list-head">
+          <h2 class="card-title" id="f19-list-title">升級案件</h2>
+          <span class="muted small" id="f19-count"></span>
+        </div>
+        <div class="f19-filters">
+          <div class="segmented segmented--block" role="tablist" aria-label="依狀態篩選" id="f19-status-tabs"></div>
+          <label class="f19-select">
+            <span class="sr-only">依事件類型篩選</span>
+            <select class="select" id="f19-event"></select>
+          </label>
+        </div>
+        <div class="f19-cases" id="f19-cases"></div>
+      </section>
+
+      <section class="f19-detail" id="f19-detail" aria-live="polite" aria-label="案件升級詳情"></section>
+    </div>
+
+    <section class="card card--static f19-rules-card" id="f19-rules" aria-labelledby="f19-rules-title">
+      <div class="card-head">
+        <h2 class="card-title" id="f19-rules-title">升級規則</h2>
+        <span class="muted small">設定一次，之後所有同類事件都照這張表跑</span>
+      </div>
+      <div id="f19-rules-table"></div>
+      <p class="f19-rules-note muted small">任何一層逾時仍然沒人處理，系統一律再往上通知老闆。停用某條規則後，這類事件只會留在案件清單，不再往上通知。</p>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f19.js"></script>
+</body>
+</html>

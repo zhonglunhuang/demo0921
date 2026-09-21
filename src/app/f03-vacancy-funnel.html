@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>空房招租漏斗｜租務中樞</title>
+  <meta name="description" content="從租客通知不續租到新房客入住，七個階段的空房進度一次看完，卡住的房間自動提醒。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f03.css">
+</head>
+<body class="app" data-feature="f03">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>空房招租漏斗</h1>
+      <p class="page-lead">從租客通知不續租，到新房客入住，每一間房走到哪一步、卡在哪裡，一眼看完。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f03-notice-btn">接收不續租通知</button>
+      </div>
+    </header>
+
+    <div id="f03-role-note"></div>
+
+    <section class="grid grid--4 reveal" id="f03-kpis" aria-label="空房概況"></section>
+
+    <div class="mt-24" id="f03-alert"></div>
+
+    <section class="grid grid--2 mt-24 reveal f03-two" aria-label="空置天數與自動待辦">
+      <article class="card card--static">
+        <div class="card-head">
+          <h2 class="card-title">各區平均空置天數</h2>
+          <span class="badge badge--neutral" id="f03-vacancy-scope">全部 103 間</span>
+        </div>
+        <div class="card-body">
+          <div id="f03-vacancy-chart" style="min-height:150px"></div>
+          <p class="small muted" id="f03-vacancy-note"></p>
+        </div>
+      </article>
+      <article class="card card--static">
+        <div class="card-head">
+          <h2 class="card-title">不續租後自動產生的待辦</h2>
+          <span class="badge badge--accent" id="f03-task-count">0 件</span>
+        </div>
+        <div class="card-body" id="f03-tasks"></div>
+      </article>
+    </section>
+
+    <section class="mt-32" aria-labelledby="f03-board-title">
+      <div class="row row--between mb-16">
+        <h2 class="section-title" id="f03-board-title">招租看板</h2>
+        <span class="small muted" id="f03-board-count"></span>
+      </div>
+      <div class="toolbar" id="f03-board-toolbar"></div>
+      <div id="f03-board"></div>
+    </section>
+
+    <section class="mt-32 reveal" aria-labelledby="f03-listing-title">
+      <div class="row row--between mb-16">
+        <h2 class="section-title" id="f03-listing-title">招租頁</h2>
+        <div class="row" id="f03-listing-picker"></div>
+      </div>
+      <div id="f03-listing"></div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f03.js"></script>
+</body>
+</html>

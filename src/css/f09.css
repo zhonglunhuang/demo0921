@@ -1,0 +1,231 @@
+/* f09.css — 鑰匙與門禁管理（f09）專屬樣式
+ * 契約：docs/DESIGN.md §2 tokens、§3 元件 class、§6.1 檔案所有權。
+ * 規則：顏色一律用 main.css :root 的 token，不寫裸 hex；只有 app/f09-keys-access.html
+ *      與 tour/f09-keys-access.html 兩頁引用。
+ */
+
+/* ========================================================================
+   1. 操作頁：警示、兩欄版面
+   ======================================================================== */
+.f09-alerts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0 0; }
+.f09-alerts:empty { display: none; }
+
+.f09-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+.f09-list-card { position: sticky; top: calc(var(--topbar-h) + 16px); padding-bottom: 8px; }
+.f09-list-head { padding: 20px 20px 0; margin-bottom: 12px; }
+.f09-filters { display: flex; flex-direction: column; gap: 10px; padding: 0 20px 14px; }
+.f09-filters .segmented { width: 100%; overflow-x: auto; scrollbar-width: none; }
+.f09-filters .segmented::-webkit-scrollbar { display: none; }
+.f09-filters .segmented .tab { flex: 1 0 auto; padding: 0 5px; font-size: 12px; white-space: nowrap; }
+.f09-region { display: block; }
+.f09-region .select { width: 100%; height: 36px; font-size: 14px; }
+
+.f09-rooms { max-height: min(76vh, 700px); overflow-y: auto; padding: 0 12px 12px; }
+.f09-rooms .empty-state { margin: 8px 8px 16px; }
+.f09-count { padding: 0 14px 6px; }
+
+.f09-room {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-s);
+  border: 1px solid transparent;
+  text-align: left;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.f09-room + .f09-room { margin-top: 4px; }
+.f09-room:hover { background: var(--row-hover); }
+.f09-room.is-active { background: var(--accent-soft); border-color: var(--accent); }
+.f09-room-id { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.f09-room-sub { grid-column: 1; font-size: 13px; color: var(--ink-2); }
+.f09-room-right { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.f09-room-count { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+/* ========================================================================
+   2. 操作頁：右欄詳情
+   ======================================================================== */
+.f09-detail { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.f09-detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.f09-detail-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.f09-detail-title h2 { font-size: 28px; letter-spacing: -.01em; }
+.f09-detail-sub { font-size: 14px; color: var(--ink-2); margin-top: 4px; display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.f09-detail-sub span { white-space: nowrap; }
+
+.f09-hold .table td.num, .f09-hold .table th.num { font-variant-numeric: tabular-nums; }
+.f09-hold .table tr.is-short td { background: var(--danger-soft); }
+.f09-item-name { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.f09-item-name .icon { color: var(--ink-2); }
+.f09-item-note { display: block; font-size: 13px; color: var(--ink-2); font-weight: 400; margin-top: 2px; }
+.f09-row-actions { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+
+.f09-handover-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.f09-handover-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.f09-handover-foot .muted { font-size: 14px; }
+
+.f09-money { font-variant-numeric: tabular-nums; }
+.f09-deduct { display: flex; flex-direction: column; gap: 8px; }
+.f09-deduct-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); }
+.f09-deduct-row:last-child { border-bottom: 0; }
+.f09-deduct-row.is-new { background: var(--warn-soft); border-radius: var(--radius-s); padding: 8px 10px; border-bottom: 0; }
+.f09-deduct-basis { display: block; font-size: 13px; color: var(--ink-2); }
+.f09-deduct-total { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.f09-deduct-total strong { font-size: 21px; font-variant-numeric: tabular-nums; }
+
+/* ========================================================================
+   3. 智慧鎖示意
+   ======================================================================== */
+.f09-lock { margin-top: 28px; }
+.f09-lock-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+.f09-lock-top h2 { font-size: 21px; }
+.f09-lock-top p { font-size: 15px; color: var(--ink-2); margin-top: 4px; max-width: 52ch; }
+
+.f09-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.f09-flow-step {
+  position: relative;
+  padding: 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+}
+.f09-flow-step::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  width: 12px;
+  height: 1px;
+  background: var(--line);
+}
+.f09-flow-step:last-child::after { display: none; }
+.f09-flow-step .icon-circle { margin-bottom: 10px; }
+.f09-flow-no { font-size: 12px; font-weight: 600; color: var(--ink-3); letter-spacing: .04em; }
+.f09-flow-step h4 { margin: 2px 0 6px; }
+.f09-flow-step p { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.f09-flow-step.is-now { border-color: var(--accent); box-shadow: var(--shadow-1); }
+.f09-flow-step.is-now .icon-circle { background: var(--accent-soft); color: var(--accent); }
+.f09-flow-step.is-now .f09-flow-no { color: var(--accent); }
+
+.f09-pin { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.f09-pin-code {
+  font-size: 28px; font-weight: 600; letter-spacing: .18em;
+  font-variant-numeric: tabular-nums;
+  padding: 8px 16px; border-radius: var(--radius-s);
+  background: var(--bg-alt); color: var(--ink);
+}
+.f09-pin-code.is-dead { color: var(--ink-3); text-decoration: line-through; text-decoration-thickness: 2px; }
+
+/* ========================================================================
+   4. 導覽舞台（960 × 600，tour/f09-keys-access.html）
+   ======================================================================== */
+.f09s { display: flex; flex-direction: column; gap: 14px; padding: 22px 26px; height: 100%; font-size: 15px; }
+.f09s-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.f09s-top h3 { font-size: 22px; letter-spacing: -.01em; }
+.f09s-meta { margin-left: auto; font-size: 13px; color: var(--ink-2); }
+
+.f09s-alert {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: var(--radius-s);
+  font-size: 14px; line-height: 1.4;
+}
+.f09s-alert .icon { flex: none; }
+.f09s-alert--warn { background: var(--warn-soft); color: var(--warn-ink); }
+.f09s-alert--danger { background: var(--danger-soft); color: var(--danger-ink); }
+.f09s-alert--ok { background: var(--ok-soft); color: var(--ok-ink); }
+.f09s-alert--accent { background: var(--accent-soft); color: var(--accent); }
+
+.f09s-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.f09s-card {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+  padding: 14px 16px; background: var(--bg);
+}
+.f09s-card + .f09s-card { margin-top: 12px; }
+.f09s-card h4 { display: flex; align-items: center; gap: 8px; font-size: 15px; margin-bottom: 10px; }
+.f09s-card h4 .icon { color: var(--ink-2); }
+
+.f09s-row {
+  display: grid; grid-template-columns: 1fr auto auto; gap: 10px;
+  align-items: center; padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.f09s-row:last-child { border-bottom: 0; }
+.f09s-row-name { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.f09s-row-name strong { font-weight: 600; }
+.f09s-box {
+  width: 20px; height: 20px; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--line); border-radius: 6px;
+  color: transparent;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.f09s-box .icon { width: 14px; height: 14px; }
+.f09s-row.is-done .f09s-box { background: var(--ok); border-color: var(--ok); color: var(--bg); }
+.f09s-row.is-short .f09s-box { border-color: var(--danger); background: var(--danger-soft); }
+.f09s-row-name .icon { color: var(--ink-3); }
+.f09s-qty { font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.f09s-row.is-done .f09s-row-name { color: var(--ok-ink); }
+.f09s-row.is-short { background: var(--danger-soft); border-radius: var(--radius-s); padding: 8px 10px; border-bottom: 0; }
+
+.f09s-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.f09s-kpi { border: 1px solid var(--line-soft); border-radius: var(--radius-m); padding: 12px 14px; background: var(--bg); }
+.f09s-kpi-label { font-size: 13px; color: var(--ink-2); }
+.f09s-kpi-value { font-size: 26px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; margin-top: 2px; }
+.f09s-kpi-value small { font-size: 14px; font-weight: 400; color: var(--ink-2); margin-left: 4px; }
+
+.f09s-line { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 5px 0; font-size: 14px; }
+.f09s-line strong { font-variant-numeric: tabular-nums; }
+.f09s-line--total { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 10px; font-size: 15px; }
+.f09s-line--total strong { font-size: 21px; }
+
+.f09s-pin { display: flex; align-items: center; gap: 10px; }
+.f09s-pin-code {
+  font-size: 24px; font-weight: 600; letter-spacing: .16em;
+  font-variant-numeric: tabular-nums;
+  padding: 6px 12px; border-radius: var(--radius-s); background: var(--bg-alt);
+}
+.f09s-pin-code.is-dead { color: var(--ink-3); text-decoration: line-through; text-decoration-thickness: 2px; }
+
+.f09s-flow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.f09s-flow-step { border: 1px solid var(--line-soft); border-radius: var(--radius-s); padding: 10px; }
+.f09s-flow-step strong { display: block; font-size: 13px; }
+.f09s-flow-step span { display: block; font-size: 12px; color: var(--ink-2); line-height: 1.4; margin-top: 2px; }
+.f09s-flow-step.is-now { border-color: var(--danger); background: var(--danger-soft); }
+.f09s-flow-step.is-now strong { color: var(--danger-ink); }
+
+.f09s-btn-wrap { margin-top: 12px; }
+.f09s-sign { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
+
+/* ========================================================================
+   5. 響應（1024 / 768 / 480）
+   ======================================================================== */
+@media (max-width: 1024px) {
+  .f09-layout { grid-template-columns: 1fr; }
+  .f09-list-card { position: static; }
+  .f09-rooms { max-height: 340px; }
+  .f09-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .f09-flow-step:nth-child(2)::after { display: none; }
+}
+@media (max-width: 768px) {
+  .f09-detail-title h2 { font-size: 24px; }
+  .f09-hold .table--cards td.cell-primary { display: block; text-align: left; }
+  .f09-hold .table--cards td.cell-primary::before { content: none; }
+  .f09-hold .table--cards tr.is-short td { background: transparent; }
+  .f09-hold .table--cards tr.is-short { background: var(--danger-soft); }
+  .f09-lock-top h2 { font-size: 19px; }
+  .f09-deduct-total strong { font-size: 19px; }
+}
+@media (max-width: 480px) {
+  .f09-filters { padding: 0 14px 12px; }
+  .f09-list-head { padding: 16px 14px 0; }
+  .f09-flow { grid-template-columns: 1fr; }
+  .f09-flow-step::after { display: none; }
+  .f09-row-actions { justify-content: flex-start; }
+  .f09-pin-code { font-size: 24px; }
+}

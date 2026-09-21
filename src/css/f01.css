@@ -1,0 +1,287 @@
+/* f01.css — 「上游租約與到期風險」專屬樣式（操作頁與導覽頁共用）
+ * 契約：docs/DESIGN.md §2 tokens、§6.1 檔案所有權。顏色一律用 token，不寫裸 hex。
+ * 只被 src/app/f01-upstream-lease.html 與 src/tour/f01-upstream-lease.html 引用。 */
+
+/* ========================================================================
+   1. 版面
+   ======================================================================== */
+.f01-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.f01-toolbar .search { flex: 1 1 240px; max-width: 320px; }
+.f01-toolbar .select { width: auto; flex: none; }
+/* 窄螢幕時篩選鈕在容器內橫向捲動，頁面本身不捲（同 main.css 的 .tabs 作法） */
+.f01-filter-scroll {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.f01-filter-scroll::-webkit-scrollbar { display: none; }
+.f01-toolbar-count { font-size: 14px; color: var(--ink-2); margin-left: auto; font-variant-numeric: tabular-nums; }
+
+.f01-detail-grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: start;
+}
+.f01-detail-title { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.f01-detail-title h2 { font-size: 24px; }
+.f01-detail-title .muted { font-size: 15px; }
+.f01-sub-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  letter-spacing: .02em;
+  margin-bottom: 10px;
+}
+.f01-terms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 32px; }
+.f01-terms .kv { grid-template-columns: 7.5em 1fr; align-items: baseline; }
+.f01-terms dd { color: var(--ink); }
+
+/* ========================================================================
+   2. 兩份租約並列時間軸
+   ======================================================================== */
+.f01-gantt { display: grid; gap: 18px; }
+.f01-lease-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.f01-lease-name { font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+.f01-lease-name::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--ink-3);
+}
+.f01-lease-name--up::before { background: var(--accent); }
+.f01-lease-name--down::before { background: var(--ink); }
+.f01-lease-range { font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+.f01-track {
+  position: relative;
+  height: 34px;
+  border-radius: var(--radius-s);
+  background: var(--bg-alt);
+  overflow: hidden;
+}
+.f01-bar {
+  position: absolute;
+  top: 7px;
+  height: 20px;
+  border-radius: var(--radius-pill);
+  transition: left var(--dur-slow) var(--ease), width var(--dur-slow) var(--ease);
+}
+.f01-bar--up { background: var(--accent); }
+.f01-bar--down { background: var(--ink); }
+.f01-gap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--danger-soft);
+  border-left: 2px dashed var(--danger);
+  border-right: 2px dashed var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--dur) var(--ease);
+}
+.f01-gap span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--danger-ink);
+  white-space: nowrap;
+  padding: 0 4px;
+}
+.f01-gap.is-cleared { opacity: 0; }
+.f01-today {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--ink-2);
+}
+.f01-today::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-2);
+}
+.f01-axis {
+  position: relative;
+  height: 18px;
+  font-size: 12px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.f01-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.f01-axis span.is-today { color: var(--ink-2); font-weight: 600; }
+.f01-gantt-note { font-size: 14px; color: var(--ink-2); }
+.f01-nw { white-space: nowrap; }
+
+/* ========================================================================
+   3. 續租處理
+   ======================================================================== */
+.f01-flow { display: grid; gap: 16px; }
+.f01-flow .btn--block + .btn--block { margin-top: 8px; }
+.f01-flow-hint { font-size: 13px; color: var(--ink-3); }
+.f01-owner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-s);
+  background: var(--bg-alt);
+}
+.f01-owner-name { font-size: 15px; font-weight: 600; }
+.f01-owner-meta { font-size: 13px; color: var(--ink-2); }
+
+.f01-task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.f01-task:last-child { border-bottom: 0; }
+.f01-task-body { flex: 1; min-width: 0; }
+.f01-task-title { font-size: 15px; font-weight: 600; }
+.f01-task-meta { font-size: 13px; color: var(--ink-2); }
+.f01-task.is-new { animation: f01-pop 480ms var(--ease) both; }
+@keyframes f01-pop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ========================================================================
+   4. 導覽畫面區（960 × 600 縮放舞台內）
+   ======================================================================== */
+.stage-screen .f01-stage-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.stage-screen .f01-stage-head h2 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
+.stage-screen .f01-stage-head p { font-size: 14px; color: var(--ink-2); }
+.stage-screen .card { padding: 18px 20px; border-radius: var(--radius-m); }
+.stage-screen .card:hover { transform: none; box-shadow: var(--shadow-1); }
+.stage-screen .card-head { margin-bottom: 12px; }
+.stage-screen .card-title { font-size: 17px; }
+.stage-screen .kpi { padding: 14px 16px; border-radius: var(--radius-m); gap: 4px; }
+.stage-screen .kpi-value { font-size: 30px; }
+.stage-screen .kpi-label { font-size: 13px; }
+.stage-screen .kpi-hint { font-size: 12px; }
+.stage-screen .grid { gap: 14px; }
+.stage-screen .table th, .stage-screen .table td { padding: 9px 12px; font-size: 14px; }
+.stage-screen .checklist-label { font-size: 14px; }
+.stage-screen .timeline-title { font-size: 14px; }
+.stage-screen .alert { padding: 12px 14px; }
+.stage-screen .f01-lease-name { font-size: 14px; }
+.stage-screen .f01-lease-range { font-size: 13px; }
+
+.f01-stack { display: grid; gap: 14px; }
+.f01-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 18px; }
+.f01-form .field > label { font-size: 13px; }
+.f01-input {
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 15px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  min-height: 40px;
+}
+.f01-input--filled { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.f01-form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }
+
+.f01-match { display: grid; gap: 10px; }
+.f01-match-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  background: var(--bg-alt);
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.f01-match-row .check-box {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.f01-match-row .check-box .icon {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2.5;
+  color: var(--bg);
+  opacity: 0;
+  transform: scale(.5);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.f01-match-row.is-done { background: var(--ok-soft); color: var(--ok-ink); }
+.f01-match-row.is-done .check-box { background: var(--ok); border-color: var(--ok); }
+.f01-match-row.is-done .check-box .icon { opacity: 1; transform: none; }
+.f01-match-row b { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+.f01-task.is-muted { opacity: .5; }
+
+/* 舞台是固定 960px 的畫面，不跟著瀏覽器寬度換排版 */
+.stage-screen .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.stage-screen .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stage-screen .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stage-screen .grid > .span-2 { grid-column: span 2; }
+.stage-screen .stat-row--divided .stat + .stat { padding-left: 32px; border-left: 1px solid var(--line-soft); }
+.stage-screen .alert { flex-wrap: nowrap; }
+.stage-screen .f01-terms { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.stage-screen .f01-gap span { display: block; }
+
+/* ========================================================================
+   5. 響應
+   ======================================================================== */
+@media (max-width: 1024px) {
+  .f01-detail-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 768px) {
+  .f01-toolbar .search { max-width: none; }
+  .f01-toolbar-count { margin-left: 0; width: 100%; }
+  .f01-terms { grid-template-columns: 1fr; gap: 12px; }
+  .f01-terms .kv { grid-template-columns: 6.5em 1fr; }
+  .f01-lease-head { gap: 4px; }
+  /* 窄螢幕塞不下就不畫帶內文字，天數改由下方說明句交代 */
+  .f01-gap span { display: none; }
+  /* 待辦一列在手機上折成兩行：上行圖示與內容，下行狀態與動作 */
+  .f01-task { flex-wrap: wrap; row-gap: 10px; }
+  .f01-task-body { flex: 1 1 calc(100% - 56px); }
+  .f01-task > .badge { margin-left: 56px; }
+  .f01-task > .btn { margin-left: auto; }
+  .f01-detail-title h2 { font-size: 21px; }
+}

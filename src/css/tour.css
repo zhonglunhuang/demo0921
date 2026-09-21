@@ -1,0 +1,506 @@
+/* tour.css — 導覽播放器樣式（只有 tour/ 頁面載入）
+ * 契約：docs/DESIGN.md §4（播放器行為）、§2（tokens）。
+ * 規則：顏色一律 var(--…)，tokens 定義於 main.css 的 :root，本檔不寫裸 hex。
+ * 保底：main.css 缺席時仍可顯示——「0. 保底」區用 :where() 寫成零特異度，
+ *       main.css 只要定義同名 class 就會蓋過去，不會互搶。
+ */
+
+/* ---------------------------------------------------------------------------
+ * 0. 保底（零特異度；main.css 一定義就讓位）
+ * ------------------------------------------------------------------------- */
+:where(.tour-main, .tour-main *, .tour-main *::before, .tour-main *::after) {
+  box-sizing: border-box;
+}
+:where(.tour-main) {
+  font-family: var(--font, -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Helvetica Neue", sans-serif);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+:where(.tour-player button) {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+:where(.tour-player a) {
+  color: inherit;
+  text-decoration: none;
+}
+:where(.tour-end .btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: var(--radius-pill, 980px);
+  font-size: 17px;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-fast, 150ms) ease, color var(--dur-fast, 150ms) ease, border-color var(--dur-fast, 150ms) ease;
+}
+:where(.tour-end .btn--primary) {
+  background: var(--accent);
+  color: var(--bg);
+}
+:where(.tour-end .btn--primary:hover) {
+  background: var(--accent-hover);
+}
+:where(.tour-end .btn--secondary) {
+  background: var(--bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+:where(.tour-end .btn--secondary:hover) {
+  background: var(--accent-soft);
+}
+
+/* ---------------------------------------------------------------------------
+ * 1. 導覽頁骨架（.tour-main / .tour-head）
+ * ------------------------------------------------------------------------- */
+.tour-main {
+  max-width: var(--container-wide, 1200px);
+  margin: 0 auto;
+  padding: 64px 22px 120px;
+}
+.tour-head {
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.tour-head .eyebrow {
+  display: block;
+  margin: 0 0 12px; /* 字級與顏色沿用 main.css 的 .eyebrow */
+}
+.tour-head h1 {
+  margin: 0 0 16px;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+.tour-head .page-lead {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.tour-empty {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--ink-3);
+}
+
+/* ---------------------------------------------------------------------------
+ * 2. 播放器版面：畫面區左 62%、說明區右 38%；<768px 上下堆疊
+ * ------------------------------------------------------------------------- */
+.tour-player {
+  display: grid;
+  grid-template-columns: 62fr 38fr;
+  gap: 48px;
+  align-items: stretch;
+}
+.tour-stage {
+  min-width: 0;
+}
+.tour-side {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------------------------------------------------------------------
+ * 3. 裝置外框與 960px 縮放畫面
+ * ------------------------------------------------------------------------- */
+.stage-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m, 16px);
+  box-shadow: var(--shadow-2);
+}
+.stage-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--line-soft);
+}
+.stage-bar i {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.stage-bar i:nth-child(1) { background: var(--danger); }
+.stage-bar i:nth-child(2) { background: var(--warn); }
+.stage-bar i:nth-child(3) { background: var(--ok); }
+.stage-bar-title {
+  flex: 1;
+  margin-right: 46px; /* 扣掉左側三點寬度，讓標題視覺置中 */
+  overflow: hidden;
+  font-size: 12px;
+  color: var(--ink-3);
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.stage-viewport {
+  position: relative;
+  width: 100%;
+  height: 600px; /* JS 依縮放比覆寫 */
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+.stage-scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 960px;
+  height: 600px;
+  transform-origin: 0 0;
+}
+.stage-screen {
+  position: relative;
+  width: 960px;
+  height: 600px;
+  padding: 28px 32px;
+  overflow: hidden;
+  background: var(--bg-alt);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.47;
+}
+
+/* 示意游標：位於縮放空間內，與畫面同比例 */
+.stage-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-200px, -200px);
+  transition: transform var(--dur-slow, 600ms) var(--ease, ease), opacity var(--dur, 300ms) ease;
+}
+.stage-cursor.is-on {
+  opacity: 1;
+}
+.stage-cursor svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.stage-cursor path {
+  fill: var(--ink);
+  stroke: var(--bg);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+.stage-cursor::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+}
+.stage-cursor.is-click::after {
+  animation: tp-click 500ms var(--ease, ease) forwards;
+}
+
+/* ---------------------------------------------------------------------------
+ * 4. 說明區
+ * ------------------------------------------------------------------------- */
+.tour-copy {
+  margin: auto 0;
+  padding: 8px 0 32px;
+}
+.tour-copy.is-in {
+  animation: tp-fade-up var(--dur, 300ms) var(--ease, ease) both;
+}
+.tour-counter {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.tour-step-title {
+  margin: 0 0 12px;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.tour-step-text {
+  margin: 0;
+  min-height: calc(1.47em * 3); /* 預留三行，切步時版面不跳 */
+  font-size: 17px;
+  line-height: 1.47;
+  color: var(--ink-2);
+}
+.tour-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+  animation: tp-fade-up var(--dur-slow, 600ms) var(--ease, ease) both;
+}
+.tour-end[hidden] {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * 5. 控制列
+ * ------------------------------------------------------------------------- */
+.tour-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+}
+.tour-btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  color: var(--ink);
+  transition: background-color var(--dur-fast, 150ms) ease, color var(--dur-fast, 150ms) ease, transform var(--dur-fast, 150ms) ease, opacity var(--dur-fast, 150ms) ease;
+}
+.tour-btn:hover {
+  background: var(--line-soft);
+}
+.tour-btn:active {
+  transform: scale(0.94);
+}
+.tour-btn[disabled] {
+  opacity: 0.35;
+  cursor: default;
+  transform: none;
+}
+.tour-btn svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+.tour-btn--play {
+  background: var(--ink);
+  color: var(--bg);
+}
+.tour-btn--play:hover {
+  background: var(--bg-dark);
+}
+.tour-dots {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+}
+.tour-dot {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 2px;
+  border-radius: var(--radius-pill, 980px);
+}
+.tour-dot i {
+  display: block;
+  position: relative;
+  width: 8px;
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-pill, 980px);
+  background: var(--line);
+  transition: width var(--dur, 300ms) var(--ease, ease), background-color var(--dur-fast, 150ms) ease;
+}
+.tour-dot:hover i {
+  background: var(--ink-3);
+}
+.tour-dot.is-active i {
+  width: 24px;
+  background: var(--line);
+}
+.tour-dot.is-active i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+.tour-player.is-playing .tour-dot.is-active i::after {
+  animation: tp-progress var(--tp-ms, 4500ms) linear forwards;
+}
+
+/* ---------------------------------------------------------------------------
+ * 6. api 效果 class（tour-player.js 加在畫面區元素上）
+ * ------------------------------------------------------------------------- */
+.tp-enter {
+  animation: tp-fade-up var(--dur-slow, 600ms) var(--ease, ease) both;
+}
+.tp-highlight {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  animation: tp-pulse 1.2s ease-out 2;
+}
+.tp-num {
+  font-variant-numeric: tabular-nums;
+}
+.tp-typing::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: tp-blink 1s steps(2, start) infinite;
+}
+.tp-check {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  transition: background-color var(--dur, 300ms) ease, border-color var(--dur, 300ms) ease;
+}
+.tp-check svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+}
+.tp-check path {
+  fill: none;
+  stroke: var(--bg);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  transition: stroke-dashoffset 400ms var(--ease, ease) 120ms;
+}
+.tp-check.is-on {
+  border-color: var(--ok);
+  background: var(--ok);
+}
+.tp-check.is-on path {
+  stroke-dashoffset: 0;
+}
+.tp-flash {
+  display: inline-block;
+  animation: tp-flash 600ms var(--ease, ease);
+}
+
+/* ---------------------------------------------------------------------------
+ * 7. keyframes
+ * ------------------------------------------------------------------------- */
+@keyframes tp-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes tp-pulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); }
+  70%  { box-shadow: 0 0 0 12px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes tp-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes tp-blink {
+  to { visibility: hidden; }
+}
+@keyframes tp-flash {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+@keyframes tp-click {
+  0%   { opacity: 0.9; transform: translate(-50%, -50%) scale(0.2); }
+  100% { opacity: 0;   transform: translate(-50%, -50%) scale(1.6); }
+}
+
+/* ---------------------------------------------------------------------------
+ * 8. 減少動態偏好：所有動畫改為直接呈現結果
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .tour-copy.is-in,
+  .tour-end,
+  .tp-enter,
+  .tp-highlight,
+  .tp-flash,
+  .tp-typing::after,
+  .stage-cursor.is-click::after,
+  .tour-player.is-playing .tour-dot.is-active i::after {
+    animation: none;
+  }
+  .tp-enter {
+    opacity: 1;
+    transform: none;
+  }
+  .stage-cursor,
+  .tour-dot i,
+  .tour-btn,
+  .tp-check,
+  .tp-check path {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * 9. 響應：1024 / 768 / 480
+ * ------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .tour-player { gap: 32px; }
+  .tour-step-title { font-size: 28px; }
+}
+@media (max-width: 768px) {
+  .tour-main { padding: 48px 16px 80px; }
+  .tour-head { margin-bottom: 32px; }
+  .tour-head h1 { font-size: 32px; }
+  .tour-head .page-lead { font-size: 19px; }
+  .tour-player {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .tour-copy {
+    margin: 0;
+    padding: 0 0 20px;
+  }
+  .tour-step-title { font-size: 24px; }
+  .tour-step-text { min-height: 0; }
+  .tour-controls { padding-top: 16px; }
+}
+@media (max-width: 480px) {
+  .stage-bar-title { display: none; }
+  .tour-controls { gap: 8px; }
+  .tour-end .btn { flex: 1 1 100%; }
+}

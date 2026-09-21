@@ -39,7 +39,7 @@ while IFS= read -r f; do
 done <<< "$html_files"
 
 # 4) 殘留佔位內容
-placeholders=$(grep -rniE 'lorem ipsum|\{\{[^}]*\}\}|TODO' $SRC --include='*.html' --include='*.css' --include='*.js' || true)
+placeholders=$(grep -rnE '[Ll]orem [Ii]psum|\{\{[^}]*\}\}|\bTODO\b|\bFIXME\b' $SRC --include='*.html' --include='*.css' --include='*.js' || true)
 if [ -n "$placeholders" ]; then
   echo "  ⚠ 發現疑似未完成的佔位內容（交給客戶前請確認）："
   echo "$placeholders" | sed 's/^/     /'

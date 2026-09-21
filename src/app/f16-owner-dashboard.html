@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老闆營運儀表板｜租務中樞</title>
+  <meta name="description" content="一頁看完 103 間物件的出租率、欠租、修繕、租約到期與未來六個月現金流，切換區域數字跟著換。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f16.css">
+</head>
+<body class="app" data-feature="f16">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>老闆營運儀表板</h1>
+      <p class="page-lead">一頁看完出租、欠租、修繕與現金流。切換區域，所有數字跟著換。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f16-report-btn">產生本月快報</button>
+      </div>
+    </header>
+
+    <div class="f16-toolbar">
+      <div class="f16-toolbar__main">
+        <span class="f16-toolbar__label" id="f16-region-label">看哪一區</span>
+        <div id="f16-regions"></div>
+      </div>
+      <p class="f16-toolbar__meta" id="f16-meta"></p>
+    </div>
+
+    <div id="f16-role-note"></div>
+
+    <section class="f16-section" aria-labelledby="f16-result-title">
+      <h2 class="sr-only" id="f16-result-title">本月結果</h2>
+      <div class="grid grid--2" id="f16-result"></div>
+    </section>
+
+    <section class="f16-section" aria-labelledby="f16-kpi-title">
+      <div class="f16-section__head">
+        <h2 class="section-title" id="f16-kpi-title">本月營運指標</h2>
+        <p class="muted small">加上方的包租淨利共 13 項，切換區域會重算</p>
+      </div>
+      <div class="grid grid--4" id="f16-kpis"></div>
+    </section>
+
+    <section class="f16-section" aria-labelledby="f16-watch-title">
+      <div class="card card--static card--flush f16-watch-card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f16-watch-title">今天要盯的事</h2>
+            <p class="card-sub">系統從 103 間物件裡挑出需要老闆決定的幾件，指派後由負責人接手</p>
+          </div>
+          <span id="f16-watch-count"></span>
+        </div>
+        <div class="card-body" id="f16-watch"></div>
+      </div>
+    </section>
+
+    <section class="f16-section" aria-labelledby="f16-expiry-title">
+      <div class="card card--static">
+        <div class="f16-expiry__head">
+          <div>
+            <h2 class="card-title" id="f16-expiry-title">租約到期</h2>
+            <p class="card-sub">上游是屋主給公司的租約，下游是公司給租客的租約</p>
+          </div>
+          <div id="f16-expiry-side"></div>
+        </div>
+        <div class="f16-expiry__counts" id="f16-expiry-counts"></div>
+        <div id="f16-expiry-list"></div>
+      </div>
+    </section>
+
+    <section class="f16-section" aria-labelledby="f16-cash-title">
+      <div class="card card--static">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f16-cash-title">未來六個月現金流</h2>
+            <p class="card-sub">依目前租約、租金與成本往前推，滑過線上的點看每個月數字</p>
+          </div>
+        </div>
+        <div id="f16-cash-chart"></div>
+        <div id="f16-cash-summary"></div>
+      </div>
+    </section>
+
+    <section class="f16-section" aria-labelledby="f16-region-title">
+      <div class="card card--static">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="f16-region-title">四區比一比</h2>
+            <p class="card-sub">同一個月，哪一區賺得多、哪一區成本高</p>
+          </div>
+        </div>
+        <div id="f16-region-chart"></div>
+        <div id="f16-region-table"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f16.js"></script>
+</body>
+</html>

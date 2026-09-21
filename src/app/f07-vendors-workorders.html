@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>廠商與修繕工單｜租務中樞</title>
+  <meta name="description" content="工單從租客報修、派工、報價、核准、完工到付款，每一步都留紀錄；報價一進來先跟同項目的歷史平均比對，貴得不合理就先擋下來。">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/f07.css">
+</head>
+<body class="app" data-feature="f07">
+  <div id="app-shell"></div>
+
+  <main class="app-main" id="main">
+    <header class="page-head">
+      <h1>廠商與修繕工單</h1>
+      <p class="page-lead">租客報修進來，系統先判類別、挑同區廠商，派工、報價、核准、完工、發票、付款都留在同一張工單上。報價一到就跟同項目的歷史平均比一次，貴得不合理先擋下來等人核准。</p>
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" id="f07-new">建立工單</button>
+      </div>
+    </header>
+
+    <section class="grid grid--4" id="f07-kpis" aria-label="修繕概況"></section>
+
+    <div id="f07-alerts" class="f07-alerts"></div>
+
+    <div class="f07-views" id="f07-view-tabs"></div>
+
+    <section class="f07-view" id="f07-view-orders" aria-label="工單">
+      <div class="f07-layout">
+        <section class="card card--flush card--static f07-list-card" aria-labelledby="f07-list-title">
+          <div class="card-head f07-list-head">
+            <h2 class="card-title" id="f07-list-title">工單</h2>
+            <span class="muted small" id="f07-count"></span>
+          </div>
+          <div class="f07-filters">
+            <div class="segmented segmented--block" role="tablist" id="f07-status-tabs"></div>
+            <label class="f07-select">
+              <span class="sr-only">篩選類別</span>
+              <select class="select" id="f07-category"></select>
+            </label>
+          </div>
+          <div id="f07-orders" class="f07-orders"></div>
+        </section>
+
+        <section class="f07-detail" id="f07-detail" aria-live="polite"></section>
+      </div>
+    </section>
+
+    <section class="f07-view" id="f07-view-vendors" aria-label="廠商資料庫" hidden>
+      <div class="toolbar">
+        <label class="search">
+          <span class="sr-only">搜尋廠商</span>
+          <span class="icon" aria-hidden="true" id="f07-vendor-search-icon"></span>
+          <input class="input" type="search" id="f07-vendor-q" placeholder="搜尋廠商名稱或維修項目" autocomplete="off">
+        </label>
+        <label>
+          <span class="sr-only">篩選分類</span>
+          <select class="select" id="f07-vendor-category"></select>
+        </label>
+        <label>
+          <span class="sr-only">篩選服務區域</span>
+          <select class="select" id="f07-vendor-region"></select>
+        </label>
+        <span class="spacer"></span>
+        <span class="muted small" id="f07-vendor-count"></span>
+      </div>
+      <section class="card card--flush card--static">
+        <div id="f07-vendors"></div>
+      </section>
+      <p class="muted small f07-note">返修率＝完工後 30 天內再壞一次的比率；評分由歷次工單的準時、報價、收尾狀況累積。</p>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/app/f07.js"></script>
+</body>
+</html>
