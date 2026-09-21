@@ -157,7 +157,7 @@
       { id: 'boss', dark: true, featureId: 'f02',
         eyebrow: '21:00 老闆的晚上', title: '不是收租率，是真正的損益', sub: '每一間都算到淨利，哪 5 間最賺、哪 5 間快沒了',
         body: '收租率 94% 很好看，但 B07 這個月是虧的。收入減掉付屋主租金、水電、網路、管理費、修繕、折舊、空置成本，才是淨利。老闆一句話看完：中壢 40 間，淨利 82,000 元。',
-        visual: '黑底儀表板：三張數字卡「收入 300,000」「成本 218,000」「淨利 82,000」，下方左右兩欄「最賺 5 間」「快沒利潤 5 間」，B07 在右欄第一列標紅。' },
+        visual: '黑底儀表板：三張數字卡「收入 293,600」「成本 260,900」「淨利 32,700」，下方左右兩欄「最賺 5 間」「快沒利潤 5 間」，B07 在右欄第一列標紅。' },
       { id: 'trail', dark: false, featureId: 'f14',
         eyebrow: '每一天，每一筆', title: '誰改了什麼，三年後還查得到', sub: '幾年後的爭議，今天就留證據',
         body: '會計看不到身分證，修繕人員看不到押金。劉○○把 A01 租金從 13,000 改成 12,000，紀錄立刻多一筆。通知何時送達、何時回覆，全部留存。資料屬於安居，隨時完整帶走。',
@@ -360,7 +360,9 @@
   };
   var PING = { '雅房': [4, 5], '套房': [6, 8], '一房一廳': [10, 13] };
   var SETUP_COST = { '雅房': 30000, '套房': 48000, '一房一廳': 72000 };   /* 裝修家具投入，60 個月攤提 */
-  var MARGIN = { '雅房': [2000, 2500], '套房': [2300, 2900], '一房一廳': [2400, 2900] }; /* 一般物件每月淨利範圍 */
+  /* 付屋主租金占租客租金的比例：包租代管實務上屋主拿 6～8 成（換取保證收租、不必自己管），
+     這裡用 58%～66%，讓每間房的毛利與淨利落在業界合理區間，不會出現「屋主只拿四成」這種沒人會簽的數字。 */
+  var OWNER_RATIO = { '雅房': [0.62, 0.66], '套房': [0.60, 0.65], '一房一廳': [0.58, 0.63] };
   var UPSTREAM_TEXT = {
     adjustClause: '續約時得依市場行情調整，幅度以 5% 為上限',
     repairResp: '結構與管線由屋主負責，其餘由公司負責',
@@ -381,8 +383,8 @@
         utilityDiff: type === '雅房' ? between(1, 2) * 100 : between(1, 4) * 100,
         depreciation: SETUP_COST[type] / 60
       };
-      var margin = roundTo(between(MARGIN[type][0], MARGIN[type][1]), 100);
-      var otherCost = cost.internet + cost.mgmtFee + cost.utilityDiff + cost.depreciation;
+      var ratioRange = OWNER_RATIO[type];
+      var ownerRatio = ratioRange[0] + rnd() * (ratioRange[1] - ratioRange[0]);
       var moveIn = addMonths('2024-01-01', between(0, 29));            /* 2024-01 ～ 2026-06 入住 */
       moveIn = moveIn.slice(0, 8) + pad2(pick([1, 1, 5, 10, 15]));
       var term = pick([12, 12, 24]);
@@ -392,7 +394,7 @@
       var upStart = addMonths(moveIn.slice(0, 8) + '01', -between(1, 6));
       var upEnd = addDays(addMonths(upStart, pick([36, 36, 60])), -1);
       while (upEnd < addMonths(contractEnd, 1)) upEnd = addMonths(upEnd, 12);   /* 一般物件：上游一定晚於下游到期 */
-      var ownerRent = rent - otherCost - margin;
+      var ownerRent = roundTo(rent * ownerRatio, 100);
 
       /* 屋主：一位屋主擁有連續 2～4 間（整層分租），約 35 位 */
       if (ownerLeft === 0) {
@@ -483,7 +485,7 @@
     D09: { extraCost: 3400, reason: '門鎖更換加室內小修' }
   };
   /* 本月最賺的 5 間（f02 排行）：調高淨利 */
-  var TOP_UNITS = { A01: 3800, A05: 3600, B02: 3400, C01: 3300, D04: 3100 };
+  var TOP_UNITS = { A01: 3200, A05: 3000, B02: 2900, C01: 2800, D04: 2700 };
 
   /* ============================================================
    * 6. 租客（已出租的物件各一位）
