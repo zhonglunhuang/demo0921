@@ -1,9 +1,9 @@
 ---
 id: DEMO-08
 title: 資料所有權與匯出
-status: 待開發        # 待開發 | 開發中 | 完成 | 作廢
+status: 開發中        # 待開發 | 開發中 | 完成 | 作廢
 roles: [客戶,提案者]
-owner:
+owner: jon-mac
 spec: docs/SPEC.md#38-資料所有權與匯出
 created: 2026-09-21
 updated: 2026-09-21

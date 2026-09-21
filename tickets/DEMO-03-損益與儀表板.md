@@ -1,9 +1,9 @@
 ---
 id: DEMO-03
 title: 損益與儀表板
-status: 待開發        # 待開發 | 開發中 | 完成 | 作廢
+status: 開發中        # 待開發 | 開發中 | 完成 | 作廢
 roles: [客戶,提案者]
-owner:
+owner: jon-mac
 spec: docs/SPEC.md#33-損益與儀表板
 created: 2026-09-21
 updated: 2026-09-21

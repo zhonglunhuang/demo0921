@@ -1,9 +1,9 @@
 ---
 id: DEMO-06
 title: 租客服務與通知
-status: 待開發        # 待開發 | 開發中 | 完成 | 作廢
+status: 開發中        # 待開發 | 開發中 | 完成 | 作廢
 roles: [客戶,提案者]
-owner:
+owner: jon-mac
 spec: docs/SPEC.md#36-租客服務與通知
 created: 2026-09-21
 updated: 2026-09-21
