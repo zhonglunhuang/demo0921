@@ -1,0 +1,75 @@
+/* ==========================================================================
+   plan.css — 合作方案頁（plan/index.html）專屬樣式
+   骨架與元件沿用 home.css（.hm-*）；本檔只放這一頁才有的版面。
+   顏色一律取 main.css 的 tokens（var(--…)），本檔不定義 :root、不放裸色碼。
+   區塊順序：頂欄目前頁 → 開頭與兩階段流程 → 階段區塊 → 項目卡 → 響應式
+   ========================================================================== */
+
+/* ---------- 頂欄：目前所在頁 ---------- */
+.hm-nav__link[aria-current="page"] { opacity: 1; font-weight: 600; }
+
+/* ---------- 開頭：兩階段流程 ---------- */
+.pl-hero { padding-bottom: 96px; }
+.pl-nowrap { white-space: nowrap; }  /* 窄螢幕只在標點後換行，不把一個詞拆成兩行 */
+.pl-flow {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px;
+  margin: 64px 0 0; padding: 0; list-style: none; text-align: left;
+}
+.pl-flow > li { position: relative; display: flex; min-width: 0; }
+/* 兩階段之間的箭頭：桌機朝右、手機朝下。順序已由 <ol> 表達，箭頭不唸給讀屏。 */
+.pl-flow > li + li::before {
+  content: "→"; content: "→" / "";
+  position: absolute; top: 50%; left: -56px; width: 56px; transform: translateY(-50%);
+  text-align: center; font-size: 24px; line-height: 1; color: var(--ink-3);
+}
+.pl-flow .hm-card { flex: 1; background: var(--bg-alt); box-shadow: none; }
+.pl-flow .hm-card:hover { box-shadow: var(--shadow-2); }
+.pl-flow .hm-card__title { font-size: 28px; }
+.pl-flow .hm-card__blurb { font-size: 17px; }
+
+/* ---------- 階段區塊 ---------- */
+.pl-phase { scroll-margin-top: 48px; }  /* 讓出毛玻璃頂欄的高度 */
+.pl-phase__meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 12px; margin: 0 0 12px; }
+.pl-phase__meta .hm-eyebrow { margin: 0; }
+.pl-block { margin-top: 64px; }
+.pl-block + .pl-block { margin-top: 56px; }
+.pl-block__title { margin: 0 0 20px; font-size: 21px; font-weight: 600; line-height: 1.2; text-align: center; color: var(--hm-text); }
+
+/* ---------- 項目卡（純閱讀，不可點） ---------- */
+.pl-grid { display: grid; gap: 20px; margin: 0; padding: 0; list-style: none; }
+.pl-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pl-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pl-item {
+  display: flex; flex-direction: column; gap: 10px; min-width: 0;
+  padding: 28px; border-radius: var(--radius-l);
+  background: var(--hm-surface); color: var(--hm-text); box-shadow: var(--shadow-1); text-align: left;
+}
+.pl-item__num { font-size: 14px; font-weight: 600; color: var(--hm-eyebrow); font-variant-numeric: tabular-nums; }
+.pl-item__mark {
+  display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;
+  border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+}
+.pl-item__title { margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: -0.005em; }
+.pl-grid--3 .pl-item__title { font-size: 21px; }
+.pl-item__text { margin: 0; font-size: 17px; line-height: 1.47; color: var(--hm-text-2); }
+
+/* ---------- 響應式 ---------- */
+@media (max-width: 768px) {
+  .pl-hero { padding-bottom: 80px; }
+  .pl-flow { grid-template-columns: minmax(0, 1fr); gap: 48px; margin-top: 48px; }
+  .pl-flow > li + li::before {
+    content: "↓"; content: "↓" / "";
+    top: -48px; left: 0; width: 100%; height: 48px; line-height: 48px; transform: none;
+  }
+  .pl-grid--3 { grid-template-columns: minmax(0, 1fr); }
+  .pl-block { margin-top: 48px; }
+  .pl-block + .pl-block { margin-top: 44px; }
+}
+@media (max-width: 480px) {
+  .pl-hero { padding-bottom: 64px; }
+  .pl-flow .hm-card__title { font-size: 24px; }
+  .pl-grid--2 { grid-template-columns: minmax(0, 1fr); }
+  .pl-grid { gap: 14px; }
+  .pl-item { padding: 22px 20px; }
+  .pl-item__title { font-size: 21px; }
+}
