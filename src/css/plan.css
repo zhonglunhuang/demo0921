@@ -1,0 +1,359 @@
+/* ==========================================================================
+   plan.css — 合作方案頁（plan/index.html）專屬樣式
+   骨架與元件沿用 home.css（.hm-*）；本檔只放這一頁才有的版面、配色與示意動畫。
+   顏色一律取 main.css 的 tokens（var(--…)）或用 color-mix 調出，本檔不定義 :root、不放裸色碼。
+   區塊順序：本頁色調 → 頂欄目前頁 → 開頭與兩階段流程 → 階段區塊 → 項目卡
+             → 示意動畫共用 → 各示意畫面 → 收尾 → 動態 → 響應式 → 動態偏好
+   示意動畫的播放由 js/plan.js 切換 .is-on；HTML 預設是播完的樣子。
+   ========================================================================== */
+
+/* ---------- 本頁色調：第一階段藍、第二階段綠，漸層取兩者之間 ---------- */
+.pl-page {
+  --pl-a: var(--accent);
+  --pl-b: color-mix(in srgb, var(--accent) 40%, var(--ok-ink));  /* 藍綠，白字與白底上都夠深 */
+  --pl-g: var(--ok-ink);
+}
+.pl-tone--blue  { --pl-soft: var(--accent-soft); --pl-ink: var(--accent); }
+.pl-tone--amber { --pl-soft: var(--warn-soft);   --pl-ink: var(--warn-ink); }
+.pl-tone--green { --pl-soft: var(--ok-soft);     --pl-ink: var(--ok-ink); }
+
+/* 圖示底座 */
+.pl-chip {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 36px; height: 36px; border-radius: var(--radius-s);
+  background: var(--pl-soft, var(--accent-soft)); color: var(--pl-ink, var(--accent));
+}
+.pl-icon { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }  /* 線條圖示，規格比照 js/icons.js */
+.pl-chip svg { width: 20px; height: 20px; }
+.pl-chip--lg { width: 48px; height: 48px; border-radius: 14px; }
+.pl-chip--lg svg { width: 24px; height: 24px; }
+
+/* 畫面示意的視窗圓點比照功能導覽上色 */
+.pl-page .hm-dots span:nth-child(1) { background: var(--danger); }
+.pl-page .hm-dots span:nth-child(2) { background: var(--warn); }
+.pl-page .hm-dots span:nth-child(3) { background: var(--ok); }
+
+/* ---------- 頂欄：目前所在頁；三個項目在窄螢幕不換行 ---------- */
+.pl-page .hm-nav__link { white-space: nowrap; }
+.pl-page .hm-nav__link[aria-current="page"] { opacity: 1; font-weight: 600; }
+
+/* ---------- 開頭：兩階段流程 ---------- */
+.pl-hero { position: relative; overflow: hidden; padding-bottom: 96px; }
+.pl-hero::before {  /* 淡彩光暈，緩慢飄移 */
+  content: ""; position: absolute; top: -140px; bottom: 0; left: -10%; width: 120%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(38% 48% at 22% 26%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 72%),
+    radial-gradient(36% 44% at 80% 22%, color-mix(in srgb, var(--ok) 18%, transparent), transparent 72%),
+    radial-gradient(30% 38% at 52% 58%, color-mix(in srgb, var(--warn) 10%, transparent), transparent 72%);
+  -webkit-mask-image: linear-gradient(to bottom, var(--bg-dark) 62%, transparent);
+  mask-image: linear-gradient(to bottom, var(--bg-dark) 62%, transparent);  /* 往下淡出，不留邊界 */
+  animation: pl-drift 16s ease-in-out infinite alternate;
+}
+.pl-hero > * { position: relative; z-index: 1; }
+.pl-nowrap { white-space: nowrap; }  /* 窄螢幕只在標點後換行，不把一個詞拆成兩行 */
+
+/* 漸層標題：不支援文字裁切的瀏覽器維持原本的深色字 */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .pl-grad {
+    background: linear-gradient(100deg, var(--pl-a) 8%, var(--pl-b) 92%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+}
+
+.pl-flow {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px;
+  margin: 64px 0 0; padding: 0; list-style: none; text-align: left;
+}
+.pl-flow > li { position: relative; display: flex; min-width: 0; }
+.pl-flow__one { --pl-tone: var(--pl-a); }
+.pl-flow__two { --pl-tone: var(--pl-g); }
+.pl-flow .hm-card { flex: 1; overflow: hidden; border: 1px solid var(--line-soft); }
+.pl-flow .hm-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--pl-tone); }
+.pl-flow .hm-card__name { color: var(--pl-tone); }
+.pl-flow .hm-card__title { font-size: 28px; }
+.pl-flow .hm-card__blurb { font-size: 17px; }
+/* 兩階段之間的箭頭與光點：桌機朝右、手機朝下。順序已由 <ol> 表達，這裡純裝飾。 */
+.pl-flow > li + li::before {
+  content: ""; position: absolute; top: 50%; left: -48px; width: 40px; height: 12px; margin-top: -6px;
+  background: linear-gradient(90deg, var(--pl-a), var(--pl-g));
+  clip-path: polygon(0 42%, 76% 42%, 76% 0, 100% 50%, 76% 100%, 76% 58%, 0 58%);
+}
+.pl-flow > li + li::after {
+  content: ""; position: absolute; top: 50%; left: -48px; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
+  background: var(--pl-a); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pl-a) 22%, transparent);
+  animation: pl-travel-x 2.4s var(--ease) infinite;
+}
+
+/* ---------- 階段區塊 ---------- */
+.pl-phase { scroll-margin-top: 48px; }  /* 讓出毛玻璃頂欄的高度 */
+.pl-phase--2 { --hm-eyebrow: var(--ok); }
+.pl-phase__meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 12px; margin: 0 0 12px; }
+.pl-phase__meta .hm-eyebrow { margin: 0; }
+.pl-block { margin-top: 64px; }
+.pl-block + .pl-block { margin-top: 56px; }
+.pl-block__title { margin: 0 0 20px; font-size: 21px; font-weight: 600; line-height: 1.2; text-align: center; color: var(--hm-text); }
+
+/* ---------- 項目卡（純閱讀，不可點） ---------- */
+.pl-grid { display: grid; gap: 20px; margin: 0; padding: 0; list-style: none; }
+.pl-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pl-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pl-item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0;
+  padding: 28px; border-radius: var(--radius-l);
+  background: var(--hm-surface); color: var(--hm-text); box-shadow: var(--shadow-1); text-align: left;
+}
+.pl-item .pl-chip { margin-bottom: 6px; }
+.pl-item__title { margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: -0.005em; }
+.pl-grid--3 .pl-item__title { font-size: 21px; }
+.pl-item__text { margin: 0; font-size: 17px; line-height: 1.47; color: var(--hm-text-2); }
+
+/* 帶示意畫面的項目卡：上半是有底色的舞台（放小視窗），下半是文字 */
+.pl-item--scene { align-items: stretch; gap: 0; padding: 0; overflow: hidden; }
+.pl-item__stage { padding: 18px; background: var(--pl-soft, var(--accent-soft)); }
+.pl-phase--2 .pl-item__stage { background: color-mix(in srgb, var(--ok) 10%, var(--bg-dark)); }
+.pl-item__copy { display: flex; flex-direction: column; gap: 8px; padding: 22px 26px 26px; }
+
+/* ---------- 示意動畫共用 ---------- */
+/* .pl-step：佔位不動、淡入；.pl-swap：不佔位、整個換掉（用在會移動或會被取代的東西） */
+.pl-step { opacity: 0; transform: translateY(6px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.pl-step.is-on { opacity: 1; transform: none; }
+.pl-mini .pl-swap { display: none; }
+.pl-mini .pl-swap.is-on { display: inline-flex; animation: pl-pop var(--dur) var(--ease) both; }
+
+/* 小視窗 */
+.pl-mini { width: 100%; max-width: 420px; margin: 0 auto; border-radius: var(--radius-m); box-shadow: var(--shadow-1); font-size: 12px; line-height: 1.4; }
+.pl-phase--2 .pl-mini { box-shadow: none; }
+.pl-mini .hm-screen__bar { height: 32px; padding: 0 12px; gap: 10px; font-size: 12px; }
+.pl-mini .hm-dots span { width: 8px; height: 8px; }
+.pl-mini .hm-screen__body { min-height: 226px; padding: 14px; }  /* 同一排的小視窗等高，下方文字才對得齊 */
+.pl-mini .hm-icon { width: 16px; height: 16px; stroke-width: 2.2; }
+.pl-mini .hm-tag--neutral { background: transparent; box-shadow: inset 0 0 0 1px var(--hm-line); }
+.pl-m-label { margin: 0 0 8px; font-size: 12px; font-weight: 600; color: var(--hm-text-2); }
+.pl-skel { display: block; height: 8px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--hm-text-2) 26%, transparent); }
+.pl-skel--s { width: 62%; }
+
+/* 進度條（第一階段流程、報告、開發執行共用） */
+.pl-row__bar { display: block; height: 8px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
+.pl-row__bar i {
+  display: block; width: 100%; height: 100%; border-radius: inherit;
+  background: linear-gradient(90deg, var(--pl-a), var(--pl-b));
+  transform: scaleX(0); transform-origin: left center; transition: transform 700ms var(--ease);
+}
+
+/* ---------- 示意：專案啟動的整體流程 ---------- */
+.pl-p1 { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 16px; }
+.pl-p1 .hm-panel { padding: 18px; }
+.pl-p1 .hm-panel__head { margin-bottom: 12px; }
+.pl-p1 .pl-p1__next { margin-top: 20px; }
+.pl-rows { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.pl-row { display: grid; grid-template-columns: 92px minmax(0, 1fr) 52px; align-items: center; gap: 12px; font-size: 14px; }
+.pl-row__who { font-weight: 600; white-space: nowrap; }
+.pl-row.is-on .pl-row__bar i { transform: scaleX(1); }
+.pl-row__state { font-size: 12px; font-weight: 600; color: var(--ok-ink); text-align: right; white-space: nowrap; opacity: 0; transition: opacity var(--dur) var(--ease); }
+.pl-row.is-on .pl-row__state { opacity: 1; transition-delay: 450ms; }
+
+.pl-docs { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.pl-doc {
+  display: grid; grid-template-columns: 36px minmax(0, 1fr) 20px; align-items: center; gap: 12px;
+  padding: 12px; border-radius: var(--radius-s); background: var(--hm-surface);
+  font-size: 14px; font-weight: 600; opacity: .38; transform: translateY(6px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.pl-doc.is-on { opacity: 1; transform: none; box-shadow: var(--shadow-1); }
+.pl-doc__check { display: inline-flex; color: var(--ok-ink); opacity: 0; transform: scale(.5); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.pl-doc__check svg { width: 20px; height: 20px; stroke-width: 2.2; }
+.pl-doc.is-on .pl-doc__check { opacity: 1; transform: none; transition-delay: 200ms; }
+
+/* ---------- 示意：現況調研報告（流程、卡點、最花時間） ---------- */
+.pl-m-flow { display: flex; gap: 18px; margin: 0 0 32px; padding: 0; list-style: none; }
+.pl-m-flow > li {
+  position: relative; display: inline-flex; align-items: center; height: 26px; padding: 0 8px;
+  border-radius: var(--radius-pill); background: var(--hm-surface-2); font-weight: 600; white-space: nowrap;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.pl-m-flow > li + li::before { content: "›"; position: absolute; left: -12px; font-weight: 400; color: var(--hm-text-2); }
+.pl-m-flow__hot:has(.pl-m-pin.is-on) { background: var(--warn-soft); color: var(--warn-ink); }
+.pl-m-pin {
+  position: absolute; top: calc(100% + 5px); left: 50%; display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 20px; margin-left: -20px; border-radius: var(--radius-pill);
+  background: var(--warn); color: var(--bg-dark); font-size: 12px; font-weight: 600;
+  opacity: 0; transition: opacity var(--dur) var(--ease);
+}
+.pl-m-pin.is-on { opacity: 1; }
+.pl-m-bars { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.pl-m-bar { display: grid; grid-template-columns: 52px minmax(0, 1fr); align-items: center; gap: 8px; white-space: nowrap; }
+.pl-m-bar--1 { --w: .92; }
+.pl-m-bar--2 { --w: .58; }
+.pl-m-bar--3 { --w: .34; }
+.pl-m-bar.is-on .pl-row__bar i { transform: scaleX(var(--w, 1)); }
+.pl-m-bar--1 .pl-row__bar i { background: var(--warn); }
+
+/* ---------- 示意：系統規劃書（系統草圖、先後順序） ---------- */
+.pl-m-wire { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; height: 76px; }
+.pl-m-wire__side { display: grid; align-content: start; gap: 6px; padding: 8px 6px; border-radius: 8px; background: var(--hm-surface-2); }
+.pl-m-wire__side i { display: block; height: 6px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--hm-text-2) 30%, transparent); }
+.pl-m-wire__main { display: grid; grid-template-rows: 16px minmax(0, 1fr); gap: 6px; }
+.pl-m-wire__top { display: block; border-radius: 6px; background: var(--warn-soft); }
+.pl-m-wire__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.pl-m-wire__cards i { display: block; border-radius: 6px; background: var(--hm-surface-2); }
+.pl-m-order { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.pl-m-order .pl-m-label { margin-bottom: 6px; }
+.pl-m-order ol { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.pl-m-order li { display: grid; grid-template-columns: 18px minmax(0, 1fr); align-items: center; gap: 8px; }
+.pl-m-order b {
+  display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--warn-soft); color: var(--warn-ink); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.pl-m-order div + div b { background: var(--hm-surface-2); color: var(--hm-text-2); }
+
+/* ---------- 示意：AI 教育訓練（對話） ---------- */
+.pl-m-chat { display: flex; flex-direction: column; gap: 8px; }
+.pl-m-bubble { max-width: 90%; margin: 0; padding: 8px 12px; border-radius: 14px; font-size: 13px; line-height: 1.4; }
+.pl-m-bubble--me { align-self: flex-end; background: var(--accent); color: var(--bg); border-bottom-right-radius: 4px; }
+.pl-m-bubble--ai { background: var(--hm-surface-2); border-bottom-left-radius: 4px; }
+.pl-m-bubble--ai .pl-skel { width: 150px; max-width: 100%; margin-top: 8px; }
+.pl-m-bubble--ai .pl-skel--s { width: 96px; }
+.pl-m-reply { display: grid; }
+.pl-m-reply > * { grid-area: 1 / 1; justify-self: start; align-self: start; }
+.pl-m-typing { display: inline-flex; gap: 4px; padding: 5px 0; }
+.pl-m-typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--hm-text-2); animation: pl-blink 1s ease-in-out infinite; }
+.pl-m-typing i:nth-child(2) { animation-delay: 150ms; }
+.pl-m-typing i:nth-child(3) { animation-delay: 300ms; }
+.pl-m-note { align-self: flex-start; margin: 2px 0 0; }
+
+/* ---------- 示意：商業顧問、網站維護（清單） ---------- */
+.pl-m-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.pl-m-li {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 36px; padding: 6px 10px;
+  border-radius: 8px; background: var(--hm-surface-2); font-size: 13px; font-weight: 600;
+}
+.pl-m-li .hm-icon { color: var(--ok); }
+.pl-m-pick {
+  display: flex; align-items: center; gap: 8px; margin: 10px 0 0; padding: 8px 10px; border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--ok) 60%, transparent); font-size: 13px; font-weight: 600;
+}
+.pl-m-status { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 24px; margin-bottom: 10px; }
+.pl-m-status .pl-m-label { margin: 0; }
+
+/* ---------- 示意：技術顧問（做法比較表） ---------- */
+.pl-m-table { display: grid; grid-template-columns: minmax(0, 1fr) 60px 60px; gap: 6px 8px; align-items: center; font-size: 13px; }
+.pl-m-th { font-size: 12px; font-weight: 600; color: var(--hm-text-2); text-align: center; white-space: nowrap; }
+.pl-m-td { font-weight: 600; white-space: nowrap; }
+.pl-m-cell { display: inline-flex; align-items: center; justify-content: center; height: 30px; border-radius: 8px; background: var(--hm-surface-2); color: var(--ok); }
+.pl-m-cell--no { color: var(--hm-text-2); }
+.pl-m-table .hm-tag { justify-self: center; }
+
+/* ---------- 示意：開發執行（待做 → 開發中 → 已上線） ---------- */
+.pl-m-kanban { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.pl-m-col { display: flex; flex-direction: column; gap: 6px; min-height: 166px; padding: 8px; border-radius: 10px; background: var(--hm-surface-2); }
+.pl-m-col .pl-m-label { margin: 0 0 2px; }
+.pl-m-card {
+  flex-direction: column; align-items: stretch; gap: 6px; padding: 8px; border-radius: 8px;
+  background: var(--hm-surface); font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.pl-mini .pl-m-card.is-on { display: flex; }
+.pl-m-card .pl-row__bar { height: 6px; background: color-mix(in srgb, var(--hm-text-2) 26%, transparent); }
+.pl-m-card .pl-row__bar i { background: var(--ok); transform: scaleX(.7); }
+.pl-m-card--doing.is-on .pl-row__bar i { animation: pl-fill 1400ms var(--ease) both; }
+.pl-m-card--done { flex-direction: row; align-items: center; justify-content: space-between; color: var(--ok); }
+
+/* ---------- 示意：包月服務的每月循環 ---------- */
+.pl-ring { position: relative; width: 100%; max-width: 340px; aspect-ratio: 1; margin: 56px auto 0; }
+.pl-ring__track {
+  position: absolute; inset: 42px; border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--ok) 30%, transparent);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--ok) 16%, transparent), transparent 74%);
+}
+/* 光點跟著 --turn 前進（js/plan.js 累加），每格 90 度，不會倒轉 */
+.pl-ring__orbit { position: absolute; inset: 42px; border-radius: 50%; transform: rotate(calc(var(--turn, 0) * 90deg)); transition: transform 1400ms var(--ease); }
+.pl-ring__orbit i {
+  position: absolute; top: -7px; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%;
+  background: var(--ok); box-shadow: 0 0 0 5px color-mix(in srgb, var(--ok) 28%, transparent), 0 0 24px var(--ok);
+}
+.pl-ring__node {
+  position: absolute; z-index: 1; display: inline-flex; align-items: center; justify-content: center;
+  width: 84px; height: 36px; border-radius: var(--radius-pill);
+  background: var(--bg-dark-2); border: 1px solid var(--hm-line); color: var(--hm-text-2);
+  font-size: 14px; font-weight: 600; white-space: nowrap;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.pl-ring__node.is-on { background: var(--ok); border-color: var(--ok); color: var(--bg-dark); box-shadow: 0 0 0 6px color-mix(in srgb, var(--ok) 22%, transparent); }
+.pl-ring__node--1 { top: 24px; left: 50%; margin-left: -42px; }
+.pl-ring__node--2 { top: 50%; right: 0; margin-top: -18px; }
+.pl-ring__node--3 { bottom: 24px; left: 50%; margin-left: -42px; }
+.pl-ring__node--4 { top: 50%; left: 0; margin-top: -18px; }
+.pl-ring__center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; }
+.pl-ring__center b { font-size: 40px; font-weight: 600; line-height: 1; letter-spacing: -0.01em; color: var(--hm-text); }
+.pl-ring__center small { font-size: 14px; color: var(--hm-text-2); }
+
+/* ---------- 收尾：彩色底 ---------- */
+.pl-cta {
+  --hm-text-2: var(--bg);
+  background: linear-gradient(120deg, var(--pl-a), var(--pl-b) 55%, var(--pl-a));
+  background-size: 220% 100%; color: var(--bg);
+  animation: pl-sheen 14s ease-in-out infinite alternate;
+}
+.pl-cta .hm-btn--primary { background: var(--bg); border-color: var(--bg); color: var(--accent); }
+.pl-cta .hm-btn--primary:hover { background: color-mix(in srgb, var(--bg) 88%, transparent); border-color: transparent; }
+.pl-cta a:focus-visible { outline-color: var(--bg); }
+
+/* ---------- 動態 ---------- */
+@keyframes pl-drift { from { transform: translate3d(-2%, 0, 0) scale(1); } to { transform: translate3d(2%, 3%, 0) scale(1.06); } }
+@keyframes pl-sheen { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@keyframes pl-travel-x { 0% { transform: translateX(0); opacity: 0; } 18% { opacity: 1; } 82% { opacity: 1; } 100% { transform: translateX(34px); opacity: 0; } }
+@keyframes pl-travel-y { 0% { transform: translateY(0); opacity: 0; } 18% { opacity: 1; } 82% { opacity: 1; } 100% { transform: translateY(34px); opacity: 0; } }
+@keyframes pl-pop { from { opacity: 0; transform: translateY(6px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes pl-fill { from { transform: scaleX(0); } to { transform: scaleX(.7); } }
+@keyframes pl-blink { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+
+/* ---------- 響應式 ---------- */
+@media (max-width: 1024px) {
+  /* 三張產出卡改成一張一列：示意畫面在左、文字在右，小視窗才不會被擠到放不下 */
+  .pl-grid--3 { grid-template-columns: minmax(0, 1fr); }
+  .pl-grid--3 .pl-item--scene { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); align-items: center; }
+}
+@media (max-width: 768px) {
+  .pl-hero { padding-bottom: 80px; }
+  .pl-flow { grid-template-columns: minmax(0, 1fr); gap: 56px; margin-top: 48px; }
+  .pl-flow > li + li::before {
+    top: -48px; left: 50%; width: 12px; height: 40px; margin: 0 0 0 -6px;
+    background: linear-gradient(180deg, var(--pl-a), var(--pl-g));
+    clip-path: polygon(42% 0, 58% 0, 58% 76%, 100% 76%, 50% 100%, 0 76%, 42% 76%);
+  }
+  .pl-flow > li + li::after { top: -48px; left: 50%; animation-name: pl-travel-y; }
+  .pl-grid--3 .pl-item--scene { display: flex; align-items: stretch; }
+  .pl-grid--scenes { grid-template-columns: minmax(0, 1fr); }
+  .pl-block { margin-top: 48px; }
+  .pl-block + .pl-block { margin-top: 44px; }
+  .pl-p1 { grid-template-columns: minmax(0, 1fr); }
+  .pl-ring { max-width: 300px; margin-top: 48px; }
+}
+@media (max-width: 480px) {
+  .pl-hero { padding-bottom: 64px; }
+  .pl-flow .hm-card__title { font-size: 24px; }
+  .pl-grid--2 { grid-template-columns: minmax(0, 1fr); }
+  .pl-grid { gap: 14px; }
+  .pl-item { padding: 22px 20px; }
+  .pl-item--scene { padding: 0; }
+  .pl-item__stage { padding: 14px; }
+  .pl-item__copy { padding: 20px 20px 22px; }
+  .pl-item__title { font-size: 21px; }
+  .pl-p1 .hm-panel { padding: 14px; }
+  .pl-row { grid-template-columns: 84px minmax(0, 1fr) 46px; gap: 10px; }
+}
+@media (max-width: 360px) {
+  /* 最窄的手機：頂欄三個項目收緊才排得進一行；示意畫面收一點留白，三欄看板才放得下 */
+  .pl-page .hm-nav__inner { gap: 8px; }
+  .pl-page .hm-nav__links { gap: 10px; }
+  .pl-page .hm-nav__link { font-size: 13px; }
+  .pl-item__stage { padding: 10px; }
+  .pl-mini .hm-screen__body { padding: 10px; }
+  .pl-m-kanban { gap: 6px; }
+  .pl-m-col { padding: 6px; }
+}
+
+/* ---------- 動態偏好：main.css 已把動畫與過渡壓到近乎 0，這裡只收掉會殘留的裝飾光點 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .pl-flow > li + li::after { display: none; }
+}
