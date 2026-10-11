@@ -1,4 +1,4 @@
-/* plan.js — 合作方案頁（plan/index.html）的圖示與示意動畫。
+/* plan.js — 合作方案頁（plan/index.html）的示意動畫。
  *
  * 示意動畫：.pl-scene 裡帶 data-seq 的元素依序加上 .is-on，樣式變化寫在 css/plan.css。
  *   data-play="build"  累積點亮（1、1+2、1+2+3…），播完停幾拍再從頭——用在有先後的流程
@@ -12,13 +12,6 @@
   'use strict';
 
   function each(list, fn) { Array.prototype.forEach.call(list, fn); }
-
-  /* 圖示：<span data-icon="briefcase"></span> → 全站共用的 Icons（js/icons.js） */
-  if (window.Icons && typeof window.Icons.get === 'function') {
-    each(document.querySelectorAll('[data-icon]'), function (el) {
-      el.innerHTML = window.Icons.get(el.getAttribute('data-icon'));
-    });
-  }
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || typeof IntersectionObserver === 'undefined') return;

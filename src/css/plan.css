@@ -23,6 +23,7 @@
   width: 36px; height: 36px; border-radius: var(--radius-s);
   background: var(--pl-soft, var(--accent-soft)); color: var(--pl-ink, var(--accent));
 }
+.pl-icon { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }  /* 線條圖示，規格比照 js/icons.js */
 .pl-chip svg { width: 20px; height: 20px; }
 .pl-chip--lg { width: 48px; height: 48px; border-radius: 14px; }
 .pl-chip--lg svg { width: 24px; height: 24px; }
@@ -32,8 +33,9 @@
 .pl-page .hm-dots span:nth-child(2) { background: var(--warn); }
 .pl-page .hm-dots span:nth-child(3) { background: var(--ok); }
 
-/* ---------- 頂欄：目前所在頁 ---------- */
-.hm-nav__link[aria-current="page"] { opacity: 1; font-weight: 600; }
+/* ---------- 頂欄：目前所在頁；三個項目在窄螢幕不換行 ---------- */
+.pl-page .hm-nav__link { white-space: nowrap; }
+.pl-page .hm-nav__link[aria-current="page"] { opacity: 1; font-weight: 600; }
 
 /* ---------- 開頭：兩階段流程 ---------- */
 .pl-hero { position: relative; overflow: hidden; padding-bottom: 96px; }
@@ -116,8 +118,8 @@
 /* .pl-step：佔位不動、淡入；.pl-swap：不佔位、整個換掉（用在會移動或會被取代的東西） */
 .pl-step { opacity: 0; transform: translateY(6px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
 .pl-step.is-on { opacity: 1; transform: none; }
-.pl-swap { display: none; }
-.pl-swap.is-on { display: inline-flex; animation: pl-pop var(--dur) var(--ease) both; }
+.pl-mini .pl-swap { display: none; }
+.pl-mini .pl-swap.is-on { display: inline-flex; animation: pl-pop var(--dur) var(--ease) both; }
 
 /* 小視窗 */
 .pl-mini { width: 100%; max-width: 420px; margin: 0 auto; border-radius: var(--radius-m); box-shadow: var(--shadow-1); font-size: 12px; line-height: 1.4; }
@@ -164,13 +166,13 @@
 .pl-doc.is-on .pl-doc__check { opacity: 1; transform: none; transition-delay: 200ms; }
 
 /* ---------- 示意：現況調研報告（流程、卡點、最花時間） ---------- */
-.pl-m-flow { display: flex; gap: 16px; margin: 0 0 32px; padding: 0; list-style: none; }
+.pl-m-flow { display: flex; gap: 18px; margin: 0 0 32px; padding: 0; list-style: none; }
 .pl-m-flow > li {
   position: relative; display: inline-flex; align-items: center; height: 26px; padding: 0 8px;
   border-radius: var(--radius-pill); background: var(--hm-surface-2); font-weight: 600; white-space: nowrap;
   transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
-.pl-m-flow > li + li::before { content: "›"; position: absolute; left: -11px; font-weight: 400; color: var(--hm-text-2); }
+.pl-m-flow > li + li::before { content: "›"; position: absolute; left: -12px; font-weight: 400; color: var(--hm-text-2); }
 .pl-m-flow__hot:has(.pl-m-pin.is-on) { background: var(--warn-soft); color: var(--warn-ink); }
 .pl-m-pin {
   position: absolute; top: calc(100% + 5px); left: 50%; display: inline-flex; align-items: center; justify-content: center;
@@ -250,7 +252,7 @@
   flex-direction: column; align-items: stretch; gap: 6px; padding: 8px; border-radius: 8px;
   background: var(--hm-surface); font-size: 12px; font-weight: 600; white-space: nowrap;
 }
-.pl-m-card.is-on { display: flex; }
+.pl-mini .pl-m-card.is-on { display: flex; }
 .pl-m-card .pl-row__bar { height: 6px; background: color-mix(in srgb, var(--hm-text-2) 26%, transparent); }
 .pl-m-card .pl-row__bar i { background: var(--ok); transform: scaleX(.7); }
 .pl-m-card--doing.is-on .pl-row__bar i { animation: pl-fill 1400ms var(--ease) both; }
@@ -287,7 +289,7 @@
 
 /* ---------- 收尾：彩色底 ---------- */
 .pl-cta {
-  --hm-text-2: color-mix(in srgb, var(--bg) 88%, transparent);
+  --hm-text-2: var(--bg);
   background: linear-gradient(120deg, var(--pl-a), var(--pl-b) 55%, var(--pl-a));
   background-size: 220% 100%; color: var(--bg);
   animation: pl-sheen 14s ease-in-out infinite alternate;
@@ -341,7 +343,10 @@
   .pl-row { grid-template-columns: 84px minmax(0, 1fr) 46px; gap: 10px; }
 }
 @media (max-width: 360px) {
-  /* 最窄的手機：收一點留白，三欄看板才放得下 */
+  /* 最窄的手機：頂欄三個項目收緊才排得進一行；示意畫面收一點留白，三欄看板才放得下 */
+  .pl-page .hm-nav__inner { gap: 8px; }
+  .pl-page .hm-nav__links { gap: 10px; }
+  .pl-page .hm-nav__link { font-size: 13px; }
   .pl-item__stage { padding: 10px; }
   .pl-mini .hm-screen__body { padding: 10px; }
   .pl-m-kanban { gap: 6px; }

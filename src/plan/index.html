@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/plan.css">
+  <!-- 沒有 JavaScript 時滾動淡入不會觸發，直接顯示內容 -->
+  <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body class="home pl-page" data-base="../">
 
@@ -30,7 +32,7 @@
       <div class="hm-container reveal">
         <p class="hm-hero__eyebrow">合作方案</p>
         <h1 class="hm-hero__title pl-grad" id="plan-title"><span class="pl-nowrap">一種合作方式，</span><span class="pl-nowrap">兩個階段</span></h1>
-        <p class="hm-hero__sub">先弄清楚安居包租代管真正需要什麼，再按月往前做</p>
+        <p class="hm-hero__sub"><span class="pl-nowrap">先弄清楚安居包租代管</span><span class="pl-nowrap">真正需要什麼，</span><span class="pl-nowrap">再按月往前做</span></p>
       </div>
       <div class="hm-container reveal" data-delay="1">
         <ol class="pl-flow" aria-label="合作的兩個階段">
@@ -38,7 +40,7 @@
             <article class="hm-card">
               <p class="hm-card__name">第一階段</p>
               <p class="hm-card__title"><a href="#phase-1">專案啟動</a></p>
-              <p class="hm-card__blurb">深度調研訪談，加上內部教育訓練。</p>
+              <p class="hm-card__blurb"><span class="pl-nowrap">深度調研訪談，</span><span class="pl-nowrap">加上內部教育訓練。</span></p>
               <div class="hm-card__foot"><span class="hm-tag hm-tag--accent">一次性費用</span><span class="hm-card__tour">看內容 ›</span></div>
             </article>
           </li>
@@ -85,9 +87,9 @@
               <div class="hm-panel">
                 <p class="hm-panel__head">做完後拿到</p>
                 <ul class="pl-docs">
-                  <li class="pl-doc is-on" data-seq="6"><span class="pl-chip pl-tone--blue" data-icon="clipboard"></span><span>現況調研報告</span><span class="pl-doc__check" data-icon="check"></span></li>
-                  <li class="pl-doc is-on" data-seq="7"><span class="pl-chip pl-tone--amber" data-icon="layers"></span><span>系統規劃書</span><span class="pl-doc__check" data-icon="check"></span></li>
-                  <li class="pl-doc is-on" data-seq="8"><span class="pl-chip pl-tone--green" data-icon="sparkles"></span><span>AI 教育訓練課程</span><span class="pl-doc__check" data-icon="check"></span></li>
+                  <li class="pl-doc is-on" data-seq="6"><span class="pl-chip pl-tone--blue"><svg class="pl-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span><span>現況調研報告</span><span class="pl-doc__check"><svg class="pl-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg></span></li>
+                  <li class="pl-doc is-on" data-seq="7"><span class="pl-chip pl-tone--amber"><svg class="pl-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></span><span>系統規劃書</span><span class="pl-doc__check"><svg class="pl-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg></span></li>
+                  <li class="pl-doc is-on" data-seq="8"><span class="pl-chip pl-tone--green"><svg class="pl-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="m12 7 1.5 3.5L17 12l-3.5 1.5L12 17l-1.5-3.5L7 12l3.5-1.5z"/><path d="M5 5l1 1"/><path d="M18 18l1 1"/></svg></span><span>AI 教育訓練課程</span><span class="pl-doc__check"><svg class="pl-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg></span></li>
                 </ul>
               </div>
             </div>
@@ -98,48 +100,47 @@
           <h3 class="pl-block__title">做兩件事</h3>
           <ul class="pl-grid pl-grid--2">
             <li class="pl-item">
-              <span class="pl-chip pl-chip--lg pl-tone--blue" data-icon="message" aria-hidden="true"></span>
+              <span class="pl-chip pl-chip--lg pl-tone--blue" aria-hidden="true"><svg class="pl-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
               <h4 class="pl-item__title">深度調研訪談</h4>
-              <p class="pl-item__text">訪談各層級同仁，了解實際的作業流程，做出最符合這家公司的系統。</p>
+              <p class="pl-item__text"><span class="pl-nowrap">訪談各層級同仁，</span><span class="pl-nowrap">了解實際的作業流程，</span><span class="pl-nowrap">做出最符合這家公司的系統。</span></p>
             </li>
             <li class="pl-item">
-              <span class="pl-chip pl-chip--lg pl-tone--green" data-icon="users" aria-hidden="true"></span>
+              <span class="pl-chip pl-chip--lg pl-tone--green" aria-hidden="true"><svg class="pl-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M17.5 14.2a6.5 6.5 0 0 1 4 5.8"/></svg></span>
               <h4 class="pl-item__title">內部教育訓練</h4>
-              <p class="pl-item__text">帶夥伴開始學習使用 AI 技能。</p>
+              <p class="pl-item__text"><span class="pl-nowrap">帶夥伴開始學習</span><span class="pl-nowrap">使用 AI 技能。</span></p>
             </li>
           </ul>
         </div>
 
-        <div class="pl-block reveal">
-          <h3 class="pl-block__title">做完後，你會拿到</h3>
+        <div class="pl-block">
+          <h3 class="pl-block__title reveal">做完後，你會拿到</h3>
           <ul class="pl-grid pl-grid--3">
-            <li class="pl-item pl-item--scene pl-tone--blue">
+            <li class="pl-item pl-item--scene pl-tone--blue reveal">
               <div class="pl-item__stage">
                 <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="650" role="img" aria-label="示意：報告整理出作業流程、卡點，以及最花時間的地方。">
                   <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">現況調研報告 · 示意</span></div>
                   <div class="hm-screen__body">
                     <p class="pl-m-label">作業流程</p>
                     <ol class="pl-m-flow">
-                      <li class="pl-step is-on" data-seq="1">招租</li>
-                      <li class="pl-step is-on" data-seq="2">簽約</li>
-                      <li class="pl-step is-on pl-m-flow__hot" data-seq="3">收租<span class="pl-m-pin is-on" data-seq="5">卡點</span></li>
-                      <li class="pl-step is-on" data-seq="4">修繕</li>
+                      <li class="pl-step is-on" data-seq="1">步驟 1</li>
+                      <li class="pl-step is-on pl-m-flow__hot" data-seq="2">步驟 2<span class="pl-m-pin is-on" data-seq="4">卡點</span></li>
+                      <li class="pl-step is-on" data-seq="3">步驟 3</li>
                     </ol>
                     <p class="pl-m-label">最花時間的地方</p>
                     <ul class="pl-m-bars">
-                      <li class="pl-m-bar pl-m-bar--1 is-on" data-seq="6"><span>收租對帳</span><span class="pl-row__bar"><i></i></span></li>
-                      <li class="pl-m-bar pl-m-bar--2 is-on" data-seq="7"><span>修繕派工</span><span class="pl-row__bar"><i></i></span></li>
-                      <li class="pl-m-bar pl-m-bar--3 is-on" data-seq="8"><span>空房招租</span><span class="pl-row__bar"><i></i></span></li>
+                      <li class="pl-m-bar pl-m-bar--1 is-on" data-seq="5"><span>工作 A</span><span class="pl-row__bar"><i></i></span></li>
+                      <li class="pl-m-bar pl-m-bar--2 is-on" data-seq="6"><span>工作 B</span><span class="pl-row__bar"><i></i></span></li>
+                      <li class="pl-m-bar pl-m-bar--3 is-on" data-seq="7"><span>工作 C</span><span class="pl-row__bar"><i></i></span></li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div class="pl-item__copy">
                 <h4 class="pl-item__title">現況調研報告</h4>
-                <p class="pl-item__text">目前的作業流程、卡點，以及最花時間的地方。</p>
+                <p class="pl-item__text"><span class="pl-nowrap">目前的作業流程、卡點，</span><span class="pl-nowrap">以及最花時間的地方。</span></p>
               </div>
             </li>
-            <li class="pl-item pl-item--scene pl-tone--amber">
+            <li class="pl-item pl-item--scene pl-tone--amber reveal">
               <div class="pl-item__stage">
                 <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="650" role="img" aria-label="示意：規劃書畫出系統長什麼樣，並排出先做什麼、後做什麼。">
                   <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">系統規劃書 · 示意</span></div>
@@ -161,13 +162,13 @@
               </div>
               <div class="pl-item__copy">
                 <h4 class="pl-item__title">系統規劃書</h4>
-                <p class="pl-item__text">這家公司真正需要的系統長什麼樣，<span class="pl-nowrap">先做什麼、後做什麼。</span></p>
+                <p class="pl-item__text"><span class="pl-nowrap">這家公司真正需要的</span><span class="pl-nowrap">系統長什麼樣，</span><span class="pl-nowrap">先做什麼、後做什麼。</span></p>
               </div>
             </li>
-            <li class="pl-item pl-item--scene pl-tone--green">
+            <li class="pl-item pl-item--scene pl-tone--green reveal">
               <div class="pl-item__stage">
                 <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="900" role="img" aria-label="示意：夥伴在日常工作裡請 AI 幫忙整理資料，課程附教材。">
-                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">AI 教育訓練 · 示意</span></div>
+                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">AI 教育訓練課程 · 示意</span></div>
                   <div class="hm-screen__body pl-m-chat">
                     <p class="pl-m-bubble pl-m-bubble--me pl-step is-on" data-seq="1">幫我整理這週的修繕回報</p>
                     <div class="pl-m-reply">
@@ -180,7 +181,7 @@
               </div>
               <div class="pl-item__copy">
                 <h4 class="pl-item__title">AI 教育訓練課程</h4>
-                <p class="pl-item__text">教夥伴在日常工作裡開始使用 AI，<span class="pl-nowrap">附教材。</span></p>
+                <p class="pl-item__text"><span class="pl-nowrap">教夥伴在日常工作裡</span><span class="pl-nowrap">開始使用 AI，</span><span class="pl-nowrap">附教材。</span></p>
               </div>
             </li>
           </ul>
@@ -208,9 +209,9 @@
           <span class="pl-ring__center"><b>每月</b><small>四項服務</small></span>
         </div>
 
-        <div class="pl-block reveal">
+        <div class="pl-block">
           <ul class="pl-grid pl-grid--2 pl-grid--scenes">
-            <li class="pl-item pl-item--scene">
+            <li class="pl-item pl-item--scene reveal">
               <div class="pl-item__stage">
                 <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="650" role="img" aria-label="示意：把想做的事攤開來，一起判斷哪些值得做、先做哪一件。">
                   <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">商業顧問 · 示意</span></div>
@@ -227,10 +228,10 @@
               </div>
               <div class="pl-item__copy">
                 <h3 class="pl-item__title">商業顧問</h3>
-                <p class="pl-item__text">一起釐清哪些事值得做、先做哪一件。</p>
+                <p class="pl-item__text"><span class="pl-nowrap">一起釐清</span><span class="pl-nowrap">哪些事值得做、</span><span class="pl-nowrap">先做哪一件。</span></p>
               </div>
             </li>
-            <li class="pl-item pl-item--scene">
+            <li class="pl-item pl-item--scene reveal">
               <div class="pl-item__stage">
                 <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="600" role="img" aria-label="示意：比較不同做法好不好維護、能不能擴充、資料帶不帶得走，再給建議。">
                   <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">技術顧問 · 示意</span></div>
@@ -247,10 +248,10 @@
               </div>
               <div class="pl-item__copy">
                 <h3 class="pl-item__title">技術顧問</h3>
-                <p class="pl-item__text">評估做法與工具，讓做出來的東西能長久用下去。</p>
+                <p class="pl-item__text"><span class="pl-nowrap">評估做法與工具，</span><span class="pl-nowrap">讓做出來的東西</span><span class="pl-nowrap">能長久用下去。</span></p>
               </div>
             </li>
-            <li class="pl-item pl-item--scene">
+            <li class="pl-item pl-item--scene reveal">
               <div class="pl-item__stage">
                 <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="900" role="img" aria-label="示意：決定要做的功能從待做、開發中，一路到已上線。">
                   <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">開發執行 · 示意</span></div>
@@ -274,10 +275,10 @@
               </div>
               <div class="pl-item__copy">
                 <h3 class="pl-item__title">開發執行</h3>
-                <p class="pl-item__text">把決定要做的功能實際做出來並上線。</p>
+                <p class="pl-item__text"><span class="pl-nowrap">把決定要做的功能</span><span class="pl-nowrap">實際做出來並上線。</span></p>
               </div>
             </li>
-            <li class="pl-item pl-item--scene">
+            <li class="pl-item pl-item--scene reveal">
               <div class="pl-item__stage">
                 <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="900" role="img" aria-label="示意：平常例行檢查，發現狀況就處理，處理完恢復正常。">
                   <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">網站維護 · 示意</span></div>
@@ -297,7 +298,7 @@
               </div>
               <div class="pl-item__copy">
                 <h3 class="pl-item__title">網站維護</h3>
-                <p class="pl-item__text">上線後持續照顧，出狀況有人處理。</p>
+                <p class="pl-item__text"><span class="pl-nowrap">上線後持續照顧，</span><span class="pl-nowrap">出狀況有人處理。</span></p>
               </div>
             </li>
           </ul>
@@ -309,7 +310,7 @@
     <section class="hm-section hm-closing pl-cta" aria-labelledby="plan-closing-title">
       <div class="hm-container reveal">
         <h2 class="hm-h2" id="plan-closing-title"><span class="pl-nowrap">導入 AI，</span><span class="pl-nowrap">降本增效</span></h2>
-        <p class="hm-sub">金額與細節，我們當面聊</p>
+        <p class="hm-sub"><span class="pl-nowrap">金額與細節，</span><span class="pl-nowrap">我們當面聊</span></p>
         <div class="hm-closing__actions">
           <a class="hm-btn hm-btn--primary" href="../index.html">回總覽首頁</a>
         </div>
@@ -326,7 +327,7 @@
         <li><a href="../tour/index.html">功能導覽</a></li>
         <li><a href="index.html">合作方案</a></li>
       </ul>
-      <p>租務中樞提案示範 · 畫面中的物件、人名與金額皆為模擬資料 · 提案聯絡：提案者 林○○ · 09xx-xxx-xxx</p>
+      <p><span class="pl-nowrap">租務中樞提案示範 ·</span> <span class="pl-nowrap">畫面中的物件、人名與金額皆為模擬資料 ·</span> <span class="pl-nowrap">提案聯絡：提案者 林○○ · 09xx-xxx-xxx</span></p>
     </div>
   </footer>
 
