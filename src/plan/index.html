@@ -29,25 +29,25 @@
     <section class="hm-hero pl-hero" aria-labelledby="plan-title">
       <div class="hm-container reveal">
         <p class="hm-hero__eyebrow">合作方案</p>
-        <h1 class="hm-hero__title" id="plan-title"><span class="pl-nowrap">一種合作方式，</span><span class="pl-nowrap">兩個階段</span></h1>
+        <h1 class="hm-hero__title pl-grad" id="plan-title"><span class="pl-nowrap">一種合作方式，</span><span class="pl-nowrap">兩個階段</span></h1>
         <p class="hm-hero__sub">先弄清楚安居包租代管真正需要什麼，再按月往前做</p>
       </div>
       <div class="hm-container reveal" data-delay="1">
         <ol class="pl-flow" aria-label="合作的兩個階段">
-          <li>
+          <li class="pl-flow__one">
             <article class="hm-card">
               <p class="hm-card__name">第一階段</p>
               <p class="hm-card__title"><a href="#phase-1">專案啟動</a></p>
-              <p class="hm-card__blurb">深度調研訪談，加上內部 AI 教育訓練。</p>
+              <p class="hm-card__blurb">深度調研訪談，加上內部教育訓練。</p>
               <div class="hm-card__foot"><span class="hm-tag hm-tag--accent">一次性費用</span><span class="hm-card__tour">看內容 ›</span></div>
             </article>
           </li>
-          <li>
+          <li class="pl-flow__two">
             <article class="hm-card">
               <p class="hm-card__name">第二階段</p>
               <p class="hm-card__title"><a href="#phase-2">包月顧問執行</a></p>
               <p class="hm-card__blurb"><span class="pl-nowrap">商業顧問、</span><span class="pl-nowrap">技術顧問、</span><span class="pl-nowrap">開發執行、</span><span class="pl-nowrap">網站維護。</span></p>
-              <div class="hm-card__foot"><span class="hm-tag hm-tag--accent">按月計費</span><span class="hm-card__tour">看內容 ›</span></div>
+              <div class="hm-card__foot"><span class="hm-tag hm-tag--ok">按月計費</span><span class="hm-card__tour">看內容 ›</span></div>
             </article>
           </li>
         </ol>
@@ -55,7 +55,7 @@
     </section>
 
     <!-- ===== 第一階段：專案啟動（淺灰底） ===== -->
-    <section class="hm-section hm-section--alt pl-phase" id="phase-1" aria-labelledby="phase-1-title">
+    <section class="hm-section hm-section--alt pl-phase pl-phase--1" id="phase-1" aria-labelledby="phase-1-title">
       <div class="hm-container">
         <div class="hm-chapter__head reveal">
           <p class="pl-phase__meta"><span class="hm-eyebrow">第一階段</span><span class="hm-tag hm-tag--accent">一次性費用</span></p>
@@ -64,16 +64,46 @@
           <p class="hm-body"><span class="pl-nowrap">動手做系統之前，</span><span class="pl-nowrap">先弄清楚公司每天實際怎麼運作，</span><span class="pl-nowrap">做出來的東西才用得上。</span></p>
         </div>
 
+        <!-- 示意動畫：訪談與訓練依序完成，再產出三樣東西。預設是播完的樣子，由 js/plan.js 重播。 -->
+        <div class="hm-chapter__visual reveal" data-delay="1">
+          <div class="hm-screen pl-scene" data-play="build" data-step-ms="800" role="img" aria-label="流程示意：先訪談各層級同仁、帶夥伴上教育訓練，做完後拿到現況調研報告、系統規劃書與 AI 教育訓練課程。">
+            <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">專案啟動 · 流程示意</span></div>
+            <div class="hm-screen__body pl-p1">
+              <div class="hm-panel">
+                <p class="hm-panel__head">深度調研訪談</p>
+                <ul class="pl-rows">
+                  <li class="pl-row is-on" data-seq="1"><span class="pl-row__who">老闆</span><span class="pl-row__bar"><i></i></span><span class="pl-row__state">已訪談</span></li>
+                  <li class="pl-row is-on" data-seq="2"><span class="pl-row__who">租務管理員</span><span class="pl-row__bar"><i></i></span><span class="pl-row__state">已訪談</span></li>
+                  <li class="pl-row is-on" data-seq="3"><span class="pl-row__who">會計</span><span class="pl-row__bar"><i></i></span><span class="pl-row__state">已訪談</span></li>
+                  <li class="pl-row is-on" data-seq="4"><span class="pl-row__who">修繕人員</span><span class="pl-row__bar"><i></i></span><span class="pl-row__state">已訪談</span></li>
+                </ul>
+                <p class="hm-panel__head pl-p1__next">內部教育訓練</p>
+                <ul class="pl-rows">
+                  <li class="pl-row is-on" data-seq="5"><span class="pl-row__who">AI 技能</span><span class="pl-row__bar"><i></i></span><span class="pl-row__state">已開課</span></li>
+                </ul>
+              </div>
+              <div class="hm-panel">
+                <p class="hm-panel__head">做完後拿到</p>
+                <ul class="pl-docs">
+                  <li class="pl-doc is-on" data-seq="6"><span class="pl-chip pl-tone--blue" data-icon="clipboard"></span><span>現況調研報告</span><span class="pl-doc__check" data-icon="check"></span></li>
+                  <li class="pl-doc is-on" data-seq="7"><span class="pl-chip pl-tone--amber" data-icon="layers"></span><span>系統規劃書</span><span class="pl-doc__check" data-icon="check"></span></li>
+                  <li class="pl-doc is-on" data-seq="8"><span class="pl-chip pl-tone--green" data-icon="sparkles"></span><span>AI 教育訓練課程</span><span class="pl-doc__check" data-icon="check"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="pl-block reveal">
           <h3 class="pl-block__title">做兩件事</h3>
           <ul class="pl-grid pl-grid--2">
             <li class="pl-item">
-              <span class="pl-item__num">01</span>
+              <span class="pl-chip pl-chip--lg pl-tone--blue" data-icon="message" aria-hidden="true"></span>
               <h4 class="pl-item__title">深度調研訪談</h4>
               <p class="pl-item__text">訪談各層級同仁，了解實際的作業流程，做出最符合這家公司的系統。</p>
             </li>
             <li class="pl-item">
-              <span class="pl-item__num">02</span>
+              <span class="pl-chip pl-chip--lg pl-tone--green" data-icon="users" aria-hidden="true"></span>
               <h4 class="pl-item__title">內部教育訓練</h4>
               <p class="pl-item__text">帶夥伴開始學習使用 AI 技能。</p>
             </li>
@@ -83,20 +113,75 @@
         <div class="pl-block reveal">
           <h3 class="pl-block__title">做完後，你會拿到</h3>
           <ul class="pl-grid pl-grid--3">
-            <li class="pl-item">
-              <span class="pl-item__mark" aria-hidden="true"><svg class="hm-icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <h4 class="pl-item__title">現況調研報告</h4>
-              <p class="pl-item__text">目前的作業流程、卡點，以及最花時間的地方。</p>
+            <li class="pl-item pl-item--scene pl-tone--blue">
+              <div class="pl-item__stage">
+                <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="650" role="img" aria-label="示意：報告整理出作業流程、卡點，以及最花時間的地方。">
+                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">現況調研報告 · 示意</span></div>
+                  <div class="hm-screen__body">
+                    <p class="pl-m-label">作業流程</p>
+                    <ol class="pl-m-flow">
+                      <li class="pl-step is-on" data-seq="1">招租</li>
+                      <li class="pl-step is-on" data-seq="2">簽約</li>
+                      <li class="pl-step is-on pl-m-flow__hot" data-seq="3">收租<span class="pl-m-pin is-on" data-seq="5">卡點</span></li>
+                      <li class="pl-step is-on" data-seq="4">修繕</li>
+                    </ol>
+                    <p class="pl-m-label">最花時間的地方</p>
+                    <ul class="pl-m-bars">
+                      <li class="pl-m-bar pl-m-bar--1 is-on" data-seq="6"><span>收租對帳</span><span class="pl-row__bar"><i></i></span></li>
+                      <li class="pl-m-bar pl-m-bar--2 is-on" data-seq="7"><span>修繕派工</span><span class="pl-row__bar"><i></i></span></li>
+                      <li class="pl-m-bar pl-m-bar--3 is-on" data-seq="8"><span>空房招租</span><span class="pl-row__bar"><i></i></span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="pl-item__copy">
+                <h4 class="pl-item__title">現況調研報告</h4>
+                <p class="pl-item__text">目前的作業流程、卡點，以及最花時間的地方。</p>
+              </div>
             </li>
-            <li class="pl-item">
-              <span class="pl-item__mark" aria-hidden="true"><svg class="hm-icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <h4 class="pl-item__title">系統規劃書</h4>
-              <p class="pl-item__text">這家公司真正需要的系統長什麼樣，<span class="pl-nowrap">先做什麼、後做什麼。</span></p>
+            <li class="pl-item pl-item--scene pl-tone--amber">
+              <div class="pl-item__stage">
+                <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="650" role="img" aria-label="示意：規劃書畫出系統長什麼樣，並排出先做什麼、後做什麼。">
+                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">系統規劃書 · 示意</span></div>
+                  <div class="hm-screen__body">
+                    <p class="pl-m-label">系統長什麼樣</p>
+                    <div class="pl-m-wire">
+                      <span class="pl-m-wire__side pl-step is-on" data-seq="1"><i></i><i></i><i></i></span>
+                      <span class="pl-m-wire__main">
+                        <span class="pl-m-wire__top pl-step is-on" data-seq="2"></span>
+                        <span class="pl-m-wire__cards"><i class="pl-step is-on" data-seq="3"></i><i class="pl-step is-on" data-seq="3"></i><i class="pl-step is-on" data-seq="4"></i></span>
+                      </span>
+                    </div>
+                    <div class="pl-m-order">
+                      <div><p class="pl-m-label">先做</p><ol><li class="pl-step is-on" data-seq="5"><b>1</b><i class="pl-skel"></i></li><li class="pl-step is-on" data-seq="6"><b>2</b><i class="pl-skel pl-skel--s"></i></li></ol></div>
+                      <div><p class="pl-m-label">後做</p><ol><li class="pl-step is-on" data-seq="7"><b>3</b><i class="pl-skel pl-skel--s"></i></li><li class="pl-step is-on" data-seq="8"><b>4</b><i class="pl-skel"></i></li></ol></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pl-item__copy">
+                <h4 class="pl-item__title">系統規劃書</h4>
+                <p class="pl-item__text">這家公司真正需要的系統長什麼樣，<span class="pl-nowrap">先做什麼、後做什麼。</span></p>
+              </div>
             </li>
-            <li class="pl-item">
-              <span class="pl-item__mark" aria-hidden="true"><svg class="hm-icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <h4 class="pl-item__title">AI 教育訓練課程</h4>
-              <p class="pl-item__text">課程與教材，夥伴在日常工作裡用得上。</p>
+            <li class="pl-item pl-item--scene pl-tone--green">
+              <div class="pl-item__stage">
+                <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="900" role="img" aria-label="示意：夥伴在日常工作裡請 AI 幫忙整理資料，課程附教材。">
+                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">AI 教育訓練 · 示意</span></div>
+                  <div class="hm-screen__body pl-m-chat">
+                    <p class="pl-m-bubble pl-m-bubble--me pl-step is-on" data-seq="1">幫我整理這週的修繕回報</p>
+                    <div class="pl-m-reply">
+                      <p class="pl-m-bubble pl-m-bubble--ai pl-step" data-seq="2" data-until="3"><span class="pl-m-typing"><i></i><i></i><i></i></span></p>
+                      <div class="pl-m-bubble pl-m-bubble--ai pl-step is-on" data-seq="3">整理好了，重點如下<i class="pl-skel"></i><i class="pl-skel pl-skel--s"></i></div>
+                    </div>
+                    <p class="pl-m-note pl-step is-on" data-seq="4"><span class="hm-tag hm-tag--ok">附教材</span></p>
+                  </div>
+                </div>
+              </div>
+              <div class="pl-item__copy">
+                <h4 class="pl-item__title">AI 教育訓練課程</h4>
+                <p class="pl-item__text">教夥伴在日常工作裡開始使用 AI，<span class="pl-nowrap">附教材。</span></p>
+              </div>
             </li>
           </ul>
         </div>
@@ -104,46 +189,127 @@
     </section>
 
     <!-- ===== 第二階段：包月顧問執行（黑底） ===== -->
-    <section class="hm-section hm-section--dark pl-phase" id="phase-2" aria-labelledby="phase-2-title">
+    <section class="hm-section hm-section--dark pl-phase pl-phase--2" id="phase-2" aria-labelledby="phase-2-title">
       <div class="hm-container">
         <div class="hm-chapter__head reveal">
-          <p class="pl-phase__meta"><span class="hm-eyebrow">第二階段</span><span class="hm-tag hm-tag--accent">按月計費</span></p>
+          <p class="pl-phase__meta"><span class="hm-eyebrow">第二階段</span><span class="hm-tag hm-tag--ok">按月計費</span></p>
           <h2 class="hm-h2" id="phase-2-title">包月顧問執行</h2>
           <p class="hm-sub">包月服務包含這四項</p>
         </div>
 
+        <!-- 示意動畫：四項服務每月循環。預設亮第一項，由 js/plan.js 輪播。 -->
+        <div class="pl-ring pl-scene reveal" data-delay="1" data-play="cycle" data-step-ms="2200" role="img" aria-label="示意：商業顧問、技術顧問、開發執行、網站維護四項服務，每月循環進行。">
+          <span class="pl-ring__track"></span>
+          <span class="pl-ring__orbit"><i></i></span>
+          <span class="pl-ring__node pl-ring__node--1 is-on" data-seq="1">商業顧問</span>
+          <span class="pl-ring__node pl-ring__node--2" data-seq="2">技術顧問</span>
+          <span class="pl-ring__node pl-ring__node--3" data-seq="3">開發執行</span>
+          <span class="pl-ring__node pl-ring__node--4" data-seq="4">網站維護</span>
+          <span class="pl-ring__center"><b>每月</b><small>四項服務</small></span>
+        </div>
+
         <div class="pl-block reveal">
-          <ul class="pl-grid pl-grid--2">
-            <li class="pl-item">
-              <span class="pl-item__num">01</span>
-              <h3 class="pl-item__title">商業顧問</h3>
-              <p class="pl-item__text">一起釐清哪些事值得做、先做哪一件。</p>
+          <ul class="pl-grid pl-grid--2 pl-grid--scenes">
+            <li class="pl-item pl-item--scene">
+              <div class="pl-item__stage">
+                <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="650" role="img" aria-label="示意：把想做的事攤開來，一起判斷哪些值得做、先做哪一件。">
+                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">商業顧問 · 示意</span></div>
+                  <div class="hm-screen__body">
+                    <p class="pl-m-label">哪些事值得做</p>
+                    <ul class="pl-m-list">
+                      <li class="pl-m-li"><span class="pl-step is-on" data-seq="1">想法 A</span><span class="hm-tag hm-tag--ok pl-step is-on" data-seq="4">值得做</span></li>
+                      <li class="pl-m-li"><span class="pl-step is-on" data-seq="2">想法 B</span><span class="hm-tag hm-tag--ok pl-step is-on" data-seq="5">值得做</span></li>
+                      <li class="pl-m-li"><span class="pl-step is-on" data-seq="3">想法 C</span><span class="hm-tag hm-tag--neutral pl-step is-on" data-seq="6">先不做</span></li>
+                    </ul>
+                    <p class="pl-m-pick pl-step is-on" data-seq="7"><span class="hm-tag hm-tag--accent">先做</span>想法 A</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pl-item__copy">
+                <h3 class="pl-item__title">商業顧問</h3>
+                <p class="pl-item__text">一起釐清哪些事值得做、先做哪一件。</p>
+              </div>
             </li>
-            <li class="pl-item">
-              <span class="pl-item__num">02</span>
-              <h3 class="pl-item__title">技術顧問</h3>
-              <p class="pl-item__text">評估做法與工具，讓做出來的東西能長久用下去。</p>
+            <li class="pl-item pl-item--scene">
+              <div class="pl-item__stage">
+                <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="600" role="img" aria-label="示意：比較不同做法好不好維護、能不能擴充、資料帶不帶得走，再給建議。">
+                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">技術顧問 · 示意</span></div>
+                  <div class="hm-screen__body">
+                    <div class="pl-m-table">
+                      <span></span><span class="pl-m-th">做法 A</span><span class="pl-m-th">做法 B</span>
+                      <span class="pl-m-td">好維護</span><span class="pl-m-cell"><svg class="hm-icon pl-step is-on" viewBox="0 0 24 24" aria-hidden="true" data-seq="1"><path d="m20 6-11 11-5-5"/></svg></span><span class="pl-m-cell"><svg class="hm-icon pl-step is-on" viewBox="0 0 24 24" aria-hidden="true" data-seq="2"><path d="m20 6-11 11-5-5"/></svg></span>
+                      <span class="pl-m-td">能擴充</span><span class="pl-m-cell pl-m-cell--no"><svg class="hm-icon pl-step is-on" viewBox="0 0 24 24" aria-hidden="true" data-seq="3"><path d="M5 12h14"/></svg></span><span class="pl-m-cell"><svg class="hm-icon pl-step is-on" viewBox="0 0 24 24" aria-hidden="true" data-seq="4"><path d="m20 6-11 11-5-5"/></svg></span>
+                      <span class="pl-m-td">資料帶得走</span><span class="pl-m-cell pl-m-cell--no"><svg class="hm-icon pl-step is-on" viewBox="0 0 24 24" aria-hidden="true" data-seq="5"><path d="M5 12h14"/></svg></span><span class="pl-m-cell"><svg class="hm-icon pl-step is-on" viewBox="0 0 24 24" aria-hidden="true" data-seq="6"><path d="m20 6-11 11-5-5"/></svg></span>
+                      <span></span><span></span><span class="hm-tag hm-tag--ok pl-step is-on" data-seq="7">建議</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pl-item__copy">
+                <h3 class="pl-item__title">技術顧問</h3>
+                <p class="pl-item__text">評估做法與工具，讓做出來的東西能長久用下去。</p>
+              </div>
             </li>
-            <li class="pl-item">
-              <span class="pl-item__num">03</span>
-              <h3 class="pl-item__title">開發執行</h3>
-              <p class="pl-item__text">把決定要做的功能實際做出來並上線。</p>
+            <li class="pl-item pl-item--scene">
+              <div class="pl-item__stage">
+                <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="900" role="img" aria-label="示意：決定要做的功能從待做、開發中，一路到已上線。">
+                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">開發執行 · 示意</span></div>
+                  <div class="hm-screen__body">
+                    <div class="pl-m-kanban">
+                      <div class="pl-m-col"><p class="pl-m-label">待做</p>
+                        <span class="pl-m-card pl-swap" data-seq="1" data-until="2">功能 1</span>
+                        <span class="pl-m-card pl-swap" data-seq="1" data-until="5">功能 2</span>
+                        <span class="pl-m-card pl-swap is-on" data-seq="1">功能 3</span>
+                      </div>
+                      <div class="pl-m-col"><p class="pl-m-label">開發中</p>
+                        <span class="pl-m-card pl-m-card--doing pl-swap" data-seq="2" data-until="4">功能 1<span class="pl-row__bar"><i></i></span></span>
+                        <span class="pl-m-card pl-m-card--doing pl-swap is-on" data-seq="5">功能 2<span class="pl-row__bar"><i></i></span></span>
+                      </div>
+                      <div class="pl-m-col"><p class="pl-m-label">已上線</p>
+                        <span class="pl-m-card pl-m-card--done pl-swap is-on" data-seq="4">功能 1<svg class="hm-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pl-item__copy">
+                <h3 class="pl-item__title">開發執行</h3>
+                <p class="pl-item__text">把決定要做的功能實際做出來並上線。</p>
+              </div>
             </li>
-            <li class="pl-item">
-              <span class="pl-item__num">04</span>
-              <h3 class="pl-item__title">網站維護</h3>
-              <p class="pl-item__text">上線後持續照顧，出狀況有人處理。</p>
+            <li class="pl-item pl-item--scene">
+              <div class="pl-item__stage">
+                <div class="hm-screen pl-mini pl-scene" data-play="build" data-step-ms="900" role="img" aria-label="示意：平常例行檢查，發現狀況就處理，處理完恢復正常。">
+                  <div class="hm-screen__bar"><span class="hm-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="hm-screen__title">網站維護 · 示意</span></div>
+                  <div class="hm-screen__body">
+                    <div class="pl-m-status"><span class="pl-m-label">網站狀態</span><span>
+                      <span class="hm-tag hm-tag--ok pl-swap" data-seq="1" data-until="3">運作正常</span>
+                      <span class="hm-tag hm-tag--warn pl-swap" data-seq="3" data-until="5">處理中</span>
+                      <span class="hm-tag hm-tag--ok pl-swap is-on" data-seq="5">運作正常</span>
+                    </span></div>
+                    <ul class="pl-m-list">
+                      <li class="pl-m-li pl-step is-on" data-seq="1"><span>例行檢查</span><svg class="hm-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg></li>
+                      <li class="pl-m-li pl-step is-on" data-seq="2"><span>例行檢查</span><svg class="hm-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg></li>
+                      <li class="pl-m-li pl-step is-on" data-seq="3"><span>發現狀況</span><span><span class="hm-tag hm-tag--warn pl-swap" data-seq="3" data-until="5">處理中</span><span class="hm-tag hm-tag--ok pl-swap is-on" data-seq="5">已處理</span></span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="pl-item__copy">
+                <h3 class="pl-item__title">網站維護</h3>
+                <p class="pl-item__text">上線後持續照顧，出狀況有人處理。</p>
+              </div>
             </li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- ===== 收尾 ===== -->
-    <section class="hm-section hm-closing" aria-labelledby="plan-closing-title">
+    <!-- ===== 收尾：導入 AI，降本增效（彩色底） ===== -->
+    <section class="hm-section hm-closing pl-cta" aria-labelledby="plan-closing-title">
       <div class="hm-container reveal">
-        <h2 class="hm-h2" id="plan-closing-title">細節我們當面聊</h2>
-        <p class="hm-sub">這一頁只說明合作方式。金額與其他細節，由提案者當面說明。</p>
+        <h2 class="hm-h2" id="plan-closing-title"><span class="pl-nowrap">導入 AI，</span><span class="pl-nowrap">降本增效</span></h2>
+        <p class="hm-sub">金額與細節，我們當面聊</p>
         <div class="hm-closing__actions">
           <a class="hm-btn hm-btn--primary" href="../index.html">回總覽首頁</a>
         </div>
@@ -167,6 +333,7 @@
   <script src="../js/data.js"></script>
   <script src="../js/icons.js"></script>
   <script src="../js/common.js"></script>
+  <script src="../js/plan.js"></script>
   <script>
     // 滾動淡入：有 common.js 就交給 App.reveal()；沒有（或載入失敗）就直接全部顯示，內容不會被藏住。
     (function () {
